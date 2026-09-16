@@ -23,6 +23,13 @@
     <Build Include="Security\HangFire.sql" />
     <Build Remove="Views\UT_VW_ValidateInverntoryLogData.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="TanyoLogs">
+      <Value>$(SqlCmdVar__1)</Value>
+      <DefaultValue>
+      </DefaultValue>
+    </SqlCmdVariable>
+  </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
   </Target>
