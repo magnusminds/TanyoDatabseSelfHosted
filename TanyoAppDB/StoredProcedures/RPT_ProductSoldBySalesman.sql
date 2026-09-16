@@ -49,12 +49,12 @@ BEGIN
 				WHEN OD.ItemStatus = 3
 					THEN 'Delivered'
 				ELSE 'Not Delivered'
-				END AS [DELIVERY STATUS]
+				END AS [DELIVERY Status]
 			,C.CategoryName AS [Category Name]
 			,P.ProductTitle AS [Product Title]
-			,CAST((OD.TotalAmount * OD.Quantity) AS DECIMAL(18, 2)) AS [Item Amount]
+			,CAST((OD.TotalAmount * OD.Quantity) AS NUMERIC(18, 2)) AS [Item Amount]
+			,SUM(CAST(OD.TotalAmount * OD.Quantity AS NUMERIC(18, 2))) OVER () AS [GrandValueOfItemAmount]
 			,COUNT(1) OVER () AS TotalCount
-			,os.ValueofOrders
 		FROM Orders O WITH (NOLOCK)
 		INNER JOIN AspNetUsers aus WITH (NOLOCK) ON O.SalesmanId = aus.UserId
 		INNER JOIN OrderSetItems OD WITH (NOLOCK) ON O.OrderId = OD.OrderId

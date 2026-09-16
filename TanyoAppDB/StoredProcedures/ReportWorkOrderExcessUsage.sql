@@ -27,7 +27,8 @@ CREATE   PROCEDURE [dbo].[ReportWorkOrderExcessUsage]
 )
 AS
 BEGIN
-    SET NOCOUNT ON;
+  SET NOCOUNT ON;
+    BEGIN TRY
 
     DROP TABLE IF EXISTS #MaterialDetail;
 
@@ -200,6 +201,19 @@ BEGIN
         @GrandTotalExcessQty AS GrandTotalExcessQty,
         @GrandPercentExcess AS GrandPercentExcess
     FROM #PagedOrders PO;
+
+    END TRY
+
+    BEGIN CATCH
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
+
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
+    END CATCH
 END
 
 GO

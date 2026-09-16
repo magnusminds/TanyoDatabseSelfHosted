@@ -14,7 +14,7 @@ BEGIN
 	SET XACT_ABORT ON;
 
 	BEGIN TRY
-		BEGIN TRAN
+		BEGIN TRAN SavePORawMaterials
 
 		DECLARE @NewPORawMaterialId BIGINT
 
@@ -120,19 +120,22 @@ BEGIN
 		SET TotalAmount = @TotalAmount
 		WHERE PORawMaterialId = @NewPORawMaterialId
 
-		COMMIT TRAN
+		COMMIT TRAN SavePORawMaterials
 
 		SELECT @NewPORawMaterialId AS PORawMaterialId  -- Return final ID
 	END TRY
 	BEGIN CATCH
-		IF @@TRANCOUNT > 0 ROLLBACK TRAN
+		IF @@TRANCOUNT > 0 
+		ROLLBACK TRAN SavePORawMaterials
 
-		DECLARE @ErrorMsg NVARCHAR(4000) = ERROR_MESSAGE()
-		DECLARE @ErrorLine INT = ERROR_LINE()
-		DECLARE @ErrorSeverity INT = ERROR_SEVERITY()
-		DECLARE @ErrorState INT = ERROR_STATE()
+		DECLARE @ObjectName VARCHAR(500)
+		,@ErrorMsg VARCHAR(MAX);
 
-		RAISERROR('SavePORawMaterials failed: %s (Line %d)', @ErrorSeverity, @ErrorState, @ErrorMsg, @ErrorLine)
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
 

@@ -93,9 +93,14 @@ BEGIN
  
 	END TRY
 	BEGIN CATCH
-		DECLARE @ErrorMsg VARCHAR(MAX)
-		SET @ErrorMsg = ERROR_MESSAGE()
-		RAISERROR ('Error in OrderProductCharges : %s', 15, 1, @ErrorMsg)
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
+
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
 

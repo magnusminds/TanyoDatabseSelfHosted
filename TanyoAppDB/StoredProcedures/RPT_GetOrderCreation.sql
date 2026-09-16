@@ -12,7 +12,7 @@
 		,@SortBy = 'CreatedDate'
 		,@SortOrder = 'DESC'
 */
-CREATE PROCEDURE RPT_GetOrderCreation
+CREATE PROCEDURE [dbo].[RPT_GetOrderCreation]
 (
 	@TenantId INT
 	,@CreatedFromDate DATE
@@ -97,7 +97,7 @@ BEGIN
 					,' '
 					,a.LastName
 					) AS SalesmanName
-				,o.STATUS AS OrderStatusId
+				,o.Status AS OrderStatusId
 				,os.Status AS OrderStatusName
 				,o.TotalAmt AS TotalAmount
 				,o.CreatedDate
@@ -156,7 +156,7 @@ BEGIN
 					,' '
 					,a.LastName
 					) AS SalesmanName
-				,o.STATUS AS OrderStatusId
+				,o.Status AS OrderStatusId
 				,os.Status AS OrderStatusName
 				,o.TotalAmt AS TotalAmount
 				,o.CreatedDate
@@ -209,19 +209,14 @@ BEGIN
 		
 	END TRY
 	BEGIN CATCH
-		DECLARE @ErrorMessage NVARCHAR(4000)
-		DECLARE @ErrorSeverity INT
-		DECLARE @ErrorState INT
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
 
-		SELECT @ErrorMessage = ERROR_MESSAGE()
-			,@ErrorSeverity = ERROR_SEVERITY()
-			,@ErrorState = ERROR_STATE()
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
 
-		RAISERROR (
-				@ErrorMessage
-				,@ErrorSeverity
-				,@ErrorState
-				)
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
 

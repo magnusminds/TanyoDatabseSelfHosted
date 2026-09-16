@@ -16,13 +16,14 @@
         ,@SortBy = 'TenantName'
         ,@SortOrder = 'ASC'
 */
-CREATE   PROCEDURE [dbo].[ListTenantAppVersion]
+CREATE PROCEDURE [dbo].[ListTenantAppVersion]
 (
     @TenantId INT = NULL
     ,@TenantName VARCHAR(200) = NULL
     ,@AppVersion VARCHAR(100) = NULL
     ,@ForceUpdate BIT = NULL
     ,@Maintenance BIT = NULL
+    ,@AppBundleId VARCHAR(200) = NULL
     ,@PageIndex INT = 1
     ,@PageSize INT = 50
     ,@SortBy VARCHAR(50) = 'TenantName'
@@ -97,6 +98,12 @@ BEGIN
             (
                 @Maintenance IS NULL
                 OR tav.IsMaintenance = @Maintenance
+            )
+            AND 
+            (
+                @AppBundleId IS NULL 
+                OR (@AppBundleId = 'TanyoApp' AND AppBundleId = 'io.ionic.TanyoERP')
+                OR (@AppBundleId = 'WhiteLabelApp' AND AppBundleId <> 'io.ionic.TanyoERP')
             )
 
         ORDER BY

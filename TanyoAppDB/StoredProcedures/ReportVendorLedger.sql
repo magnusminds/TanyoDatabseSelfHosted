@@ -6,7 +6,9 @@ CREATE   PROCEDURE [dbo].[ReportVendorLedger] (
 	)
 AS
 BEGIN
-	SET NOCOUNT ON;
+   SET NOCOUNT ON;
+
+    BEGIN TRY
 
 	DECLARE @VendorName NVARCHAR(200)
 		,@TotalDebitAmount DECIMAL(18, 2)
@@ -99,6 +101,19 @@ BEGIN
 	DROP TABLE IF EXISTS #POProducts;
 	
 	DROP TABLE IF EXISTS #POProductPayment;
+
+	END TRY 
+
+	BEGIN CATCH
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
+
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
+    END CATCH
 END
 
 GO

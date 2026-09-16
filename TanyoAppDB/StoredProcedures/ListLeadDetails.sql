@@ -28,6 +28,7 @@ CREATE PROC [dbo].[ListLeadDetails] (
 	,@SortBy VARCHAR(50) = 'LastCreatedOn'
 	,@SortOrder VARCHAR(10) = 'DESC'
 	,@InquiryFor VARCHAR(100) = NULL
+	,@BuyingRangeValueId BIGINT = NULL
 	)
 AS
 BEGIN
@@ -64,6 +65,7 @@ BEGIN
 					ELSE ''
 					END, '') AS Salesman
 			,ISNULL(la.LocationName, '') AS LocationName
+			,ISNULL(br.LookupValueName, '') AS BuyingRange
 			,REPLACE(l.InquiryFor, ',', ',<BR>') AS InquiryFor
 			,ISNULL(FORMAT(l.UpdatedDate, 'dd/MM/yyyy hh:mm tt'), '') AS LastModifiedOn
 			,COUNT(1) OVER () AS TotalCount
@@ -77,6 +79,8 @@ BEGIN
 			AND la.IsDeleted = 0
 		LEFT JOIN dbo.LookupValues lv WITH (NOLOCK) ON lv.LookupValueId = l.LeadSourceId
 			AND lv.IsDeleted = 0
+		LEFT JOIN dbo.LookupValues br WITH (NOLOCK) ON br.LookupValueId = l.BuyingRangeValueId
+			AND br.IsDeleted = 0
 		LEFT JOIN (
 			SELECT LeadId
 				,FollowUpComment
@@ -125,6 +129,10 @@ BEGIN
 					SELECT value
 					FROM STRING_SPLIT(@LocationID, ',')
 					)
+				)
+			AND (
+				@BuyingRangeValueId IS NULL
+				OR l.BuyingRangeValueId = @BuyingRangeValueId
 				)
 		ORDER BY CASE 
 				WHEN @SortBy = 'CustomerName'

@@ -314,6 +314,11 @@ BEGIN
 					--,@Status = @OutputStatus OUTPUT
 					--,@Message = @Message OUTPUT
 					--,@Error = @Error OUTPUT
+
+				IF @IsAutoManufacture = 0  -- Manual work order flow
+				BEGIN
+                    EXEC CreateManufacturingWorkOrders @OrderId = @OrderId, @TenantId = @TenantId, @UserId = @UserId;
+                END
 			END
 		END
 

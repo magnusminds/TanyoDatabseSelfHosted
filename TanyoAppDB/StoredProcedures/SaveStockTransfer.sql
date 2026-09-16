@@ -1,3 +1,55 @@
+/*To transfer all stock of one warehouse to another warehouse
+
+--First prepare json of the products which needs to transfer
+SELECT '    {
+                "stockTransferDetailId": 0,
+                "productId": '+CAST(pqbw.ProductId AS VARCHAR(10))+',
+                "quantity": '+CAST(pqbw.Quantity AS VARCHAR(50))+'
+            },' 
+FROM ProductQuantitiesByWarehouse pqbw
+INNER JOIN Products p ON p.ProductId = pqbw.ProductId
+WHERE TenantId = 191
+AND WarehouseId = 202
+AND pqbw.Quantity >0
+
+--Step2 copy whole json cretaed from the above query and put it into the ProductList json and run the procedure
+
+DECLARE @ReturnMessage NVARCHAR(1024);
+
+EXEC [dbo].[SaveStockTransfer]
+    @TenantId = 191,
+    @UserId = 9047,
+    @JsonObject = N'{
+        "stockTransferId": 0,
+        "fromWarehouseId": 202,
+        "toWarehouseId": 208,
+        "remarks": "Stock transfer for all products",
+        "status": 1,
+        "productsList": [
+                          {
+                            "stockTransferDetailId": 0,
+                            "productId": 296480,
+                            "quantity": 2
+                          },
+                          {
+                            "stockTransferDetailId": 0,
+                            "productId": 296481,
+                            "quantity": 1
+                          },
+                          {
+                            "stockTransferDetailId": 0,
+                            "productId": 296482,
+                            "quantity": 1
+                          }
+                    ]
+    }',
+@ReturnMessage = @ReturnMessage OUTPUT;
+
+SELECT @ReturnMessage AS ReturnMessage;
+
+
+Step3: Go to the tenant portal and Mark that stock transfer as received
+*/
 CREATE PROCEDURE [dbo].[SaveStockTransfer] (
 	@TenantId INT
 	,@UserId INT

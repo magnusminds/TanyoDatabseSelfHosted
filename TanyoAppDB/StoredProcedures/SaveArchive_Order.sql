@@ -1,7 +1,6 @@
-CREATE   PROCEDURE [dbo].[SaveArchive_Order] 
-	(
-		 @OrderID BIGINT
-		,@UserId BIGINT
+CREATE PROCEDURE [dbo].[SaveArchive_Order] (
+	@OrderID BIGINT
+	,@UserId BIGINT
 	)
 AS
 BEGIN
@@ -34,7 +33,7 @@ BEGIN
 			,OrderId
 			,OrderNo
 			,CustomerID
-			,STATUS
+			,Status
 			,TenantId
 			,OrderType
 			,InquiryExpirationDate
@@ -71,7 +70,7 @@ BEGIN
 			,OrderID
 			,OrderNo
 			,CustomerID
-			,STATUS
+			,Status
 			,TenantID
 			,OrderType
 			,InquiryExpirationDate
@@ -235,16 +234,14 @@ BEGIN
 		IF @@TRANCOUNT > 0
 			ROLLBACK TRAN
 
-		DECLARE @ErrorMsg VARCHAR(MAX)
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
 
-		SET @ErrorMsg = ERROR_MESSAGE()
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
 
-		RAISERROR (
-				'Error in SaveArchive_Order : %s'
-				,15
-				,1
-				,@ErrorMsg
-				)
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
 

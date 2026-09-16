@@ -44,6 +44,8 @@ BEGIN
 		BEGIN
 			SELECT @Message = 'Order Status must be in "Pending For Approal" to mark as Approved. Order ID: '
 				+ CAST(@OrderId AS VARCHAR(100))
+				+ ', Tenant ID: '
+				+ CAST(@TenantId AS VARCHAR(100))
 
 			RAISERROR (
 					@Message
@@ -64,6 +66,8 @@ BEGIN
 		BEGIN
 			SELECT @Message = 'Order Delivery Date must be a valid current/future date. . Order ID: '
 				+ CAST(@OrderId AS VARCHAR(100))
+				+ ', Tenant ID: '
+				+ CAST(@TenantId AS VARCHAR(100))
 
 			RAISERROR (
 					@Message
@@ -84,9 +88,13 @@ BEGIN
 			AND @TenantId NOT IN (
 				185
 				,193
-				) --Zula n more and NOvelty allows
+				,130
+				) --Zula n more and NOvelty and G n C  allows
 		BEGIN
-			SELECT @Message = 'Orderset Item Price 0, which is not allowed.'
+			SELECT @Message = 'Orderset Item Price 0, which is not allowed. Order ID:'
+				+ CAST(@OrderId AS VARCHAR(100))
+				+ ', Tenant ID: '
+				+ CAST(@TenantId AS VARCHAR(100))
 
 			RAISERROR (
 					@Message

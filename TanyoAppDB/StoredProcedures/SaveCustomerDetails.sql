@@ -26,20 +26,17 @@ BEGIN
 		,@DateUtc DATETIME = GETUTCDATE();
 
 	DROP TABLE IF EXISTS #CustomerDetails
-	
-	--IF EXISTS (	SELECT 1
-	--			FROM Customers WITH (NOLOCK)
-	--			WHERE PhoneNumber = @CustomerPhoneNumber
-	--				AND TenantId = @TenantID
-	--				AND IsDeleted = 0)
-	--BEGIN
 
-	--		SET @CustomerPhoneNumber = NULL
-		
-	--END
-
+		--IF EXISTS (	SELECT 1
+		--			FROM Customers WITH (NOLOCK)
+		--			WHERE PhoneNumber = @CustomerPhoneNumber
+		--				AND TenantId = @TenantID
+		--				AND IsDeleted = 0)
+		--BEGIN
+		--		SET @CustomerPhoneNumber = NULL
+		--END
 	BEGIN TRY
-		BEGIN TRAN;
+		BEGIN TRAN SaveCustomerDetails;
 
 		SELECT *
 		INTO #CustomerDetails
@@ -110,18 +107,21 @@ BEGIN
 			SET @NewCustomerID = SCOPE_IDENTITY();
 		END
 
-		COMMIT TRAN;
+		COMMIT TRAN SaveCustomerDetails;
 	END TRY
 
 	BEGIN CATCH
 		IF @@TRANCOUNT > 0
-			ROLLBACK TRAN;
+			ROLLBACK TRAN SaveCustomerDetails;
 
-		DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE()
-			,@ErrorSeverity INT = ERROR_SEVERITY()
-			,@ErrorState INT = ERROR_STATE();
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
 
-		THROW;
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 
 	SELECT @NewCustomerID AS CustomerID;

@@ -18,8 +18,7 @@ EXEC SaveProductSets
 ,@TenantId =2
 
 */
-
-CREATE   PROCEDURE [dbo].[SaveProductSets] (
+CREATE PROCEDURE [dbo].[SaveProductSets] (
 	@ProductSetId BIGINT
 	,@SetName VARCHAR(510)
 	,@Description VARCHAR(500)
@@ -39,38 +38,40 @@ BEGIN
 		,@Message VARCHAR(256) = ''
 		,@NewProductCount INT
 		,@OldProductCount INT
-		--,@NewProductSetId BIGINT
 
-	DROP TABLE IF EXISTS #ProductList
+	--,@NewProductSetId BIGINT
+	DROP TABLE IF EXISTS #ProductList;
 
-	;WITH ProductIdList AS (
-		SELECT TRY_CAST(LTRIM(RTRIM(value)) AS BIGINT) AS ProductId
-			,ROW_NUMBER() OVER (
-				ORDER BY (
-						SELECT NULL
-						)
-				) AS RowNum
-		FROM STRING_SPLIT(@ProductId, ',')
-		WHERE LTRIM(RTRIM(value)) <> ''
-		)
-		,ProductQtyList AS (
-		SELECT TRY_CAST(LTRIM(RTRIM(value)) AS DECIMAL(18, 4)) AS Quantity
-			,ROW_NUMBER() OVER (
-				ORDER BY (
-						SELECT NULL
-						)
-				) AS RowNum
-		FROM STRING_SPLIT(ISNULL(@ProductQuantities, ''), ',')
-		WHERE LTRIM(RTRIM(value)) <> ''
-		)
-	SELECT p.ProductId
-		,ISNULL(NULLIF(q.Quantity, 0), 1) AS Quantity
-		,p.RowNum
-	INTO #ProductList
-	FROM ProductIdList p
-	LEFT JOIN ProductQtyList q ON p.RowNum = q.RowNum
-	WHERE p.ProductId IS NOT NULL
-	
+		WITH ProductIdList
+		AS (
+			SELECT TRY_CAST(LTRIM(RTRIM(value)) AS BIGINT) AS ProductId
+				,ROW_NUMBER() OVER (
+					ORDER BY (
+							SELECT NULL
+							)
+					) AS RowNum
+			FROM STRING_SPLIT(@ProductId, ',')
+			WHERE LTRIM(RTRIM(value)) <> ''
+			)
+			,ProductQtyList
+		AS (
+			SELECT TRY_CAST(LTRIM(RTRIM(value)) AS DECIMAL(18, 4)) AS Quantity
+				,ROW_NUMBER() OVER (
+					ORDER BY (
+							SELECT NULL
+							)
+					) AS RowNum
+			FROM STRING_SPLIT(ISNULL(@ProductQuantities, ''), ',')
+			WHERE LTRIM(RTRIM(value)) <> ''
+			)
+		SELECT p.ProductId
+			,ISNULL(NULLIF(q.Quantity, 0), 1) AS Quantity
+			,p.RowNum
+		INTO #ProductList
+		FROM ProductIdList p
+		LEFT JOIN ProductQtyList q ON p.RowNum = q.RowNum
+		WHERE p.ProductId IS NOT NULL
+
 	SELECT @NewProductCount = COUNT(ProductId)
 	FROM #ProductList
 
@@ -79,15 +80,12 @@ BEGIN
 	--BEGIN
 	--	SET @Status = 0
 	--	SET @Message = 'Invalid Request'
-
 	--	SELECT @Status AS [Status]
 	--		,@Message AS [Message]
-
 	--	RETURN;
 	--END
-
 	BEGIN TRY
-		BEGIN TRAN;
+		BEGIN TRAN SaveProductSets;
 
 		IF ISNULL(@ProductSetId, 0) = 0
 			AND NOT EXISTS (
@@ -163,8 +161,8 @@ BEGIN
 						AND PSI.ProductSetId = @ProductSetId
 					WHERE PSI.ProductId IS NULL
 					)
-			OR @OldProductCount <> @NewProductCount
-			OR EXISTS (
+				OR @OldProductCount <> @NewProductCount
+				OR EXISTS (
 					SELECT 1
 					FROM #ProductList PL
 					INNER JOIN ProductSetItems PSI WITH (NOLOCK) ON PSI.ProductId = PL.ProductId
@@ -207,56 +205,75 @@ BEGIN
 		--	SET @Status = 0
 		--	SET @Message = 'Invalid Request'
 		--END
-
 		--Delete images removed by the user
 		IF ISNULL(@DeletedImageIds, '') <> ''
 		BEGIN
-			DELETE FROM ProductSetImage 
-			WHERE ProductSetImageID IN (SELECT CAST(value AS BIGINT) FROM STRING_SPLIT(@DeletedImageIds, ','))
+			DELETE
+			FROM ProductSetImage
+			WHERE ProductSetImageID IN (
+					SELECT CAST(value AS BIGINT)
+					FROM STRING_SPLIT(@DeletedImageIds, ',')
+					)
 		END
 
 		--Insert newly uploaded images from comma separated list
-        IF ISNULL(@ProductSetImages, '') <> ''
-        BEGIN
-            DROP TABLE IF EXISTS #ImageList;
+		IF ISNULL(@ProductSetImages, '') <> ''
+		BEGIN
+			DROP TABLE IF EXISTS #ImageList;
 
-            SELECT LTRIM(RTRIM(value)) AS ImagePath
-            INTO #ImageList
-            FROM STRING_SPLIT(@ProductSetImages, ',');
+				SELECT LTRIM(RTRIM(value)) AS ImagePath
+				INTO #ImageList
+				FROM STRING_SPLIT(@ProductSetImages, ',');
 
-            INSERT INTO ProductSetImage (
-                ProductSetId,
-                ImagePath,
-                IsCover,
-                CreatedBy,
-                CreatedDate,
-                CreatedUTCDate
-            )
-            SELECT 
-                @ProductSetId,
-                ImagePath,
-                CASE WHEN ImagePath = @SetImage THEN 1 ELSE 0 END,
-                @UserId,
-                @dt,
-                @dtUTC
-            FROM #ImageList;
-        END
+			INSERT INTO ProductSetImage (
+				ProductSetId
+				,ImagePath
+				,IsCover
+				,CreatedBy
+				,CreatedDate
+				,CreatedUTCDate
+				)
+			SELECT @ProductSetId
+				,ImagePath
+				,CASE 
+					WHEN ImagePath = @SetImage
+						THEN 1
+					ELSE 0
+					END
+				,@UserId
+				,@dt
+				,@dtUTC
+			FROM #ImageList;
+		END
 
 		--Synchronize the IsCover flag for all images of this set
-		UPDATE ProductSetImage 
-		SET IsCover = CASE WHEN ImagePath = @SetImage THEN 1 ELSE 0 END
+		UPDATE ProductSetImage
+		SET IsCover = CASE 
+				WHEN ImagePath = @SetImage
+					THEN 1
+				ELSE 0
+				END
 		WHERE ProductSetId = @ProductSetId
 
-		COMMIT TRAN;
+		COMMIT TRAN SaveProductSets;
 
-		SELECT 	@ProductSetId AS ProductSetId
+		SELECT @ProductSetId AS ProductSetId
 			,@Status AS [Status]
 			,@Message AS [Message]
 	END TRY
 
 	BEGIN CATCH
 		IF @@TRANCOUNT > 0
-			ROLLBACK TRAN;
+			ROLLBACK TRAN SaveProductSets;
+
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
+
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 
 		SELECT 0 AS [Status]
 			,ERROR_MESSAGE() AS [Message];

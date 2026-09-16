@@ -103,6 +103,8 @@ BEGIN
         END
         SET @Result = @@ROWCOUNT;
 
+        COMMIT TRANSACTION UpdateProductOfferPrice;
+
         IF @Result > 0
 		BEGIN
 			DECLARE @Inc INT = 1
@@ -147,7 +149,6 @@ BEGIN
 			DROP TABLE #ActivityLogData;
 		END
 
-        COMMIT TRANSACTION UpdateProductOfferPrice;
 
     END TRY
 

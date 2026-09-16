@@ -39,12 +39,12 @@ BEGIN
 			,c.PhoneNumber
 			,o.ApprovedDate
 			,CASE 
-				WHEN o.STATUS = 5
+				WHEN o.Status = 5
 					THEN o.DeliveryDate
 				ELSE o.TentativeDeliveryDate
 				END AS DeliveryDate
-			,o.STATUS AS OrderStatus
-			,os.STATUS AS OrderStatusName
+			,o.Status AS OrderStatus
+			,os.Status AS OrderStatusName
 			,o.TotalAmt AS InvoiceAmount
 			,ISNULL(o.AdvanceAmount, 0) AS PaymentReceived
 			,(o.TotalAmt - ISNULL(o.AdvanceAmount, 0)) AS PaymentDueAmount
@@ -76,20 +76,20 @@ BEGIN
 			,SUM(o.TotalAmt - ISNULL(o.AdvanceAmount, 0)) OVER () AS TotalPaymentDueAmount
 		FROM Orders o WITH (NOLOCK)
 		INNER JOIN Customers c WITH (NOLOCK) ON c.CustomerId = o.CustomerID
-		INNER JOIN OrderStatus os WITH (NOLOCK) ON os.StatusEnumId = o.STATUS
+		INNER JOIN OrderStatus os WITH (NOLOCK) ON os.StatusEnumId = o.Status
 			AND os.TenantId = @TenantId
 			AND os.Type = 'Order'
 		WHERE o.TenantId = @TenantId
 			AND (
 				@OrderStatus IS NULL
-				OR o.STATUS IN (
+				OR o.Status IN (
 					SELECT value
 					FROM string_split(@OrderStatus, ',')
 					)
 				)
 			AND o.ApprovedDate BETWEEN @ApprovedFromDateTime
 				AND @ApprovedToDateTime
-			AND o.STATUS <> 9
+			AND o.Status <> 9
 			AND (o.TotalAmt - ISNULL(o.AdvanceAmount, 0)) > 0
 		ORDER BY CASE 
 				WHEN @SortBy = 'ApprovedDate'
@@ -114,12 +114,12 @@ BEGIN
 			,CASE 
 				WHEN @SortBy = 'OrderStatus'
 					AND @SortOrder = 'ASC'
-					THEN o.STATUS
+					THEN o.Status
 				END ASC
 			,CASE 
 				WHEN @SortBy = 'OrderStatus'
 					AND @SortOrder = 'DESC'
-					THEN o.STATUS
+					THEN o.Status
 				END DESC
 			,CASE 
 				WHEN @SortBy = 'InvoiceAmount'
@@ -166,19 +166,14 @@ BEGIN
 	END TRY
 
 	BEGIN CATCH
-		DECLARE @ErrorMessage NVARCHAR(4000)
-		DECLARE @ErrorSeverity INT
-		DECLARE @ErrorState INT
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
 
-		SELECT @ErrorMessage = ERROR_MESSAGE()
-			,@ErrorSeverity = ERROR_SEVERITY()
-			,@ErrorState = ERROR_STATE()
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
 
-		RAISERROR (
-				@ErrorMessage
-				,@ErrorSeverity
-				,@ErrorState
-				)
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
 

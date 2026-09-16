@@ -54,7 +54,7 @@ BEGIN
 		INNER JOIN ProductQuantities pq WITH (NOLOCK) ON pq.ProductId = p.ProductId
 		WHERE pq.Quantity > 0
 			AND p.TenantId = @TenantId
-			AND p.STATUS = 1
+			AND p.Status = 1
 			AND NOT EXISTS (
 				SELECT 1
 				FROM OrderSetItems osi WITH (NOLOCK)
@@ -62,7 +62,7 @@ BEGIN
 				WHERE p.ProductId = osi.SubjectId
 					AND o.TenantId = @TenantId
 					AND osi.SubjectTypeId = @ProductSubjectTypeId
-					AND o.STATUS NOT IN (
+					AND o.Status NOT IN (
 						6
 						,8
 						,9
@@ -214,19 +214,14 @@ BEGIN
 	END TRY
 
 	BEGIN CATCH
-		DECLARE @ErrorMessage NVARCHAR(4000)
-		DECLARE @ErrorSeverity INT
-		DECLARE @ErrorState INT
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
 
-		SELECT @ErrorMessage = ERROR_MESSAGE()
-			,@ErrorSeverity = ERROR_SEVERITY()
-			,@ErrorState = ERROR_STATE()
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
 
-		RAISERROR (
-				@ErrorMessage
-				,@ErrorSeverity
-				,@ErrorState
-				)
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
 

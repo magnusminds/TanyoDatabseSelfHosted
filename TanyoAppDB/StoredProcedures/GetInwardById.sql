@@ -1,20 +1,21 @@
 /* 
 EXEC  [GetInwardById]
-    @InwardId = 30659   
+    @InwardId = 62535   
 */
-CREATE   PROCEDURE [dbo].[GetInwardById] (@InwardId INT)
+CREATE PROCEDURE [dbo].[GetInwardById] 
+(
+@InwardId INT
+)
 AS
 BEGIN
 	SET NOCOUNT ON;
 
-    BEGIN TRY
-
+	BEGIN TRY
 		DECLARE @SalesReturnType INT = 3;-- InwardTypeEnum.SalesReturn — adjust to your actual enum value
 
-			------------------------------------------------------------------
-			-- Result set 1: header
-			------------------------------------------------------------------
-	 
+		------------------------------------------------------------------
+		-- Result set 1: header
+		------------------------------------------------------------------
 		SELECT
 			-- InwardEntry fields
 			x.CustomerId
@@ -52,7 +53,6 @@ BEGIN
 			,ST.TransferDate
 			,FW.Name AS FromWarehouseName
 			,TW.Name AS ToWarehouseName
-
 			-- InwardDetailsEntry fields
 			,d.Amount
 			,AudioURL = ISNULL(d.AudioURL, N'')
@@ -74,12 +74,19 @@ BEGIN
 			,d.WarehouseId
 			,IDEW.Name AS WarehouseName
 			,STD.StockTransferDetailId
-
 		FROM dbo.InwardEntry x
-		INNER JOIN InwardDetailsEntry d  ON x.InwardId = d.InwardId
-		INNER JOIN dbo.Products p ON p.ProductId = d.ProductId
-		INNER JOIN dbo.Categories c ON c.CategoryId = p.CategoryId
-		INNER JOIN Warehouse IDEW ON d.WarehouseId = IDEW.Id
+		LEFT JOIN InwardDetailsEntry d ON x.InwardId = d.InwardId
+			AND d.IsDeleted = 0
+			AND EXISTS (
+				SELECT 1
+				FROM dbo.Products p2
+				WHERE p2.ProductId = d.ProductId
+					AND p2.STATUS = 1
+				)
+		LEFT JOIN dbo.Products p ON p.ProductId = d.ProductId
+			AND p.STATUS = 1
+		LEFT JOIN dbo.Categories c ON c.CategoryId = p.CategoryId
+		LEFT JOIN Warehouse IDEW ON d.WarehouseId = IDEW.Id
 		LEFT JOIN dbo.Vendors vend ON vend.VendorId = x.VendorId
 		LEFT JOIN dbo.Customers cust ON cust.CustomerId = x.CustomerId
 			AND x.InwardType = @SalesReturnType
@@ -88,38 +95,31 @@ BEGIN
 			AND x.OrderId > 0
 		--LEFT JOIN StockTransfer ST ON ST.StockTransferId = X.StockTransferId AND X.StockTransferId > 0
 		--LEFT JOIN StockTransferDetail STD ON STD.StockTransferId = ST.StockTransferId
-		LEFT JOIN StockTransfer ST ON ST.StockTransferId = X.StockTransferId AND X.StockTransferId > 0
+		LEFT JOIN StockTransfer ST ON ST.StockTransferId = X.StockTransferId
+			AND X.StockTransferId > 0
 		LEFT JOIN StockTransferDetail STD ON STD.StockTransferDetailId = d.StockTransferDetailId
 		LEFT JOIN POProducts PO ON PO.POProductId = X.POProductId
 		LEFT JOIN Warehouse FW ON ST.FromWarehouseId = FW.Id
 		LEFT JOIN Warehouse TW ON ST.ToWarehouseId = TW.Id
- 		OUTER APPLY (
+		OUTER APPLY (
 			SELECT TOP 1 *
 			FROM dbo.[AspNetUsers]
 			WHERE UserId = COALESCE(x.UpdatedBy, x.CreatedBy)
 			) usr
 		WHERE x.InwardId = @InwardId
-		and x.IsDeleted = 0
-		and d.IsDeleted = 0
+			AND x.IsDeleted = 0
 	END TRY
-    BEGIN CATCH
-        DECLARE @ErrorMessage NVARCHAR(4000),
-                @ErrorSeverity INT,
-                @ErrorState INT,
-                @ObjectName VARCHAR(500);
 
-        SELECT 
-            @ErrorMessage = ERROR_MESSAGE(),
-            @ErrorSeverity = ERROR_SEVERITY(),
-            @ErrorState = ERROR_STATE(),
-            @ObjectName = OBJECT_NAME(@@PROCID);
+	BEGIN CATCH
+		DECLARE @ErrorMessage VARCHAR(MAX)
+			,@ObjectName VARCHAR(500);
 
-        EXEC dbo.SaveDBErrorLog
-			@ObjectName = @ObjectName
+		SELECT @ErrorMessage = ERROR_MESSAGE()
+			,@ObjectName = OBJECT_NAME(@@PROCID);
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
 			,@ErrorMsg = @ErrorMessage
-
-        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
-    END CATCH
+	END CATCH
 END
 
 GO

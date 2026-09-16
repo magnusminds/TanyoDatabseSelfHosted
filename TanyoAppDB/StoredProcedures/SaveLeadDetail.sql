@@ -1,5 +1,4 @@
-CREATE PROC SaveLeadDetail
-(	
+CREATE PROC [dbo].[SaveLeadDetail] (
 	@CustomerName VARCHAR(200)
 	,@PhoneNumber VARCHAR(10)
 	,@InquiryFor VARCHAR(200)
@@ -11,97 +10,107 @@ CREATE PROC SaveLeadDetail
 	,@UserId INT
 	,@CreatedDate DATETIMEOFFSET
 	,@CreatedUTCDate DATETIME
-)
+	)
 AS
 BEGIN
-	
 	SET NOCOUNT ON;
 
-	DECLARE @CustomerId BIGINT = 0
-		,@LocationId INT
-		,@dt DATE = GETDATE()
+	BEGIN TRY
+		DECLARE @CustomerId BIGINT = 0
+			,@LocationId INT
+			,@dt DATE = GETDATE()
 
-	SELECT @LocationId = LocationID
-	FROM LocationUserMapping
-	WHERE UserID = @UserId
-	AND IsDefault = 1
+		SELECT @LocationId = LocationID
+		FROM LocationUserMapping
+		WHERE UserID = @UserId
+			AND IsDefault = 1
 
-	IF EXISTS (
-			SELECT TOP 1 1
+		IF EXISTS (
+				SELECT TOP 1 1
+				FROM Customers c WITH (NOLOCK)
+				WHERE c.PhoneNumber = @PhoneNumber
+					AND c.TenantId = @TenantId
+					AND c.IsDeleted = 0
+				)
+		BEGIN
+			SELECT @CustomerId = c.CustomerId
 			FROM Customers c WITH (NOLOCK)
 			WHERE c.PhoneNumber = @PhoneNumber
-			AND c.TenantId = @TenantId
-			AND c.IsDeleted = 0
-			)
-	BEGIN
-		SELECT @CustomerId = c.CustomerId
-		FROM Customers c WITH (NOLOCK)
-		WHERE c.PhoneNumber = @PhoneNumber
-			AND c.TenantId = @TenantId
-			AND c.IsDeleted = 0
-	END
-	ELSE
-	BEGIN
-		INSERT INTO Customers
-		(
-			CustomerTypeId
-			,FirstName
+				AND c.TenantId = @TenantId
+				AND c.IsDeleted = 0
+		END
+		ELSE
+		BEGIN
+			INSERT INTO Customers (
+				CustomerTypeId
+				,FirstName
+				,PhoneNumber
+				,TenantId
+				,CreatedBy
+				,CreatedDate
+				,CreatedUTCDate
+				)
+			SELECT 1
+				,@CustomerName
+				,@PhoneNumber
+				,@TenantId
+				,@UserId
+				,@CreatedDate
+				,@CreatedUTCDate
+
+			SELECT @CustomerId = SCOPE_IDENTITY()
+		END
+
+		INSERT INTO Leads (
+			FirstName
 			,PhoneNumber
+			,Notes
+			,[Source]
+			,Email
+			,Priority
+			,Status
+			,SalesmanId
+			,SalesmanAssignDate
+			,LastContactedDate
 			,TenantId
 			,CreatedBy
+			,LocationID
+			,InquiryFor
+			,CustomerId
+			,LeadSourceId
 			,CreatedDate
 			,CreatedUTCDate
-		)
-		SELECT 1
-			,@CustomerName
+			)
+		SELECT @CustomerName
 			,@PhoneNumber
+			,@Notes
+			,0
+			,''
+			,0
+			,0
+			,@SalesmanId
+			,@dt
+			,@dt
 			,@TenantId
 			,@UserId
+			,@LocationId
+			,@InquiryFor
+			,@CustomerId
+			,@LeadSourceId
 			,@CreatedDate
 			,@CreatedUTCDate
+	END TRY
 
-		SELECT @CustomerId = SCOPE_IDENTITY()
-	END
+	BEGIN CATCH
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg VARCHAR(MAX);
 
-	INSERT INTO Leads
-	(
-		FirstName
-		,PhoneNumber
-		,Notes
-		,[Source]
-		,Email
-		,Priority
-		,Status
-		,SalesmanId
-		,SalesmanAssignDate
-		,LastContactedDate
-		,TenantId
-		,CreatedBy
-		,LocationID
-		,InquiryFor
-		,CustomerId
-		,LeadSourceId
-		,CreatedDate
-		,CreatedUTCDate
-	)
-	SELECT @CustomerName
-		,@PhoneNumber
-		,@Notes
-		,0
-		,''
-		,0
-		,0
-		,@SalesmanId
-		,@dt
-		,@dt
-		,@TenantId
-		,@UserId
-		,@LocationId
-		,@InquiryFor
-		,@CustomerId
-		,@LeadSourceId
-		,@CreatedDate
-		,@CreatedUTCDate
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
+	END CATCH
 END
 
 GO

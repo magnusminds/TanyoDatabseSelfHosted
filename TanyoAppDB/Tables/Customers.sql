@@ -25,7 +25,7 @@ CREATE TABLE [dbo].[Customers] (
     [CompanyName]           VARCHAR (100)                                                     NULL,
     [LabelId]               BIGINT                                                            NULL,
     [AltName]               VARCHAR (50)                                                      NULL,
-    [LocationID]            BIGINT                                                            NULL,
+    [LocationID]            BIGINT                                                            NOT NULL,
     [InteriorCommissionPer] NUMERIC (5, 2)                                                    CONSTRAINT [DF__Customers__Inter__03275C9C] DEFAULT ((0)) NULL,
     [CustomerTenantID]      INT                                                               NULL,
     [PANNo]                 VARCHAR (15)                                                      NULL,

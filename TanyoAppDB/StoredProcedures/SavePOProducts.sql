@@ -54,7 +54,7 @@ BEGIN
 			,VendorModelNo VARCHAR(50)
 			,Quantity DECIMAL(18, 2)
 			,VendorProductPrice DECIMAL(18, 2)
-			,STATUS INT
+			,Status INT
 			,Remarks NVARCHAR(500)
 			,OrderSetItemId BIGINT   
 			,Width DECIMAL(18, 2)    
@@ -176,7 +176,7 @@ BEGIN
 			INNER JOIN Products PTIP WITH (NOLOCK) ON PTIP.ProductId = PIT.ProductId
 				AND PTIP.TenantId = @TenantId
 			LEFT JOIN Products PT WITH (NOLOCK) ON PT.ModelNo = PVM.VendorModelNo
-				AND PT.STATUS <> 1
+				AND PT.Status <> 1
 				AND PT.TenantId = @VendorTenantId
 
 			SELECT @UnPublishedProducts = STRING_AGG(ProductInfo, ',')
@@ -244,7 +244,7 @@ BEGIN
 		INNER JOIN #POItems PIT ON PIT.POProductItemId = OPIT.POProductItemId
 
 
-		BEGIN TRAN
+		BEGIN TRAN SavePOProducts
 
 		-- =========================================
 		-- INSERT CASE (New PO)
@@ -300,7 +300,7 @@ BEGIN
 		BEGIN
 			UPDATE dbo.POProducts
 			SET OrderDate = @OrderDate
-				,STATUS = @Status
+				,Status = @Status
 				,UpdatedBy = @UserId
 				,UpdatedDate = SYSDATETIMEOFFSET()
 				,UpdatedUTCDate = GETUTCDATE()
@@ -331,7 +331,7 @@ BEGIN
 		--		,Quantity
 		--		,VendorProductPrice
 		--		,ExpectedDeliveryDate
-		--		,STATUS
+		--		,Status
 		--		,Remarks
 		--	FROM OPENJSON(@POProductItems) WITH (
 		--			ProductId BIGINT
@@ -339,7 +339,7 @@ BEGIN
 		--			,Quantity DECIMAL(18, 2)
 		--			,VendorProductPrice DECIMAL(18, 2)
 		--			,ExpectedDeliveryDate DATE
-		--			,STATUS INT
+		--			,Status INT
 		--			,Remarks NVARCHAR(500)
 		--			)
 		--	)
@@ -364,7 +364,7 @@ BEGIN
 			UPDATE PIT
 			SET Quantity = UPIT.Quantity
 			,UnitPrice = UPIT.VendorProductPrice
-			--,Status = UPIT.STATUS
+			--,Status = UPIT.Status
 			,Remarks = UPIT.Remarks
 			--,OrderSetItemId = UPIT.OrderSetItemId
 			,Width = UPIT.Width
@@ -390,7 +390,7 @@ BEGIN
 				,VendorModelNo
 				,Quantity
 				,UnitPrice
-				,STATUS
+				,Status
 				,Remarks
 				,CreatedBy
 				,OrderSetItemId
@@ -410,7 +410,7 @@ BEGIN
 				,VendorModelNo
 				,Quantity
 				,VendorProductPrice
-				,STATUS
+				,Status
 				,Remarks
 				,@UserId
 				,OrderSetItemId
@@ -443,7 +443,7 @@ BEGIN
 			,AmountBeforeGST = @AmountBeforeGST
 		WHERE POProductId = @NewPOProductId
 
-		COMMIT TRAN
+		COMMIT TRAN SavePOProducts
 
 		SET @OutputPOProductId = @NewPOProductId;
 		SET @StatusCode = 1;
@@ -460,20 +460,16 @@ BEGIN
 
 	BEGIN CATCH
 		IF @@TRANCOUNT > 0
-			ROLLBACK TRAN
+			ROLLBACK TRAN SavePOProducts
 
-		DECLARE @ErrorMsg NVARCHAR(4000) = ERROR_MESSAGE()
-		DECLARE @ErrorLine INT = ERROR_LINE()
-		DECLARE @ErrorSeverity INT = ERROR_SEVERITY()
-		DECLARE @ErrorState INT = ERROR_STATE()
+		DECLARE @ObjectName VARCHAR(500)
+		,@ErrorMsg VARCHAR(MAX);
 
-		RAISERROR (
-				'SavePOProducts failed: %s (Line %d)'
-				,@ErrorSeverity
-				,@ErrorState
-				,@ErrorMsg
-				,@ErrorLine
-				)
+		SET @ObjectName = OBJECT_NAME(@@PROCID);
+		SET @ErrorMsg = ERROR_MESSAGE();
+
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
 
