@@ -11,13 +11,13 @@ CREATE TABLE [dbo].[OfferProductMapping] (
 
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [IX_U_NC_Product_Offer]
+CREATE NONCLUSTERED INDEX [IX_NC_OfferProductMapping_cover]
     ON [dbo].[OfferProductMapping]([OfferId] ASC, [ProductId] ASC);
 
 
 GO
 
-CREATE NONCLUSTERED INDEX [IX_NC_OfferProductMapping_cover]
+CREATE UNIQUE NONCLUSTERED INDEX [IX_U_NC_Product_Offer]
     ON [dbo].[OfferProductMapping]([OfferId] ASC, [ProductId] ASC);
 
 

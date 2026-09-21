@@ -1,7 +1,7 @@
 /*  
-EXEC [dbo].[GetInventoryDetailsByProduct]  
-    @TenantId = 1206,  
-    @ProductId = 402805;  
+EXEC [dbo].[GetInventoryDetailsByProduct]        
+@TenantId = 1207,    
+@ProductId = 402888;    
 */
 CREATE PROCEDURE [dbo].[GetInventoryDetailsByProduct] (
 	@TenantId BIGINT
@@ -24,7 +24,7 @@ BEGIN
 
 		DROP TABLE IF EXISTS #WareHouse;
 
-	    CREATE TABLE #WareHouse (WAREHOUSEID BIGINT)
+		CREATE TABLE #WareHouse (WAREHOUSEID BIGINT);
 
 		-- 1. Get SubjectTypeId for 'Products'  
 		SELECT @ProductSubjectTypeId = SubjectTypeId
@@ -35,10 +35,10 @@ BEGIN
 
 		INSERT INTO #WareHouse (WareHouseId)
 		SELECT WarehouseId
-		FROM ProductQuantitiesByWarehouse
-		WHERE ProductId = @ProductId
+		FROM dbo.ProductQuantitiesByWarehouse WITH (NOLOCK)
+		WHERE ProductId = @ProductId;
 
-		-- 2. Calculate Approved Quantities (Same logic as GetInventoryWarehouseDetailsV2)
+		-- 2. Calculate Approved Quantities 
 		SELECT @ApprovedQuantities = ISNULL(SUM(os.Quantity), 0)
 		FROM dbo.Orders o WITH (NOLOCK)
 		INNER JOIN dbo.OrderSetItems os WITH (NOLOCK) ON os.OrderId = o.OrderId
@@ -47,9 +47,9 @@ BEGIN
 			AND os.SubjectId = @ProductId
 			AND os.SubjectTypeId = @ProductSubjectTypeId
 			AND (
-				o.STATUS IN (2) -- Approved  
+				o.Status IN (2) -- Approved  
 				OR (
-					o.STATUS IN (3) -- InProgress  
+					o.Status IN (3) -- InProgress  
 					AND os.ItemStatus IN (
 						0
 						,1
@@ -58,7 +58,6 @@ BEGIN
 					)
 				);
 
-		-- 3. Calculate Ready To Deliver Quantities (Order Status = InProgress(3) & ItemStatus = ReadyToDeliver(2))  
 		SELECT @ReadyToDelivered = ISNULL(SUM(os.Quantity), 0)
 		FROM dbo.Orders o WITH (NOLOCK)
 		INNER JOIN dbo.OrderSetItems os WITH (NOLOCK) ON os.OrderId = o.OrderId
@@ -66,34 +65,26 @@ BEGIN
 			AND os.IsDeleted = 0
 			AND os.SubjectId = @ProductId
 			AND os.SubjectTypeId = @ProductSubjectTypeId
-			AND o.STATUS IN (3)
+			AND o.Status IN (3)
 			AND os.ItemStatus = 2;
 
-		-- 4. Calculate On-Hold Quantities  
 		SELECT @OnHoldCnt = ISNULL(SUM(vh.Quantity), 0)
 		FROM dbo.vw_HoldItems vh WITH (NOLOCK)
 		WHERE vh.TenantId = @TenantId
 			AND vh.HoldUptoDate > @dt
 			AND vh.SubjectId = @ProductId;
 
-		-- 5. Calculate Warehouse Total & Final Saleable Total (Same logic as GetInventoryWarehouseDetailsV2)
-		SET @WareHouseCount = (SELECT COUNT(1) FROM #WareHouse)
-
-		IF (@WareHouseCount) > 0
-		BEGIN
-			SELECT @FinalTotal = Quantity
-			FROM dbo.ProductQuantities WITH (NOLOCK)
-			WHERE ProductId = @ProductId;
-		END
+		SELECT @WarehouseTotal = ISNULL(SUM(Quantity), 0)
+		FROM dbo.ProductQuantitiesByWarehouse WITH (NOLOCK)
+		WHERE ProductId = @ProductId;
 
 		SET @FinalTotal = ISNULL(@WarehouseTotal, 0) - ISNULL(@OnHoldCnt, 0) - ISNULL(@ApprovedQuantities, 0) - ISNULL(@ReadyToDelivered, 0);
 
-		IF @FinalTotal < 0
-			SET @FinalTotal = ISNULL(@FinalTotal, 0)
-
-		-- =====================================================================  
-		-- UNIFIED RESULT SET: Product, Saleable & Warehouse Inventory Details  
-		-- =====================================================================  
+		--SET @OnHoldCnt = CASE WHEN @OnHoldCnt > 0 THEN cast(concat('-',@OnHoldCnt) as nvarchar(20)) ELSE @OnHoldCnt END
+		--SET @ApprovedQuantities = CASE WHEN @ApprovedQuantities > 0 THEN cast(concat('-',@ApprovedQuantities) as nvarchar(20)) ELSE @ApprovedQuantities END
+		--SET @ReadyToDelivered = CASE WHEN @ReadyToDelivered > 0 THEN cast(concat('-',@ReadyToDelivered) as nvarchar(20)) ELSE @ReadyToDelivered END
+		--IF @FinalTotal < 0 
+		--       SET @FinalTotal = 0;
 		SELECT C.CategoryName
 			,CAST(CASE 
 					WHEN C.CategoryTypeId = 2
@@ -103,25 +94,25 @@ BEGIN
 			,P.ProductTitle AS ProductName
 			,PQ.MinimumLimit AS ReorderPoint
 			,ISNULL(PQ.ProductQuantityId, 0) AS ProductQuantityId
-			,ISNULL(PQ.Quantity, 0) AS CurrentQuantity
-			,ISNULL(PQ.Quantity, 0) AS UpdateQuantity
+			,@FinalTotal AS CurrentQuantity
+			,@FinalTotal AS UpdateQuantity
 			,@OnHoldCnt AS OnHoldQuantities
 			,@ApprovedQuantities AS ApprovedQuantities
 			,@ReadyToDelivered AS ReadyToDeliver
-			,CAST(@FinalTotal AS NUMERIC(18, 2)) AS TotalSaleableQuantity
+			,@FinalTotal AS TotalSaleableQuantity
 			,W.Id AS WarehouseId
 			,W.Name AS WarehouseName
 			,ISNULL(PQBW.ProductQuantityByWarehouseId, 0) AS ProductQuantityByWarehouseId
 			,ISNULL(PQBW.Quantity, 0) AS WarehouseCurrentQuantity
 			,ISNULL(PQBW.Quantity, 0) AS WarehouseUpdateQuantity
-			,CAST(@FinalTotal AS NUMERIC(18, 2)) AS TotalWarehouseQuantity
+			,@WarehouseTotal AS TotalWarehouseQuantity
 		FROM dbo.Products P WITH (NOLOCK)
 		INNER JOIN dbo.Categories C WITH (NOLOCK) ON C.CategoryId = P.CategoryId
 			AND C.TenantId = @TenantId
 		INNER JOIN dbo.ProductQuantities PQ WITH (NOLOCK) ON PQ.ProductId = P.ProductId
 		INNER JOIN dbo.Warehouse W WITH (NOLOCK) ON W.TenantId = @TenantId
 			AND W.IsDeleted = 0
-		INNER JOIN dbo.ProductQuantitiesByWarehouse PQBW WITH (NOLOCK) ON PQBW.WarehouseId = W.Id
+		LEFT JOIN dbo.ProductQuantitiesByWarehouse PQBW WITH (NOLOCK) ON PQBW.WarehouseId = W.Id
 			AND PQBW.ProductId = P.ProductId
 		WHERE P.TenantId = @TenantId
 			AND P.ProductId = @ProductId

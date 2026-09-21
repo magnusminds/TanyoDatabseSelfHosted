@@ -9,14 +9,14 @@ CREATE TABLE [HangFire].[Set] (
 
 GO
 
-CREATE NONCLUSTERED INDEX [IX_HangFire_Set_ExpireAt]
-    ON [HangFire].[Set]([ExpireAt] ASC) WHERE ([ExpireAt] IS NOT NULL);
+CREATE NONCLUSTERED INDEX [IX_HangFire_Set_Score]
+    ON [HangFire].[Set]([Key] ASC, [Score] ASC);
 
 
 GO
 
-CREATE NONCLUSTERED INDEX [IX_HangFire_Set_Score]
-    ON [HangFire].[Set]([Key] ASC, [Score] ASC);
+CREATE NONCLUSTERED INDEX [IX_HangFire_Set_ExpireAt]
+    ON [HangFire].[Set]([ExpireAt] ASC) WHERE ([ExpireAt] IS NOT NULL);
 
 
 GO

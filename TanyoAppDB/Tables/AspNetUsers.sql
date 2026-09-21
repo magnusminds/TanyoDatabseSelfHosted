@@ -34,14 +34,14 @@ CREATE TABLE [dbo].[AspNetUsers] (
 
 GO
 
-CREATE NONCLUSTERED INDEX [IX_NC_UserId]
-    ON [dbo].[AspNetUsers]([UserId] ASC);
+CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
+    ON [dbo].[AspNetUsers]([NormalizedUserName] ASC, [IsActive] ASC, [IsDeleted] ASC, [NormalizedEmail] ASC) WHERE ([NormalizedUserName] IS NOT NULL) WITH (FILLFACTOR = 70);
 
 
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
-    ON [dbo].[AspNetUsers]([NormalizedUserName] ASC, [IsActive] ASC, [IsDeleted] ASC, [NormalizedEmail] ASC) WHERE ([NormalizedUserName] IS NOT NULL) WITH (FILLFACTOR = 70);
+CREATE NONCLUSTERED INDEX [IX_NC_UserId]
+    ON [dbo].[AspNetUsers]([UserId] ASC);
 
 
 GO

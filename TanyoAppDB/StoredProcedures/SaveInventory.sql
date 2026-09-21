@@ -90,24 +90,20 @@ BEGIN
 		/*========================================================
           3. Validate Saleable Quantity = Warehouse Quantity
         ========================================================*/
-		IF ISNULL(@SaleableQuantity, 0) <> ISNULL(@TotalWarehouseQuantity, 0)
-		BEGIN
-			SET @Status = 0;
-			SET @ReturnMessage = 'Total Saleable Quantity (' + CAST(ISNULL(@SaleableQuantity, 0) AS VARCHAR(50)) + ') must be equal to Total Warehouse Quantity (' + CAST(ISNULL(@TotalWarehouseQuantity, 0) AS VARCHAR(50)) + ').';
-
-			SELECT @Status AS [Status]
-				,@ReturnMessage AS ReturnMessage;
-
-			RETURN;
-		END;
-
+		--IF ISNULL(@SaleableQuantity, 0) <> ISNULL(@TotalWarehouseQuantity, 0)
+		--BEGIN
+		--	SET @Status = 0;
+		--	SET @ReturnMessage = 'Total Saleable Quantity (' + CAST(ISNULL(@SaleableQuantity, 0) AS VARCHAR(50)) + ') must be equal to Total Warehouse Quantity (' + CAST(ISNULL(@TotalWarehouseQuantity, 0) AS VARCHAR(50)) + ').';
+		--	SELECT @Status AS [Status],
+		--	       @ReturnMessage AS ReturnMessage;
+		--	RETURN;
+		--END;
 		BEGIN TRANSACTION InventoryUpdateTransaction;
 
 		/*========================================================
           4. Update Saleable Quantity / Stock Count (Using separate SP)
         ========================================================*/
-		EXEC [dbo].[UpdateProductSellableQuantity] 
-			 @ProductQuantityId = @ProductQuantityId
+		EXEC [dbo].[UpdateProductSellableQuantity] @ProductQuantityId = @ProductQuantityId
 			,@Quantity = @SaleableQuantity
 			,@MinimumLimit = @ReorderPoint
 			,@Remarks = @Remarks
@@ -144,8 +140,7 @@ BEGIN
 			BEGIN
 				SET @Cur_Description = ISNULL(@Cur_WarehouseName, '') + ' Warehouse inventory has been added with ' + CAST(ISNULL(TRY_CAST(@Cur_NewQuantity AS NUMERIC(18, 2)), 0) AS VARCHAR(50)) + ' for ' + ISNULL(@ProductName, '');
 
-				EXEC [dbo].[PopulateProductWarehouseQuantity] 
-					 @TenantId = @TenantId
+				EXEC [dbo].[PopulateProductWarehouseQuantity] @TenantId = @TenantId
 					,@UserId = @UserId
 					,@ProductId = @ProductId
 					,@WarehouseId = @Cur_WarehouseId
@@ -156,8 +151,7 @@ BEGIN
 			ELSE IF ISNULL(@Cur_ProductQuantityByWarehouseId, 0) > 0
 				AND ISNULL(@Cur_OldQuantity, 0) <> ISNULL(@Cur_NewQuantity, 0)
 			BEGIN
-				EXEC [dbo].[UpdateProductQuantityByWarehouse] 
-					 @ProductQuantityByWarehouseId = @Cur_ProductQuantityByWarehouseId
+				EXEC [dbo].[UpdateProductQuantityByWarehouse] @ProductQuantityByWarehouseId = @Cur_ProductQuantityByWarehouseId
 					,@Quantity = @Cur_NewQuantity
 					,@UserId = @UserId
 					,@Remarks = @Remarks;

@@ -47,8 +47,14 @@ BEGIN
 		,@dt DATETIMEOFFSET = SYSDATETIMEOFFSET()
 		,@dtUTC DATETIME = GETUTCDATE()
 		,@Date DATE = GETDATE()
-		,@SkipAddress BIT  = 0
-		,@BuyingRangeValueId BIGINT;
+		,@SkipAddress BIT = 0
+		,@BuyingRangeValueId BIGINT
+		,@AlternateMobileNumber VARCHAR(15)
+		,@InquiryAreaRequirement DECIMAL(18, 2)
+		,@AlternateSalesmanId BIGINT
+		,@ClientMeetingStageId INT
+		,@ArchitectMeetingStageId INT
+		,@LeadType INT;
 
 	SELECT @CustomerId = JSON_VALUE(@LeadRequestDetails, '$.customerDetails.CustomerId')
 		,@FirstName = JSON_VALUE(@LeadRequestDetails, '$.customerDetails.firstName')
@@ -85,14 +91,19 @@ BEGIN
 		,@PurchaseUrgencyId = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.purchaseUrgencyId')
 		,@CustomerBehaviorId = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.customerBehaviorId')
 		,@CloseLookupValueId = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.closeLookupValueId')
-		,@BuyingRangeValueId = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.buyingRangeValueId');
+		,@BuyingRangeValueId = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.buyingRangeValueId')
+		,@AlternateMobileNumber = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.alternateMobileNumber')
+		,@InquiryAreaRequirement = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.inquiryAreaRequirement')
+		,@AlternateSalesmanId = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.alternateSalesmanId')
+		,@ClientMeetingStageId = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.clientMeetingStageId')
+		,@ArchitectMeetingStageId = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.architectMeetingStageId')
+		,@LeadType = JSON_VALUE(@LeadRequestDetails, '$.leadDetails.leadType');
 
-
-    IF JSON_QUERY(@LeadRequestDetails, '$.customerAddress') IS NULL
-	 OR JSON_QUERY(@LeadRequestDetails, '$.customerAddress') = '{}'
-    BEGIN
-        SET @SkipAddress = 1;
-    END
+	IF JSON_QUERY(@LeadRequestDetails, '$.customerAddress') IS NULL
+		OR JSON_QUERY(@LeadRequestDetails, '$.customerAddress') = '{}'
+	BEGIN
+		SET @SkipAddress = 1;
+	END
 
 	IF ISNULL(@LeadId, 0) = 0
 	BEGIN
@@ -112,13 +123,13 @@ BEGIN
 			,1;
 	END
 
-	-- Verify lead exists and belongs to this tenant
+	-- Verify lead exists and belongs to this tenant  
 	IF NOT EXISTS (
 			SELECT 1
 			FROM Leads WITH (NOLOCK)
 			WHERE LeadId = @LeadId
 				AND TenantId = @TenantId
-				AND STATUS <> 6
+				AND Status <> 6
 			)
 	BEGIN
 		SET @ReturnMessage = 'Lead not found.';
@@ -148,13 +159,12 @@ BEGIN
 			,1;
 	END
 
-	BEGIN TRANSACTION;
+	BEGIN TRANSACTION UpdateLeadWithCustomerDetails;
 
 	BEGIN TRY
 		IF ISNULL(@CustomerId, 0) = 0
 		BEGIN
-
-			-- Phone must be unique within tenant
+			-- Phone must be unique within tenant  
 			IF EXISTS (
 					SELECT 1
 					FROM Customers WITH (NOLOCK)
@@ -163,31 +173,28 @@ BEGIN
 					)
 			BEGIN
 				SELECT @CustomerId = CustomerId
-                FROM Customers WITH (NOLOCK)
-                WHERE PhoneNumber = @PhoneNumber 
-                AND TenantId = @TenantId 
+				FROM Customers WITH (NOLOCK)
+				WHERE PhoneNumber = @PhoneNumber
+					AND TenantId = @TenantId
 
-                SELECT
-                    @FirstName   = FirstName
-                    ,@LastName    = LastName
-                    ,@PhoneNumber = PhoneNumber
-                    ,@Email       = EmailId
-                FROM Customers WITH (NOLOCK)
-                WHERE CustomerId = @CustomerId
-                AND TenantId   = @TenantId
-                
-				
-				--SET @ReturnMessage = 'A customer with this phone number already exists.';
-				--THROW 50001,@ReturnMessage,1;
+				SELECT @FirstName = FirstName
+					,@LastName = LastName
+					,@PhoneNumber = PhoneNumber
+					,@Email = EmailId
+				FROM Customers WITH (NOLOCK)
+				WHERE CustomerId = @CustomerId
+					AND TenantId = @TenantId
+					--SET @ReturnMessage = 'A customer with this phone number already exists.';  
+					--THROW 50001,@ReturnMessage,1;  
 			END
 			ELSE
 			BEGIN
 				DECLARE @UserLocationId INT
 
-                SELECT @UserLocationId = lum.LocationId
-                FROM LocationUserMapping lum WITH (NOLOCK)
-                WHERE lum.UserId = @UserId
-                AND lum.IsDefault = 1
+				SELECT @UserLocationId = lum.LocationId
+				FROM LocationUserMapping lum WITH (NOLOCK)
+				WHERE lum.UserId = @UserId
+					AND lum.IsDefault = 1
 
 				INSERT INTO Customers (
 					CustomerTypeId
@@ -237,21 +244,19 @@ BEGIN
 
 			IF @IsPortal = 1
 			BEGIN
-				
-
 				SELECT @ExistingPhoneNumber = PhoneNumber
 				FROM Customers WITH (NOLOCK)
 				WHERE CustomerId = @CustomerId
 					AND TenantId = @TenantId
-					--AND IsDeleted = 0;
 
+				--AND IsDeleted = 0;  
 				IF @PhoneNumber <> @ExistingPhoneNumber
 					AND EXISTS (
 						SELECT 1
 						FROM Customers WITH (NOLOCK)
 						WHERE PhoneNumber = @PhoneNumber
 							AND TenantId = @TenantId
-							--AND IsDeleted = 0
+							--AND IsDeleted = 0  
 							AND CustomerId <> @CustomerId
 						)
 				BEGIN
@@ -262,24 +267,23 @@ BEGIN
 						,1;
 				END
 
-				-- Update customer details
+				-- Update customer details  
 				UPDATE Customers
 				SET FirstName = @FirstName
 					,LastName = ISNULL(@LastName, '')
 					,EmailId = @Email
 					,PhoneNumber = @PhoneNumber
-					,RefferedBy = IIF(ISNULL(@RefferedBy, 0) = 0, NULL,@RefferedBy )
+					,RefferedBy = IIF(ISNULL(@RefferedBy, 0) = 0, NULL, @RefferedBy)
 					,UpdatedBy = @UserId
 					,UpdatedDate = @dt
 					,UpdatedUTCDate = @dtUTC
 					,IsDeleted = 0
 				WHERE CustomerId = @CustomerId
 					AND TenantId = @TenantId
-					--AND IsDeleted = 0;
+					--AND IsDeleted = 0;  
 			END
 			ELSE
 			BEGIN
-
 				IF @FirstName IS NULL
 					OR TRIM(@FirstName) = ''
 				BEGIN
@@ -304,15 +308,15 @@ BEGIN
 				FROM Customers WITH (NOLOCK)
 				WHERE CustomerId = @CustomerId
 					AND TenantId = @TenantId
-					--AND IsDeleted = 0;
 
+				--AND IsDeleted = 0;  
 				IF @PhoneNumber <> @ExistingPhoneNumber
 					AND EXISTS (
 						SELECT 1
 						FROM Customers WITH (NOLOCK)
 						WHERE PhoneNumber = @PhoneNumber
 							AND TenantId = @TenantId
-							--AND IsDeleted = 0
+							--AND IsDeleted = 0  
 							AND CustomerId <> @CustomerId
 						)
 				BEGIN
@@ -323,20 +327,18 @@ BEGIN
 						,1;
 				END
 
-				-- Update customer details
+				-- Update customer details  
 				UPDATE Customers
 				SET FirstName = @FirstName
 					,LastName = ISNULL(@LastName, '')
 					,PhoneNumber = @PhoneNumber
-					,RefferedBy = IIF(ISNULL(@RefferedBy, 0) = 0, NULL,@RefferedBy )
+					,RefferedBy = IIF(ISNULL(@RefferedBy, 0) = 0, NULL, @RefferedBy)
 					,UpdatedBy = @UserId
 					,UpdatedDate = @dt
 					,UpdatedUTCDate = @dtUTC
 					,IsDeleted = 0
 				WHERE CustomerId = @CustomerId
 					AND TenantId = @TenantId
-					
-				
 			END
 		END
 
@@ -347,19 +349,17 @@ BEGIN
 		FROM Customers WITH (NOLOCK)
 		WHERE CustomerId = @CustomerId
 			AND TenantId = @TenantId
-		
 
-		IF @SkipAddress  = 0
+		IF @SkipAddress = 0
 		BEGIN
-			IF ISNULL(@CustomerAddressId, 0) = 0  
+			IF ISNULL(@CustomerAddressId, 0) = 0
 			BEGIN
-				IF isnull(@IsDefault,0) = 1 AND ISNULL(@CustomerId,0) > 0
-				BEGIN 
-
+				IF isnull(@IsDefault, 0) = 1
+					AND ISNULL(@CustomerId, 0) > 0
+				BEGIN
 					UPDATE CustomerAddresses
 					SET IsDefault = 0
 					WHERE CustomerId = @CustomerId
-
 				END
 
 				INSERT INTO CustomerAddresses (
@@ -390,7 +390,7 @@ BEGIN
 					,ISNULL(@Area, '')
 					,@City
 					,@State
-					,ISNULL(@ZipCode,'')
+					,ISNULL(@ZipCode, '')
 					,ISNULL(@IsDefault, 0)
 					,0
 					,@UserId
@@ -405,7 +405,7 @@ BEGIN
 			END
 			ELSE
 			BEGIN
-				-- Verify address belongs to this customer + tenant
+				-- Verify address belongs to this customer + tenant  
 				IF NOT EXISTS (
 						SELECT 1
 						FROM CustomerAddresses WITH (NOLOCK)
@@ -421,30 +421,29 @@ BEGIN
 						,1;
 				END
 
-				IF isnull(@IsDefault,0) = 1 AND ISNULL(@CustomerId,0) > 0
-				BEGIN 
-
+				IF isnull(@IsDefault, 0) = 1
+					AND ISNULL(@CustomerId, 0) > 0
+				BEGIN
 					UPDATE CustomerAddresses
 					SET IsDefault = 0
 					WHERE CustomerId = @CustomerId
-
 				END
 
 				UPDATE CustomerAddresses
-				SET 
-				--AddressType = @AddressType
-				--	,Street1 = ISNULL(@Street1, '')
-				--	,Street2 = @Street2
-				--	,Landmark = @Landmark
-				--	,Area = @Area
-				--	,City = @City
-				--	,STATE = @State
-				--	,ZipCode = ISNULL(@ZipCode,ZipCode)
+				SET
+					--AddressType = @AddressType  
+					-- ,Street1 = ISNULL(@Street1, '')  
+					-- ,Street2 = @Street2  
+					-- ,Landmark = @Landmark  
+					-- ,Area = @Area  
+					-- ,City = @City  
+					-- ,STATE = @State  
+					-- ,ZipCode = ISNULL(@ZipCode,ZipCode)  
 					IsDefault = ISNULL(@IsDefault, 1)
-					--,Latitude = @Latitude
-					--,Longitude = @Longitude
-					--,Country = @Country
-					--,FullAddress = @FullAddress
+					--,Latitude = @Latitude  
+					--,Longitude = @Longitude  
+					--,Country = @Country  
+					--,FullAddress = @FullAddress  
 					,UpdatedBy = @UserId
 					,UpdatedDate = @dt
 					,UpdatedUTCDate = @dtUTC
@@ -479,7 +478,7 @@ BEGIN
 		SET FirstName = @FirstName
 			,LastName = @LastName
 			,Notes = @Inquiry
-			,STATUS = @Status
+			,Status = @Status
 			,SalesmanId = @SalesmanId
 			,SalesmanAssignDate = CASE 
 				WHEN @SalesmanId IS NOT NULL
@@ -502,15 +501,21 @@ BEGIN
 				END
 			,CloseLookupValueId = @CloseLookupValueId
 			,InquiryFor = @InquiryFor
-			,RefferedBy = IIF(ISNULL(@RefferedBy, 0) = 0, NULL,@RefferedBy )
+			,RefferedBy = IIF(ISNULL(@RefferedBy, 0) = 0, NULL, @RefferedBy)
 			,CustomerId = @CustomerId
 			,LeadSourceId = @LeadSourceId
 			,PurchaseUrgencyId = @PurchaseUrgencyId
 			,CustomerBehaviorId = @CustomerBehaviorId
 			,BuyingRangeValueId = @BuyingRangeValueId
+			,AlternateMobileNumber = @AlternateMobileNumber
+			,InquiryAreaRequirement = @InquiryAreaRequirement
+			,AlternateSalesmanId = @AlternateSalesmanId
+			,ClientMeetingStageId = @ClientMeetingStageId
+			,ArchitectMeetingStageId = @ArchitectMeetingStageId
+			,LeadType = @LeadType
 		WHERE LeadId = @LeadId
 			AND TenantId = @TenantId
-			AND STATUS <> 6;
+			AND Status <> 6;
 
 		IF ISNULL(@SalesmanId, 0) <> ISNULL(@PrevSalesmanId, 0)
 			AND ISNULL(@SalesmanId, 0) > 0
@@ -533,7 +538,7 @@ BEGIN
 				);
 		END
 
-		COMMIT TRANSACTION;
+		COMMIT TRANSACTION UpdateLeadWithCustomerDetails;
 
 		SELECT l.LeadId
 			,l.FirstName
@@ -554,26 +559,29 @@ BEGIN
 			,l.CustomerBehaviorId
 			,@CustomerAddressId AS CustomerAddressId
 			,l.BuyingRangeValueId
+			,l.AlternateMobileNumber
+			,l.InquiryAreaRequirement
+			,l.AlternateSalesmanId
+			,l.ClientMeetingStageId
+			,l.ArchitectMeetingStageId
+			,l.LeadType
 		FROM Leads l WITH (NOLOCK)
 		WHERE l.LeadId = @LeadId;
 	END TRY
 
-		BEGIN CATCH
-		
+	BEGIN CATCH
 		IF @@TRANCOUNT > 0
-			ROLLBACK;
+			ROLLBACK TRANSACTION UpdateLeadWithCustomerDetails;
 
-		DECLARE @ObjectName VARCHAR(500) 
-			,@ErrorMsg NVARCHAR(4000);
+        DECLARE @ObjectName VARCHAR(500)
+		,@ErrorMsg NVARCHAR(4000);
 
 		SET @ObjectName = OBJECT_NAME(@@PROCID);
 		SET @ErrorMsg = ERROR_MESSAGE();
 
-		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName 
+		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
 			,@ErrorMsg = @ErrorMsg;
-	
 	END CATCH
-
 END;
 
 GO

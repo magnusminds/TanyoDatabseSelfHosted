@@ -1,13 +1,14 @@
-/*
-EXEC DeleteProduct
-	@ProductId = 10101
-	,@TenantId = 2
-	,@UserId = 4486
+/*  
+EXEC DeleteProduct  
+ @ProductId = 10101  
+ ,@TenantId = 2  
+ ,@UserId = 4486  
 */
 CREATE PROCEDURE [dbo].[DeleteProduct] (
 	@ProductId BIGINT
 	,@TenantId INT
 	,@UserId INT
+	,@SkipInquiryCheck BIT = 0
 	)
 AS
 BEGIN
@@ -34,7 +35,8 @@ BEGIN
 		AND Ps.TenantId = @TenantId
 		AND Ps.Status <> 3;
 
-	IF EXISTS (
+	IF @SkipInquiryCheck = 0
+		AND EXISTS (
 			SELECT 1
 			FROM Orders O
 			INNER JOIN OrderSetItems OSI WITH (NOLOCK) ON O.OrderId = OSI.OrderId
@@ -76,56 +78,56 @@ BEGIN
 			WHERE ProductID = @ProductId;
 		END
 
-		--IF EXISTS (
-		--		SELECT 1
-		--		FROM ProductMaterials
-		--		WHERE ProductId = @ProductId
-		--		)
-		--BEGIN
-		--	DELETE
-		--	FROM ProductMaterials
-		--	WHERE ProductId = @ProductId;
-		--END
-		--IF EXISTS (
-		--		SELECT 1
-		--		FROM ProductImages
-		--		WHERE ProductId = @ProductId
-		--		)
-		--BEGIN
-		--	DELETE
-		--	FROM ProductImages
-		--	WHERE ProductId = @ProductId;
-		--END
-		--IF EXISTS (
-		--		SELECT 1
-		--		FROM ProductVendorMapping
-		--		WHERE ProductID = @ProductId
-		--		)
-		--BEGIN
-		--	DELETE
-		--	FROM ProductVendorMapping
-		--	WHERE ProductID = @ProductId;
-		--END
-		--IF EXISTS (
-		--		SELECT 1
-		--		FROM ProductVariants
-		--		WHERE ProductID = @ProductId
-		--		)
-		--BEGIN
-		--	DELETE
-		--	FROM ProductVariants
-		--	WHERE ProductID = @ProductId;
-		--END
-		--IF EXISTS (
-		--		SELECT 1
-		--		FROM ProductCustomFields
-		--		WHERE ProductID = @ProductId
-		--		)
-		--BEGIN
-		--	DELETE
-		--	FROM ProductCustomFields
-		--	WHERE ProductID = @ProductId;
-		--END
+		--IF EXISTS (  
+		--  SELECT 1  
+		--  FROM ProductMaterials  
+		--  WHERE ProductId = @ProductId  
+		--  )  
+		--BEGIN  
+		-- DELETE  
+		-- FROM ProductMaterials  
+		-- WHERE ProductId = @ProductId;  
+		--END  
+		--IF EXISTS (  
+		--  SELECT 1  
+		--  FROM ProductImages  
+		--  WHERE ProductId = @ProductId  
+		--  )  
+		--BEGIN  
+		-- DELETE  
+		-- FROM ProductImages  
+		-- WHERE ProductId = @ProductId;  
+		--END  
+		--IF EXISTS (  
+		--  SELECT 1  
+		--  FROM ProductVendorMapping  
+		--  WHERE ProductID = @ProductId  
+		--  )  
+		--BEGIN  
+		-- DELETE  
+		-- FROM ProductVendorMapping  
+		-- WHERE ProductID = @ProductId;  
+		--END  
+		--IF EXISTS (  
+		--  SELECT 1  
+		--  FROM ProductVariants  
+		--  WHERE ProductID = @ProductId  
+		--  )  
+		--BEGIN  
+		-- DELETE  
+		-- FROM ProductVariants  
+		-- WHERE ProductID = @ProductId;  
+		--END  
+		--IF EXISTS (  
+		--  SELECT 1  
+		--  FROM ProductCustomFields  
+		--  WHERE ProductID = @ProductId  
+		--  )  
+		--BEGIN  
+		-- DELETE  
+		-- FROM ProductCustomFields  
+		-- WHERE ProductID = @ProductId;  
+		--END  
 		SET @ProductIds = CAST(@ProductId AS VARCHAR(20));
 
 		EXEC [dbo].[DeleteProductOfferAndMapping] @TenantId = @TenantId
@@ -148,7 +150,15 @@ BEGIN
 			WHERE ProductId = @ProductId
 				AND TenantId = @TenantId;
 
-			SELECT @ActivityDescription = CONCAT (CASE WHEN @CategoryTypeId = 1 THEN 'Product 'ELSE 'Fabric 'END,pt.ProductTitle,' has been deleted')
+			SELECT @ActivityDescription = CONCAT (
+					CASE 
+						WHEN @CategoryTypeId = 1
+							THEN 'Product '
+						ELSE 'Fabric '
+						END
+					,pt.ProductTitle
+					,' has been deleted'
+					)
 			FROM Products PT WITH (NOLOCK)
 			WHERE ProductId = @ProductId;
 
@@ -173,13 +183,9 @@ BEGIN
 			ROLLBACK TRANSACTION DeleteProduct;
 
 		DECLARE @ErrorMessage NVARCHAR(4000)
-		DECLARE @ErrorSeverity INT
-		DECLARE @ErrorState INT
 		DECLARE @ObjectName VARCHAR(500)
 
 		SELECT @ErrorMessage = ERROR_MESSAGE()
-			,@ErrorSeverity = ERROR_SEVERITY()
-			,@ErrorState = ERROR_STATE()
 			,@ObjectName = OBJECT_NAME(@@PROCID)
 
 		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName

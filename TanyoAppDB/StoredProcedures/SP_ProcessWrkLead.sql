@@ -64,8 +64,13 @@ BEGIN
             ,PurchaseUrgencyId INT
             ,CustomerBehaviorId INT
             ,CustomerAddressId INT
-			,BuyingRangeValueId	bigint
-	
+			,BuyingRangeValueId BIGINT
+			,AlternateMobileNumber VARCHAR(15) 
+			,InquiryAreaRequirement DECIMAL(18,2)
+			,AlternateSalesmanId BIGINT
+			,ClientMeetingStageId INT
+			,ArchitectMeetingStageId INT
+			,LeadType INT
 	)
 
 	SELECT @TenantId = TenantId

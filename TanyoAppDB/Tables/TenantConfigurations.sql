@@ -24,6 +24,7 @@ CREATE TABLE [dbo].[TenantConfigurations] (
     [StockTransferNumberCounter]      BIGINT             DEFAULT ((0)) NULL,
     [InwardEntryNumberCounter]        BIGINT             DEFAULT ((0)) NOT NULL,
     [IsSpecialDiscount]               BIT                CONSTRAINT [DF_TenantConfigurations_IsSpecialDiscount] DEFAULT ((0)) NOT NULL,
+    [UseAsOfNowStock]                 BIT                CONSTRAINT [DF_TenantConfigurations_UseAsOfNowStock] DEFAULT ((0)) NOT NULL,
     PRIMARY KEY CLUSTERED ([TenantConfigurationID] ASC)
 );
 

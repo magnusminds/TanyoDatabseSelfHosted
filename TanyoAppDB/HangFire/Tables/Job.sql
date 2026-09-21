@@ -12,15 +12,15 @@ CREATE TABLE [HangFire].[Job] (
 
 GO
 
-CREATE NONCLUSTERED INDEX [IX_HangFire_Job_ExpireAt]
-    ON [HangFire].[Job]([ExpireAt] ASC)
-    INCLUDE([StateName]) WHERE ([ExpireAt] IS NOT NULL) WITH (FILLFACTOR = 70);
+CREATE NONCLUSTERED INDEX [IX_HangFire_Job_StateName]
+    ON [HangFire].[Job]([StateName] ASC) WHERE ([StateName] IS NOT NULL) WITH (FILLFACTOR = 70);
 
 
 GO
 
-CREATE NONCLUSTERED INDEX [IX_HangFire_Job_StateName]
-    ON [HangFire].[Job]([StateName] ASC) WHERE ([StateName] IS NOT NULL) WITH (FILLFACTOR = 70);
+CREATE NONCLUSTERED INDEX [IX_HangFire_Job_ExpireAt]
+    ON [HangFire].[Job]([ExpireAt] ASC)
+    INCLUDE([StateName]) WHERE ([ExpireAt] IS NOT NULL) WITH (FILLFACTOR = 70);
 
 
 GO

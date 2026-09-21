@@ -294,11 +294,7 @@ BEGIN
 
 			TRUNCATE TABLE #ChildResult;
 
-			INSERT INTO #ChildResult (
-				ReturnCode
-				,ReturnMessage
-				,ReturnOrderId
-				)
+			INSERT INTO #ChildResult
 			EXEC dbo.DeliverOrderSetItem @TenantId = @TenantId
 				,@ProductId = @CurrentProductId
 				,@OrderSetItemId = @CurrentOrderSetItemId

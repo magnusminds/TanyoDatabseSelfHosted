@@ -1,18 +1,19 @@
-/*    
- EXEC [dbo].[ListLeadDetails]    
-   @TenantId = 1    
-  ,@CustomerName  = NULL    
-  ,@PhoneNumber = NULL    
-  ,@SalesmanId  = NULL    
-  ,@LeadSourceId  = NULL   
-  ,@Status  = NULL    
-  ,@Tags  = NULL    
-  ,@LocationID = NULL  
-  ,@PageIndex  = 1    
-  ,@PageSize  = 25    
-  ,@SortBy = 'LastCreatedOn'    
-  ,@SortOrder  = 'DESC'    
-  ,@InquiryFor = NULL  
+/*      
+ EXEC [dbo].[ListLeadDetails]      
+   @TenantId = 1      
+  ,@CustomerName  = NULL      
+  ,@PhoneNumber = NULL      
+  ,@SalesmanId  = NULL      
+  ,@LeadSourceId  = NULL     
+  ,@Status  = NULL      
+  ,@Tags  = NULL      
+  ,@LocationID = NULL    
+  ,@PageIndex  = 1      
+  ,@PageSize  = 25      
+  ,@SortBy = 'LastCreatedOn'      
+  ,@SortOrder  = 'DESC'      
+  ,@InquiryFor = NULL    
+  ,@BuyingRangeValueId = NULL  
 */
 CREATE PROC [dbo].[ListLeadDetails] (
 	@TenantId BIGINT
@@ -37,7 +38,7 @@ BEGIN
 	BEGIN TRY
 		SELECT l.LeadId
 			,
-			--ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, '') AS CustomerName,  
+			--ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, '') AS CustomerName,    
 			LTRIM(RTRIM(ISNULL(NULLIF(ISNULL(c.FirstName, '') + ' ' + ISNULL(c.LastName, ''), ' '), ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, '')))) AS CustomerName
 			,ISNULL(l.LeadSourceId, 0) AS LeadSourceId
 			,CASE 
@@ -53,11 +54,11 @@ BEGIN
 			,ISNULL(ll.LabelName, '') AS LabelName
 			,ISNULL(ll.ColorCode, '') AS ColorCode
 			,
-			--l.PhoneNumber,  
+			--l.PhoneNumber,    
 			ISNULL(c.PhoneNumber, l.PhoneNumber) AS PhoneNumber
 			,l.Notes AS InquiryAbout
 			,fl.FollowUpComment AS FollowupComment
-			,l.STATUS AS STATUS
+			,l.Status AS Status
 			,FORMAT(l.CreatedDate, 'dd/MM/yyyy hh:mm tt') AS LastCreatedOn
 			,ISNULL(au.FirstName + ' ' + au.LastName + CASE 
 					WHEN au.IsDeleted = 1
@@ -68,6 +69,12 @@ BEGIN
 			,ISNULL(br.LookupValueName, '') AS BuyingRange
 			,REPLACE(l.InquiryFor, ',', ',<BR>') AS InquiryFor
 			,ISNULL(FORMAT(l.UpdatedDate, 'dd/MM/yyyy hh:mm tt'), '') AS LastModifiedOn
+			,l.AlternateMobileNumber
+			,l.InquiryAreaRequirement
+			,l.AlternateSalesmanId
+			,l.ClientMeetingStageId
+			,l.ArchitectMeetingStageId
+			,l.LeadType
 			,COUNT(1) OVER () AS TotalCount
 		FROM dbo.Leads l WITH (NOLOCK)
 		LEFT JOIN dbo.Customers AS c WITH (NOLOCK) ON l.CustomerId = c.CustomerId
@@ -91,9 +98,9 @@ BEGIN
 			) AS fl ON fl.LeadId = l.LeadId
 			AND fl.rn = 1
 		WHERE l.TenantId = @TenantId
-			AND l.STATUS <> 6 -- Deleted    
-			--AND (@CustomerName IS NULL OR (ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, '')) LIKE '%' + @CustomerName + '%')  
-			--AND (@PhoneNumber IS NULL OR l.PhoneNumber LIKE '%' + @PhoneNumber + '%')  
+			AND l.Status <> 6 -- Deleted      
+			--AND (@CustomerName IS NULL OR (ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, '')) LIKE '%' + @CustomerName + '%')    
+			--AND (@PhoneNumber IS NULL OR l.PhoneNumber LIKE '%' + @PhoneNumber + '%')    
 			AND (
 				@CustomerName IS NULL
 				OR LTRIM(RTRIM(ISNULL(NULLIF(ISNULL(c.FirstName, '') + ' ' + ISNULL(c.LastName, ''), ' '), ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, '')))) LIKE '%' + @CustomerName + '%'
@@ -113,7 +120,7 @@ BEGIN
 				)
 			AND (
 				@Status IS NULL
-				OR l.STATUS = @Status
+				OR l.Status = @Status
 				)
 			AND (
 				@Tags IS NULL
@@ -223,30 +230,22 @@ BEGIN
 				WHEN @SortBy = 'LastModifiedOn'
 					AND @SortOrder = 'DESC'
 					THEN ISNULL(l.UpdatedDate, l.CreatedDate)
-				END DESC OFFSET(@PageIndex - 1) * @PageSize ROWS
+				END DESC 
 
+		OFFSET(@PageIndex - 1) * @PageSize ROWS
 		FETCH NEXT @PageSize ROWS ONLY;
+
 	END TRY
 
 	BEGIN CATCH
 		DECLARE @ErrorMessage NVARCHAR(4000)
-			,@ErrorSeverity INT
-			,@ErrorState INT
 			,@ObjectName VARCHAR(500);
 
 		SELECT @ErrorMessage = ERROR_MESSAGE()
-			,@ErrorSeverity = ERROR_SEVERITY()
-			,@ErrorState = ERROR_STATE()
 			,@ObjectName = OBJECT_NAME(@@PROCID);
 
 		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
 			,@ErrorMsg = @ErrorMessage
-
-		RAISERROR (
-				@ErrorMessage
-				,@ErrorSeverity
-				,@ErrorState
-				);
 	END CATCH
 END
 
