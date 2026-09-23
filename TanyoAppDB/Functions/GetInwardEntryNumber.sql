@@ -6,6 +6,7 @@ CREATE   FUNCTION [dbo].[GetInwardEntryNumber] (
     @TenantID BIGINT
 )
 RETURNS VARCHAR(50)
+WITH ENCRYPTION
 AS
 BEGIN
     DECLARE @InwardEntryNumber VARCHAR(50)

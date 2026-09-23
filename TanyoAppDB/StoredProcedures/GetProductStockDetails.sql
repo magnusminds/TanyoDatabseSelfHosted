@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[GetProductStockDetails]
 	,@ProductId BIGINT
 	,@WarehouseId BIGINT = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	

@@ -10,6 +10,7 @@ CREATE   PROCEDURE [dbo].[SearchLeadsByCustomerAndNotes]
 	,@CustomerId BIGINT
 	,@Search NVARCHAR(500) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

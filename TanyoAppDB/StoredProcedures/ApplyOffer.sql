@@ -14,6 +14,7 @@ CREATE   PROCEDURE [dbo].[ApplyOffer]
 	,@UserId BIGINT
 	,@IsApplyFromOffer BIT = 0
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

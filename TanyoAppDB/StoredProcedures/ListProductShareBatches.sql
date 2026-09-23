@@ -10,6 +10,7 @@ CREATE   PROC [dbo].[ListProductShareBatches]
 	,@PageIndex INT = 1
 	,@PageSize INT = 50
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	

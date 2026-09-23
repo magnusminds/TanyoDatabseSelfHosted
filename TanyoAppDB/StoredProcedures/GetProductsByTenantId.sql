@@ -5,6 +5,7 @@ CREATE   PROCEDURE  [dbo].[GetProductsByTenantId](
 @ModelNo nvarchar(4000)=NULL,
 @ProductQuantityDate datetimeoffset = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN 
 SET NOCOUNT ON;

@@ -13,6 +13,7 @@ CREATE PROCEDURE [dbo].[SearchProductsAndFabrics] (
 	,@IsFabric BIT = NULL
 	,@RoleId NVARCHAR(100)
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

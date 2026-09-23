@@ -39,6 +39,7 @@ CREATE PROCEDURE [dbo].[GetApprovedOrderData] (
 	,@ProductTitle VARCHAR(150) = NULL
 	,@ModelNo VARCHAR(150) = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

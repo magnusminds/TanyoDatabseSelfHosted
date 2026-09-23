@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[StockValuationForAllTenants]
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

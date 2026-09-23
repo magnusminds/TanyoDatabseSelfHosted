@@ -16,6 +16,7 @@ CREATE PROCEDURE [dbo].[SaveCustomerDetails] (
 	,@CustomerPhoneNumber VARCHAR(10) = NULL
 	,@UserID INT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

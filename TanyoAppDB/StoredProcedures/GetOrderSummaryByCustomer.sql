@@ -7,6 +7,7 @@ CREATE   PROCEDURE [dbo].[GetOrderSummaryByCustomer] (
 	,@SortBy VARCHAR(50) = 'TotalAmount'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SELECT ORD.CreatedDate AS InquiryDate

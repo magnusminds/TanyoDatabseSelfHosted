@@ -1,4 +1,5 @@
 CREATE Procedure DeleteDeletedOrders
+WITH ENCRYPTION
 AS
 BEGIN
 

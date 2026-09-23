@@ -6,6 +6,7 @@ CREATE PROCEDURE [dbo].[DeleteOrderSoft] (
 	,@TenantId INT
 	,@DeletedBy BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

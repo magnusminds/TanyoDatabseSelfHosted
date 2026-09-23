@@ -1,4 +1,5 @@
 CREATE   PROCEDURE dbo.GenerateRandomCodeSixDigit
+WITH ENCRYPTION
 AS
 BEGIN
     DECLARE @Code CHAR(6)

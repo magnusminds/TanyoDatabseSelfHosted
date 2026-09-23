@@ -1,4 +1,5 @@
 CREATE VIEW [dbo].[CombinedSalesAnalysis]
+WITH ENCRYPTION
 AS
 WITH cte AS (
 	SELECT

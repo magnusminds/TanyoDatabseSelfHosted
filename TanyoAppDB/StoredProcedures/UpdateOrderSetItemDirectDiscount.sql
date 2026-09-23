@@ -17,6 +17,7 @@ CREATE PROC [dbo].[UpdateOrderSetItemDirectDiscount] (
 	,@IsSQFTProduct BIT = 0
 	,@PerSQFTUnitPrice NUMERIC(18, 2) = 0
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

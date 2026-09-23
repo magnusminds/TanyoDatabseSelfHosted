@@ -2,6 +2,7 @@ CREATE PROCEDURE [dbo].[UpdateOrderStatusDeclined]
 (
 @OrderNo VARCHAR(100)
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

@@ -2,6 +2,7 @@
 	EXEC [dbo].[Job_GetApprovedOrdersWithManufacturingNotifications]
 */
 CREATE PROCEDURE [dbo].[Job_GetApprovedOrdersWithManufacturingNotifications]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

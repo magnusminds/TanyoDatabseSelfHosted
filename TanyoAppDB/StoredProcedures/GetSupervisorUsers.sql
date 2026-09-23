@@ -6,6 +6,7 @@ CREATE   PROC [dbo].[GetSupervisorUsers]
 (
 	@TenantId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

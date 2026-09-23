@@ -6,6 +6,7 @@ CREATE PROCEDURE [dbo].[GetInwardById]
 (
 @InwardId INT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -3,6 +3,7 @@ CREATE PROCEDURE [dbo].[UpdatePOProductStatus] (
 	,@Status INT
 	,@UserId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

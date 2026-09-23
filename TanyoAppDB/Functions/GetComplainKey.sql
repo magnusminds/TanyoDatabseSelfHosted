@@ -9,6 +9,7 @@ CREATE FUNCTION [dbo].[GetComplainKey]
  @Type VARCHAR(1)    
 )  
 RETURNS VARCHAR(15)  
+WITH ENCRYPTION
 AS  
 BEGIN  
  DECLARE @ComplainKey VARCHAR(15)  

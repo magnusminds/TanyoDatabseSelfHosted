@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[SendNotificationToDeactiveTenants]
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

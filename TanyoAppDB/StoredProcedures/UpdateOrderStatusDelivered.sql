@@ -6,6 +6,7 @@ CREATE PROC [dbo].[UpdateOrderStatusDelivered]
 (
 @OrderNo VARCHAR(100)
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

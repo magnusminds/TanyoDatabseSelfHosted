@@ -3,6 +3,7 @@ CREATE   PROCEDURE [dbo].[CreateComplain] (
 	,@TenantId BIGINT
 	,@UserId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

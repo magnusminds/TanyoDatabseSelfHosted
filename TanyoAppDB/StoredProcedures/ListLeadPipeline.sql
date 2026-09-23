@@ -33,6 +33,7 @@ CREATE PROCEDURE [dbo].[ListLeadPipeline] (
 	,@SortBy VARCHAR(50) = 'UpdatedDate'
 	,@SortOrder VARCHAR(4) = 'DESC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -1,6 +1,7 @@
 
 --SELECT * FROM dbo.UT_VW_IncorrectOrderUnitPriceWithDiscount
 CREATE VIEW [dbo].[UT_VW_IncorrectOrderUnitPriceWithDiscount]
+WITH ENCRYPTION
 AS
 SELECT t.TenantId
 	,t.TenantName

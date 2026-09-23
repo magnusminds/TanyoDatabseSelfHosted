@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[SaveOrder]
 	,@LocationID BIGINT = NULL
 	,@isFromBackOrder BIT = NULL 
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

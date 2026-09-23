@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[SaveCancelledOrder] (
 	,@Comment NVARCHAR(MAX) = NULL
 	,@ReturnMessage NVARCHAR(500) = '' OUTPUT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

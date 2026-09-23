@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[HFJob_DailyProductQuantitySales]
+WITH ENCRYPTION
 AS
 BEGIN
 	

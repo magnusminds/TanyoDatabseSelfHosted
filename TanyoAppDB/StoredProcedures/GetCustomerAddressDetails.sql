@@ -5,6 +5,7 @@ EXEC GetCustomerAddressDetails
 
 */
 CREATE PROCEDURE GetCustomerAddressDetails (@CustomerId BIGINT)
+WITH ENCRYPTION
 AS
 BEGIN
 	SELECT CA.CustomerAddressId

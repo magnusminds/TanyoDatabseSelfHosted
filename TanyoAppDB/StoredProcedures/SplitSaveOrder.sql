@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[SplitSaveOrder] (
 	,@ReturnStatus BIT = 0 OUTPUT
 	,@ReturnMessage VARCHAR(100) = NULL OUTPUT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

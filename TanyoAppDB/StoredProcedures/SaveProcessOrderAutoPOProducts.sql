@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[SaveProcessOrderAutoPOProducts] (
 	,@OrderId BIGINT
 	,@OrderSetItemId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

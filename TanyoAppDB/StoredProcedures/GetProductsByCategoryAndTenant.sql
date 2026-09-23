@@ -13,6 +13,7 @@ CREATE PROCEDURE [dbo].[GetProductsByCategoryAndTenant] (
 	,@PageIndex INT = 1
 	,@PageSize INT = 50
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

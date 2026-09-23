@@ -4,6 +4,7 @@ EXEC SendSMSNotification
 
 */
 CREATE   PROCEDURE [dbo].[SendSMSNotification]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

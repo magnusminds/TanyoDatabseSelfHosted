@@ -16,6 +16,7 @@ CREATE PROC [dbo].[ReportAttendanceSummary]
 	,@PageIndex INT = 1
 	,@PageSize INT = 50
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

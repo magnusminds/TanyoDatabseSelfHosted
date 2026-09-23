@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[GetOrderDataForGlobalSearch] (
 	@SearchText VARCHAR(200)
 	,@TenantID BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

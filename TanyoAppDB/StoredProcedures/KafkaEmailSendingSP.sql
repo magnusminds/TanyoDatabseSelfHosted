@@ -10,6 +10,7 @@ CREATE   PROCEDURE [dbo].[KafkaEmailSendingSP] (
 	,@NotificationEmail VARCHAR(250)
 	,@AttachmentFileName VARCHAR(100)
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

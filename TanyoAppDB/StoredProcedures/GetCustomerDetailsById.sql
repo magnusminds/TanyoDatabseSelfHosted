@@ -20,6 +20,7 @@ CREATE   PROCEDURE [dbo].[GetCustomerDetailsById]
 	@CustomerId BIGINT
 	,@TenantId INT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -6,6 +6,7 @@ CREATE PROC ReportMonthlyUsageByTenantID
 (
 	@TenantID BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

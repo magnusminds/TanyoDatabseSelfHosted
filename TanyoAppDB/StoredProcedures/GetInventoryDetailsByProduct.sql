@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[GetInventoryDetailsByProduct] (
 	@TenantId BIGINT
 	,@ProductId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

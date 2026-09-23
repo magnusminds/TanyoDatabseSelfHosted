@@ -20,6 +20,7 @@ CREATE   PROCEDURE [dbo].[App_MegaSearch] (
 	,@CurrentUserId BIGINT
 	,@RoleId NVARCHAR(100)
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -49,6 +49,7 @@ CREATE PROC [dbo].[SavePOProducts_V2] (
 	,@OutputPOProductId BIGINT = 0 OUTPUT
 	,@IsUnmappedSave BIT = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

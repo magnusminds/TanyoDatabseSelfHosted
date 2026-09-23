@@ -8,6 +8,7 @@ CREATE   PROCEDURE [dbo].[GetOrderDetailsByOrderId]
 	@TenantId BIGINT
 	,@OrderID BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -3,6 +3,7 @@ CREATE PROCEDURE [dbo].[SaveOrderShippingAddress] (
 	,@ShippingAddressID BIGINT
 	,@UserId INT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

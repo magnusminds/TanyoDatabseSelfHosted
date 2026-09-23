@@ -4,6 +4,7 @@ EXEC SendWhatsAppNotification
 
 */
 CREATE   PROCEDURE [dbo].[SendWhatsAppNotification]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

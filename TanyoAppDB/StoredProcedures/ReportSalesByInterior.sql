@@ -22,6 +22,7 @@ CREATE   PROC [dbo].[ReportSalesByInterior] (
 	,@FromDate DATE = NULL
 	,@ToDate DATE = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -7,6 +7,7 @@ CREATE     PROCEDURE [dbo].[CancelStockTransfer] (
 	,@UserId BIGINT
 	,@ReturnMessage NVARCHAR(255) = '' OUTPUT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

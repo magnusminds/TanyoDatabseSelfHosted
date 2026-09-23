@@ -1,6 +1,7 @@
 CREATE   PROCEDURE GetOrderRemarksByOrderId (
 @OrderId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SELECT OC.OrderCommentId

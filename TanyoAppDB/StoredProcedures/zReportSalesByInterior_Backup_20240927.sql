@@ -23,6 +23,7 @@ CREATE PROC [dbo].[zReportSalesByInterior_Backup_20240927] (
 	,@FromDate DATE = NULL
 	,@ToDate DATE = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

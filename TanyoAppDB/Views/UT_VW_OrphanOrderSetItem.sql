@@ -1,4 +1,5 @@
 CREATE VIEW [dbo].[UT_VW_OrphanOrderSetItem]
+WITH ENCRYPTION
 AS
 SELECT osi.*
 FROM OrderSetItems osi WITH (NOLOCK)

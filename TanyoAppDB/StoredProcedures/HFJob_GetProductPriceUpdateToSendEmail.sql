@@ -1,4 +1,5 @@
 CREATE   PROCEDURE [dbo].[HFJob_GetProductPriceUpdateToSendEmail]
+WITH ENCRYPTION
 AS
 BEGIN
 	DECLARE @YesterDayDate DATE = DATEADD(DAY, - 1, GETUTCDATE())

@@ -2,6 +2,7 @@
 	EXEC SendGreetingEmailNotification
 */
 CREATE PROCEDURE [dbo].[SendGreetingEmailNotification]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

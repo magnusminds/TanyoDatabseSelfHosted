@@ -49,6 +49,7 @@ CREATE PROC [dbo].[LisLeadByModule] (
 	,@SortOrder VARCHAR(4) = 'DESC'
 	,@BuyingRangeValueId BIGINT = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

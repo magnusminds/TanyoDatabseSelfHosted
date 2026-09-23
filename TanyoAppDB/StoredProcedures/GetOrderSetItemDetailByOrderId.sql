@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[GetOrderSetItemDetailByOrderId] (
 	@TenantId INT
 	,@OrderId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

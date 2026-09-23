@@ -2,6 +2,7 @@
 	EXEC [dbo].[ReleaseStockOnHold]
 */
 CREATE PROCEDURE [dbo].[ReleaseStockOnHold] 
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON

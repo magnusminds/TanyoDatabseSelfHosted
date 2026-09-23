@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[ReportSalesmanSaleByCategory] (
  ,@OrderType INT = NULL
  ,@GroupBy INT = 1 -- 1: Salesman, 2: Category
  )  
+WITH ENCRYPTION
 AS  
 BEGIN  
  SET NOCOUNT ON;  

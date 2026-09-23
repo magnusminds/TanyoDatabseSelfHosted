@@ -6,6 +6,7 @@ CREATE   FUNCTION [dbo].[zCalculateWholesalerPrice]
     ,@TenantId INT
 )
 RETURNS DECIMAL(18, 2)
+WITH ENCRYPTION
 AS
 BEGIN
     DECLARE @CategoryWSPPercentage DECIMAL(18, 2);

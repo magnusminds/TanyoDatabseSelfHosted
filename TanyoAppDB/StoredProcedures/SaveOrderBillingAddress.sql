@@ -3,6 +3,7 @@ CREATE PROCEDURE [dbo].[SaveOrderBillingAddress] (
 	,@BillingAddressID BIGINT
 	,@UserId INT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

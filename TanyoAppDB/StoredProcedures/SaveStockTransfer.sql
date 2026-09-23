@@ -56,6 +56,7 @@ CREATE PROCEDURE [dbo].[SaveStockTransfer] (
 	,@JsonObject NVARCHAR(MAX)
 	,@ReturnMessage NVARCHAR(1024) = '' OUTPUT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

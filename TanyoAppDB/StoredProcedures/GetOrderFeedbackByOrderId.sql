@@ -8,6 +8,7 @@
 */
 CREATE PROCEDURE [dbo].[GetOrderFeedbackByOrderId] 
 (@OrderId BIGINT)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

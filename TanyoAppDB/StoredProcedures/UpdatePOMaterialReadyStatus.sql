@@ -2,6 +2,7 @@ CREATE PROCEDURE [dbo].[UpdatePOMaterialReadyStatus] (
 	@OrderSetItemId INT
 	,@OrderId INT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

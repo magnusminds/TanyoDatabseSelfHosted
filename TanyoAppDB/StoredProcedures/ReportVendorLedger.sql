@@ -4,6 +4,7 @@ CREATE   PROCEDURE [dbo].[ReportVendorLedger] (
 	,@FromDate DATE = NULL
 	,@ToDate DATE = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
    SET NOCOUNT ON;

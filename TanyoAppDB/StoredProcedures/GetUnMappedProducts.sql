@@ -11,6 +11,7 @@ CREATE  PROCEDURE [dbo].[GetUnMappedProducts]
     @POProductId BIGINT,
     @VendorId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

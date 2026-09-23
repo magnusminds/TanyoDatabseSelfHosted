@@ -7,6 +7,7 @@ CREATE   FUNCTION [dbo].[GetStockTransferNumber] (
 @TenantID BIGINT
 )
 RETURNS VARCHAR(15)
+WITH ENCRYPTION
 AS
 BEGIN
 DECLARE @StockTransferNumber VARCHAR(15)

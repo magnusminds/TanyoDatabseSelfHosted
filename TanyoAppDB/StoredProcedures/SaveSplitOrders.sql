@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[SaveSplitOrders] (
 	,@Status BIT = 0 OUTPUT
 	,@Message VARCHAR(128) = '' OUTPUT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -5,6 +5,7 @@ CREATE FUNCTION [dbo].[CalculateTotalOfferAmount]
     @OfferPercentage DECIMAL(18, 2)
 )
 RETURNS DECIMAL(18, 2)
+WITH ENCRYPTION
 AS
 BEGIN
     DECLARE @TotalOfferAmount DECIMAL(18, 2);

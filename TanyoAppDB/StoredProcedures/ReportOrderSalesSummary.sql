@@ -20,6 +20,7 @@ CREATE PROCEDURE [dbo].[ReportOrderSalesSummary]
 	,@SortBy VARCHAR(50) = 'OrderDate'
 	,@SortOrder VARCHAR(10) = 'DESC'
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -4,6 +4,7 @@ CREATE PROCEDURE [dbo].[UpdateLeadWithCustomerDetails] (
 	,@UserId BIGINT
 	,@IsPortal BIT = 0
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -414,7 +415,7 @@ BEGIN
 							AND IsDeleted = 0
 						)
 				BEGIN
-					SET @ReturnMessage = 'Customer address not found.';
+					SET @ReturnMessage = 'Selected Customer Address is already deleted, Please reselect.';
 
 					THROW 50001
 						,@ReturnMessage
@@ -573,16 +574,15 @@ BEGIN
 		IF @@TRANCOUNT > 0
 			ROLLBACK TRANSACTION UpdateLeadWithCustomerDetails;
 
-        DECLARE @ObjectName VARCHAR(500)
-		,@ErrorMsg NVARCHAR(4000);
+		DECLARE @ObjectName VARCHAR(500)
+			,@ErrorMsg NVARCHAR(4000);
 
 		SET @ObjectName = OBJECT_NAME(@@PROCID);
 		SET @ErrorMsg = ERROR_MESSAGE();
 
 		EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
 			,@ErrorMsg = @ErrorMsg;
+
+		THROW
 	END CATCH
 END;
-
-GO
-

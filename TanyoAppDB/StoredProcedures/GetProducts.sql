@@ -32,6 +32,7 @@ CREATE PROCEDURE [dbo].[GetProducts] (
 	,@SortBy VARCHAR(50) = '10'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 

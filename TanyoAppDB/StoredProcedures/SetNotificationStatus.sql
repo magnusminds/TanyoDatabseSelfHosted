@@ -12,6 +12,7 @@ CREATE   PROCEDURE [dbo].[SetNotificationStatus]
 	,@Response VARCHAR(MAX) = ''
 	,@WAMessageId VARCHAR(80) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

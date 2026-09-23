@@ -9,6 +9,7 @@
 */ 
 CREATE   PROCEDURE [dbo].[Dashboard_GetRawMaterialInwardCount]
     @TenantId INT
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

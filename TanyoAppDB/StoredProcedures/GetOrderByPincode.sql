@@ -12,6 +12,7 @@ CREATE PROC [dbo].[GetOrderByPincode] (
 	@Pincode VARCHAR(MAX) = NULL
 	,@TenantId INT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

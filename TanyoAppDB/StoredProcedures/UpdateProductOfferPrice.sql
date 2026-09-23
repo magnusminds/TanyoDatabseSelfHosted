@@ -18,6 +18,7 @@ CREATE PROCEDURE [dbo].[UpdateProductOfferPrice]
     ,@IsPublished BIT = NULL
     ,@Result INT OUTPUT
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

@@ -9,6 +9,7 @@ CREATE PROCEDURE [dbo].[GetOpenInquiriesByProductId]
     ,@ProductId BIGINT = NULL
     ,@CategoryId BIGINT = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN   
     SET NOCOUNT ON;

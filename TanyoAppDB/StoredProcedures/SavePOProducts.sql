@@ -15,6 +15,7 @@ CREATE   PROC [dbo].[SavePOProducts] (
 	,@IGSTAmount NUMERIC(18, 2) = NULL
 	,@OutputPOProductId BIGINT = 0 OUTPUT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -13,6 +13,7 @@ CREATE   PROCEDURE [dbo].[GetWarehouseStock]
 	@WarehouseId BIGINT,
 	@Search NVARCHAR(200) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

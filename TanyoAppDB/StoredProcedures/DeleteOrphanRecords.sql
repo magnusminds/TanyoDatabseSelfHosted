@@ -1,5 +1,6 @@
 
 CREATE PROCEDURE [dbo].[DeleteOrphanRecords]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

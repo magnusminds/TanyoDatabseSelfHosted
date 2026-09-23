@@ -6,6 +6,7 @@
 CREATE   PROCEDURE [dbo].[GetInventoryWarehouseDetails]
     @ProductId BIGINT
     ,@WarehouseId BIGINT = NULL
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

@@ -2,6 +2,7 @@
 	EXEC [dbo].[Job_GetFollowUpOrders]
 */
 CREATE   PROC [dbo].[Job_GetFollowUpOrders]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

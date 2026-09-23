@@ -29,6 +29,7 @@ CREATE PROCEDURE [dbo].[SaveProcessOrder] (
 	,@AutoProcess BIT
 	,@RequestProcessOrder NVARCHAR(MAX) = NULL -- JSON Input
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

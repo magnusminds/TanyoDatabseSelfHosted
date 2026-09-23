@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[GetProductImages]
 (
     @TenantId INT
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

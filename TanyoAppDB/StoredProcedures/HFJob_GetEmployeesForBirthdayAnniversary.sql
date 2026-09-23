@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[HFJob_GetEmployeesForBirthdayAnniversary]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

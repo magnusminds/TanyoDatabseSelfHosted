@@ -7,6 +7,7 @@ CREATE   PROC [dbo].[GetPOProductById] (
  @POProductId BIGINT
  ,@TenantId BIGINT
  )
+WITH ENCRYPTION
 AS
 BEGIN
  SET NOCOUNT ON;

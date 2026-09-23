@@ -41,6 +41,7 @@ CREATE PROC [dbo].[GetLeadCountByModule]
     ,@PriorityId INT = NULL
     ,@BuyingRangeValueId BIGINT = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

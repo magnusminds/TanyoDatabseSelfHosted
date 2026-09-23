@@ -22,6 +22,7 @@ CREATE PROCEDURE [dbo].[GetCategoryWithProducts_v1]
 	,@PageSize INT = 25
 	,@ProductIDs VARCHAR(MAX) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

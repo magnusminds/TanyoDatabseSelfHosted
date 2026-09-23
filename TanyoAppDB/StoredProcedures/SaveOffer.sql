@@ -25,6 +25,7 @@ CREATE PROCEDURE [dbo].[SaveOffer] (
 	,@EndDate DATE = NULL
 	,@IsPublished BIT = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

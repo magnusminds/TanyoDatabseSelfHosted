@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[HFJob_SendCustomerBirthdayOrAnniversaryNotifications]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

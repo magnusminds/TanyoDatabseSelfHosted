@@ -6,6 +6,7 @@ CREATE PROCEDURE [dbo].[RefreshInquiry]
 	,@FabricSubjectTypeId BIGINT
 	,@PolishSubjectTypeId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	

@@ -16,6 +16,7 @@ CREATE   PROCEDURE [dbo].[UpdateLead] (
 	,@TenantId BIGINT
 	,@UserId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

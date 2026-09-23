@@ -4,6 +4,7 @@ CREATE PROCEDURE [dbo].[UpdateProductQuantityByWarehouse] (
     @Remarks NVARCHAR(1000),
     @UserId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

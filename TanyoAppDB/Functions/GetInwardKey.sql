@@ -9,6 +9,7 @@ CREATE FUNCTION [dbo].[GetInwardKey]
  @Type VARCHAR(2)    
 )  
 RETURNS VARCHAR(16)  
+WITH ENCRYPTION
 AS  
 BEGIN  
  DECLARE @InwardEntryNumber VARCHAR(16)  

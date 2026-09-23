@@ -3,6 +3,7 @@ CREATE     FUNCTION [dbo].[fn_CalculateInteriorCommission]
 	@OrderID BIGINT
 )
 RETURNS TABLE 
+WITH ENCRYPTION
 AS
 RETURN 
 (

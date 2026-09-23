@@ -15,6 +15,7 @@ CREATE PROCEDURE [dbo].[ReportRawMaterialInventory] (
 	,@SortBy VARCHAR(50) = 'RequiredQuantity'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

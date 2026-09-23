@@ -11,6 +11,7 @@ CREATE PROC [dbo].[SaveLeadDetail] (
 	,@CreatedDate DATETIMEOFFSET
 	,@CreatedUTCDate DATETIME
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

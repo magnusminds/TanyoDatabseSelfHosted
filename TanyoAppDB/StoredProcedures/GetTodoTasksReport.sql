@@ -6,6 +6,7 @@ CREATE   PROC [dbo].[GetTodoTasksReport]
 	@UserID BIGINT = NULL
 	,@TenantID BIGINT = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

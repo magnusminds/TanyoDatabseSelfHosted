@@ -9,6 +9,7 @@ CREATE   FUNCTION [dbo].[CalculateFinalCostPrice]
     @CategoryId INT
 )
 RETURNS DECIMAL(18, 2)
+WITH ENCRYPTION
 AS
 BEGIN
     DECLARE @HasWholesalerPrice BIT = 0;

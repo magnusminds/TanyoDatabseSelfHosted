@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[Job_GetOrdersForSendOrderInquiryEmail]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

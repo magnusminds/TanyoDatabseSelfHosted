@@ -18,6 +18,7 @@ CREATE   PROCEDURE [dbo].[OwnerDashboardStock]
     @TenantId INT,
     @SlowMovingDays INT = 60,
     @DeadStockDays  INT = 120
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

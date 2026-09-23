@@ -19,6 +19,7 @@ CREATE   PROCEDURE [dbo].[PopulateInventoryLogs] (
 	,@Remarks NVARCHAR(1000) = NULL
 	,@UserId INT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

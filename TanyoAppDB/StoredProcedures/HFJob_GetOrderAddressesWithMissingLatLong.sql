@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[HFJob_GetOrderAddressesWithMissingLatLong]
+WITH ENCRYPTION
 AS
 BEGIN
 	SELECT OA.CustomerAddressId

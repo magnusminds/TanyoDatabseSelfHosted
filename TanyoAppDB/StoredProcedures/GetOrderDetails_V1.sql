@@ -3,6 +3,7 @@ CREATE   PROCEDURE [dbo].[GetOrderDetails_V1] (
 	,@OrderId BIGINT
 	,@RoleId NVARCHAR(36)
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

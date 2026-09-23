@@ -13,6 +13,7 @@ CREATE   PROC [dbo].[CountOfManufacturing]
     ,@ManufacturingWorkflowId int
     ,@ManufacturingStatus int
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

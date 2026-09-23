@@ -2,6 +2,7 @@ CREATE PROCEDURE [dbo].[SearchCustomer] (
 	@Search NVARCHAR(100)
 	,@TenantId INT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

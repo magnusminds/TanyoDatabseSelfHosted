@@ -24,6 +24,7 @@ CREATE   PROCEDURE [dbo].[GlobalReportSalesByTenant](
     ,@SortBy     VARCHAR(50) = 'TotalGstAmount'
     ,@SortOrder  VARCHAR(50) = 'desc'
 )
+WITH ENCRYPTION
 AS  
 BEGIN  
     SET NOCOUNT ON;

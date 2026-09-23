@@ -3,6 +3,7 @@ EXEC [dbo].[HFJob_SendRawMaterialStockUpdate]
 */
 
 CREATE   PROCEDURE [dbo].[HFJob_SendRawMaterialStockUpdate] 
+WITH ENCRYPTION
 AS
 BEGIN
 	SELECT rm.RawMaterialId

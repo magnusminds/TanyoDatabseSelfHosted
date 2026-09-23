@@ -20,6 +20,7 @@ CREATE PROCEDURE [dbo].[Dashboard_GetTotalComplainCount]
      @TenantId INT
 	,@CurrentUserId INT
 	,@RoleId NVARCHAR(100)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

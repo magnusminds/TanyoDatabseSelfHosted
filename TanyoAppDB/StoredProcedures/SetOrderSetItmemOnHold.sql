@@ -4,6 +4,7 @@ CREATE PROCEDURE [dbo].[SetOrderSetItmemOnHold] (
 	,@TimePeriod VARCHAR(20)
 	,@UserId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

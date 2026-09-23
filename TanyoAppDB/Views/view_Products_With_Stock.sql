@@ -1,4 +1,5 @@
-CREATE   VIEW view_Products_With_Stock AS
+CREATE   VIEW view_Products_With_Stock WITH ENCRYPTION
+AS
 SELECT 
     P.ProductId AS Product_ID,
     P.ProductTitle AS Product_Name,

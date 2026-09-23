@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[SchedulerAttendanceComplete]
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

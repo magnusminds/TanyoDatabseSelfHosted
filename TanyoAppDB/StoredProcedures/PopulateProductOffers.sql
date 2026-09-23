@@ -6,6 +6,7 @@ CREATE PROCEDURE [dbo].[PopulateProductOffers] (
 	,@OfferId INT = NULL
 	,@ProductIds VARCHAR(MAX) = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

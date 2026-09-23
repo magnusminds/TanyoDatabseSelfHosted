@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[GetArchiveOrderDetails_V1]
 	,@TenantId INT
 	,@OrderId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

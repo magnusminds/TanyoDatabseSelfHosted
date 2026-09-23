@@ -49,6 +49,7 @@ CREATE PROC [dbo].[zListOrderDetails_Backup_20250509]
  ,@SortOrder VARCHAR(10) = 'ASC'  
  ,@IsStockOnHold BIT = NULL  
 )  
+WITH ENCRYPTION
 AS  
 BEGIN  
   

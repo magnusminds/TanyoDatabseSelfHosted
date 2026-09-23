@@ -1,5 +1,6 @@
 --select * from [UT_Location_NULL]
 CREATE VIEW [dbo].[UT_Location_NULL]
+WITH ENCRYPTION
 AS
 	SELECT 'Leads' AS TableName, COUNT(1) AS TotalCount
 	FROM Leads l1 WITH (NOLOCK)

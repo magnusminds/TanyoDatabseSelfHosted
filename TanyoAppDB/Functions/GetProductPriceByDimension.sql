@@ -43,6 +43,7 @@ CREATE FUNCTION [dbo].[GetProductPriceByDimension]
     ,@PriceType INT
 )
 RETURNS DECIMAL(18, 2)
+WITH ENCRYPTION
 AS
 BEGIN
 

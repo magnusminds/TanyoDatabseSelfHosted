@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[zGetOrderDetails_V1_BK] (
 	,@OrderId BIGINT
 	,@RoleId NVARCHAR(36)
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

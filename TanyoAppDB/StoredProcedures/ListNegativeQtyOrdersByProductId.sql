@@ -16,6 +16,7 @@ CREATE   PROC [dbo].[ListNegativeQtyOrdersByProductId]
     ,@SortBy VARCHAR(50) = 'DeliveryDate'
     ,@SortOrder VARCHAR(10) = 'ASC'
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

@@ -16,6 +16,7 @@ CREATE PROCEDURE [dbo].[ReportOrderBySalesman]
 	,@SortBy VARCHAR(50) = 'NoofOrders'
 	,@SortOrder VARCHAR(50) = 'DESC'
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -29,6 +29,7 @@ CREATE PROCEDURE [dbo].[App_GetDashboardSummary]
      @TenantId INT
 	,@UserId BIGINT
 	,@RoleId NVARCHAR(100)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

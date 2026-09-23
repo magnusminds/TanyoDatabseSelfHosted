@@ -26,6 +26,7 @@ CREATE PROC [dbo].[DeductProductWarehouseQuantity] (
 	,@StockTransferNo VARCHAR(50) = NULL
 	,@PurchaseOrderNo VARCHAR(50) = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -17,6 +17,7 @@
 
 CREATE   PROCEDURE [dbo].[OwnerDashboardCash]
     @TenantId INT
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

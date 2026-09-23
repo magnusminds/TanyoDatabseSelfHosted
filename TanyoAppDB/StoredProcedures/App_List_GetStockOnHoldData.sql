@@ -38,6 +38,7 @@ CREATE PROCEDURE [dbo].[App_List_GetStockOnHoldData]
     @SortBy VARCHAR(50) = 'releaseDate',
     @SortOrder VARCHAR(4) = 'ASC'
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

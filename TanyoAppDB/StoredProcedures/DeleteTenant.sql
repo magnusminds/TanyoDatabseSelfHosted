@@ -8,6 +8,7 @@ CREATE PROC [dbo].[DeleteTenant]
  @TenantId BIGINT
  ,@Type INT--2: Delete all, 1: Delete Products,0: delete Masters
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	-- OTP / Auth Cleanup

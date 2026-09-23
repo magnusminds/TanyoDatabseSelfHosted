@@ -5,6 +5,7 @@
 	EXEC STMT	: SELECT * FROM Vw_CustomerDetail
 */
 CREATE VIEW Vw_CustomerDetail
+WITH ENCRYPTION
 AS
 	With Cte as
 	(

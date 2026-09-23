@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[SetTenantPaymentDueStatus]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

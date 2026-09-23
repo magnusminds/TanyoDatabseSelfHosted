@@ -8,6 +8,7 @@ CREATE   PROC [dbo].[SavePORawMaterials]
 	,@UserId BIGINT
 	,@PORawMaterialItems NVARCHAR(MAX)
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

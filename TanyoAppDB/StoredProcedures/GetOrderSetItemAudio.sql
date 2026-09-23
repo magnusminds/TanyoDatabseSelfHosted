@@ -4,6 +4,7 @@ EXEC GetOrderSetItemAudio
 	@OrderId =1
 */
 CREATE PROCEDURE [dbo].[GetOrderSetItemAudio] (@OrderId BIGINT)
+WITH ENCRYPTION
 AS
 BEGIN
 	IF OBJECT_ID('tempdb..#OrderSetItems') IS NOT NULL

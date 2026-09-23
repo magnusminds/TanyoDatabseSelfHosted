@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[GetProductDetails] (
     ,@MinPrice DECIMAL(18,2) = NULL
     ,@MaxPrice DECIMAL(18,2) = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

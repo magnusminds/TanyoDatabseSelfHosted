@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[GetArchiveOrderDetails] (
 	,@OrderId BIGINT
 	,@RoleId NVARCHAR(36) = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

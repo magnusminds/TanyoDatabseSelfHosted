@@ -36,6 +36,7 @@ CREATE PROCEDURE [dbo].[ReportNotificationManagement] (
 	,@SortBy VARCHAR(50) = 'NotificationType'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

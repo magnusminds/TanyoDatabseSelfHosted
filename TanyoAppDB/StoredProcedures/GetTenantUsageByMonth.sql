@@ -13,6 +13,7 @@ CREATE   PROC dbo.GetTenantUsageByMonth
 	@Month VARCHAR(50)
 	,@Year INT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	

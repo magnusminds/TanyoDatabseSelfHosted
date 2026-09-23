@@ -26,6 +26,7 @@ CREATE PROCEDURE [dbo].[RPT_GetOrderCreation]
 	,@SortBy VARCHAR(50) = 'CreatedDate'
     ,@SortOrder VARCHAR(4) = 'DESC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

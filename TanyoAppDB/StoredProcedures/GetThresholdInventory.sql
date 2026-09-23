@@ -11,6 +11,7 @@
 CREATE PROCEDURE [dbo].[GetThresholdInventory] (
 	@TenantId INT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

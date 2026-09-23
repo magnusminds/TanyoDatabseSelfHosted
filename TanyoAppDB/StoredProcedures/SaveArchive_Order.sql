@@ -2,6 +2,7 @@ CREATE PROCEDURE [dbo].[SaveArchive_Order] (
 	@OrderID BIGINT
 	,@UserId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

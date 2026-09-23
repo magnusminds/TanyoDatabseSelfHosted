@@ -1,6 +1,7 @@
 --GetSalesMen  2
 CREATE PROC [dbo].[GetSalesMen] 
  @TenantID INT
+WITH ENCRYPTION
 AS
 BEGIN
 

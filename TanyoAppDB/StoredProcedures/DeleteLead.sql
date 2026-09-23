@@ -6,6 +6,7 @@ CREATE PROC DeleteLead
 	@LeadId BIGINT
 	,@TenantId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	

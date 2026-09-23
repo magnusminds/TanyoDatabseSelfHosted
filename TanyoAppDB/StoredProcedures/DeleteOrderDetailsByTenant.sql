@@ -1,4 +1,5 @@
 CREATE PROCEDURE [dbo].[DeleteOrderDetailsByTenant] (@TenantId INT)
+WITH ENCRYPTION
 AS
 BEGIN
 	DROP TABLE IF EXISTS #Orders

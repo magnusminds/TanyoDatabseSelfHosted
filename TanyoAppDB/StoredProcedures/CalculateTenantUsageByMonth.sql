@@ -8,6 +8,7 @@
 	EXEC dbo.CalculateTenantUsageByMonth
 */
 CREATE   PROC [dbo].[CalculateTenantUsageByMonth]
+WITH ENCRYPTION
 AS
 BEGIN
 	

@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[DeleteOrder] (
 	@OrderId VARCHAR(MAX)
 	,@DeletedBy BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

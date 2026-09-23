@@ -1,6 +1,7 @@
 CREATE   PROCEDURE [dbo].[SetNotificationStatusPending]
 	 @Status INT
 	,@NotificationMethod VARCHAR(128)
+WITH ENCRYPTION
 AS
 BEGIN
   BEGIN TRY

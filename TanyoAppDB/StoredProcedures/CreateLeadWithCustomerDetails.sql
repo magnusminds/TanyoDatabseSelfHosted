@@ -1,55 +1,47 @@
 /*
 EXEC [dbo].[CreateLeadWithCustomerDetails]  
-    @LeadRequestDetails   = '{
+    @LeadRequestDetails = '{
   "customerDetails": {
-    "CustomerId": 315508,
-    "firstName": "mehul",
-    "lastName": "bhai",
-    "phoneNumber": "9714483636"
+    "CustomerId": 350765,
+    "firstName": "Tanmay",
+    "lastName": "B",
+    "phoneNumber": "8565555555",
+    "emailId": "mm.aloko@gmail.com"
   },
   "customerAddress": {
-    "customerId": 315508,
-    "customerAddressId": 155989,
+    "customerId": 350765,
+    "customerAddressId": 179405,
     "addressType": "Home",
-    "street1": "",
-    "street2": "",
-    "landmark": "",
-    "area": "",
-    "city": "Junagadh",
+    "street1": "503 & 506",
+    "street2": "Mauryansh Elanza, Shyamal Cross Road, Parekh’s Hospital",
+    "area": "Jodhpur Village",
+    "city": "Ahmedabad",
     "state": "Gujarat",
-    "zipCode": "",
+    "zipCode": "380015",
     "isDefault": true,
-    "latitude": "21.5222203",
-    "longitude": "70.4579436",
+    "latitude": "23.0129387",
+    "longitude": "72.5298645",
     "country": "India",
-    "fullAddress": "Junagadh"
+    "fullAddress": "MagnusMinds IT Solution"
   },
   "leadDetails": {
     "id": 0,
-    "customerId": 315508,
-    "leadSourceId": null,
-    "other": null,
-    "inquiry": "",
-    "salesmanId": 9000,
-    "status": 0,
-    "refferedBy": 0,
-    "refferedByName": "",
+    "customerId": 350765,
+    "status": 1,
     "inquiryFor": "BED",
-    "isEdit": false,
-    "closeLookupValueId": null,
-    "purchaseUrgencyId": null,
-    "customerBehaviorId": null
+    "locationId": 40207
   }
-}'
-    ,@TenantId          = 185
-    ,@UserId            = 9000
+}',
+    @TenantId = 1206,
+    @UserId   = 13312;
 */
-CREATE   PROCEDURE [dbo].[CreateLeadWithCustomerDetails]  
+CREATE PROCEDURE [dbo].[CreateLeadWithCustomerDetails]  
 (  
     @LeadRequestDetails  VARCHAR(MAX)  
     ,@TenantId         BIGINT  
     ,@UserId           BIGINT  
-)  
+)
+WITH ENCRYPTION
 AS  
 BEGIN  
     SET NOCOUNT ON;  
@@ -161,7 +153,10 @@ BEGIN
     END  
   
     BEGIN TRY  
-      
+  
+        BEGIN TRANSACTION CreateLeadWithCustomerDetails;  
+  
+         
         IF ISNULL(@CustomerId, 0) = 0  
         BEGIN  
   
@@ -280,7 +275,6 @@ BEGIN
         END  
         ELSE  
         BEGIN  
-  
             SELECT  
                  @FirstName   = FirstName  
                 ,@LastName    = LastName  
@@ -300,7 +294,7 @@ BEGIN
        IF isnull(@IsDefault,0) = 1 AND ISNULL(@CustomerId,0) > 0  
        BEGIN   
   
-        UPDATE CustomerAddresses  
+      UPDATE CustomerAddresses  
         SET IsDefault = 0  
         WHERE CustomerId = @CustomerId  
   
@@ -359,11 +353,11 @@ BEGIN
          AND IsDeleted = 0  
         )  
         BEGIN  
-         SET @ReturnMessage = 'Customer address not found.';  
+         SET @ReturnMessage = 'Selected Customer Adress is already deleted, Please reselect.';  
   
-		    			THROW 50001
-		    				,@ReturnMessage
-		    				,1;
+         --RAISERROR(@ReturnMessage, 16, 1)
+         --RETURN;
+         THROW 50001, @ReturnMessage, 1;
         END  
   
         IF isnull(@IsDefault,0) = 1 AND ISNULL(@CustomerId,0) > 0  
@@ -427,9 +421,8 @@ BEGIN
             SET @LocationID = @DefaultLocationId;  
         END  
   
-        BEGIN TRANSACTION CreateLeadWithCustomerDetails;
   
-        SET @LeadNumber = dbo.GetLeadNumber(@TenantId);  
+    SET @LeadNumber = dbo.GetLeadNumber(@TenantId);  
   
         UPDATE TenantConfigurations  
         SET LeadNumberCounter = LeadNumberCounter + 1  
@@ -562,20 +555,20 @@ BEGIN
     END TRY  
   
  BEGIN CATCH  
+
   IF @@TRANCOUNT > 0  
    ROLLBACK TRANSACTION CreateLeadWithCustomerDetails;  
   
-  DECLARE @ObjectName VARCHAR(500)
+  DECLARE @ObjectName VARCHAR(500)  
    ,@ErrorMsg NVARCHAR(4000);  
   
   SET @ObjectName = OBJECT_NAME(@@PROCID);  
   SET @ErrorMsg = ERROR_MESSAGE();  
   
-  EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName 
-   ,@ErrorMsg = @ErrorMsg;  
+  EXEC dbo.SaveDBErrorLog @ObjectName = @ObjectName
+   ,@ErrorMsg = @ErrorMsg;
+ 
+  THROW
  END CATCH  
   
 END;
-
-GO
-

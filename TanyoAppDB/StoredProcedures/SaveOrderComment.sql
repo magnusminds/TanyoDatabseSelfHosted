@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[SaveOrderComment] (
 	,@CreatedDate DATETIMEOFFSET
 	,@CreatedUTCDate DATETIME
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

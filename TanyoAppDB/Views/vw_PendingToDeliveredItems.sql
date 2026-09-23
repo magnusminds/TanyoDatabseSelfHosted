@@ -1,5 +1,6 @@
 --SELECT * FROM vw_PendingToDeliveredItems
 CREATE VIEW [dbo].[vw_PendingToDeliveredItems]
+WITH ENCRYPTION
 AS
 	SELECT o.OrderId
 		,o.TenantId

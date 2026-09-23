@@ -10,6 +10,7 @@ EXEC [dbo].[GetRawMaterialThresholdLessThanZero]
 
 -- =============================================
 CREATE   PROCEDURE [dbo].[GetRawMaterialThresholdLessThanZero] (@TenantId BIGINT = 1)
+WITH ENCRYPTION
 AS
 BEGIN
 	SELECT rm.RawMaterialId

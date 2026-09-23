@@ -19,6 +19,7 @@ CREATE   PROCEDURE [dbo].[AutoCreatePO] (
 	,@OrderId BIGINT
 	,@OrderSetItemId BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

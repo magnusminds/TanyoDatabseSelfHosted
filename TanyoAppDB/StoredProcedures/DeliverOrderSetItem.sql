@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[DeliverOrderSetItem] (
 	,@WarehouseDetails VARCHAR(MAX)
 	,@Comment VARCHAR(MAX) = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	DECLARE @IsRestrictDeliveryWithoutFullPayment BIT
@@ -177,6 +178,53 @@ BEGIN
 	FROM #orderSetItemByOrderId
 	WHERE OrderSetItemId = @OrderSetItemId
 
+		CREATE TABLE #UnmappedWarehouses (
+			Id INT IDENTITY(1,1),
+			WarehouseId INT,
+			WareHouseName VARCHAR(50)
+		);
+
+		-- Identify warehouses selected in delivery that are NOT mapped in ProductQuantitiesByWarehouse
+		INSERT INTO #UnmappedWarehouses (WarehouseId,WareHouseName)
+		SELECT WD.WarehouseId , W.Name
+		FROM #WarehouseDeliverDetails WD
+		INNER JOIN Warehouse w ON WD.WarehouseId = w.Id
+		WHERE NOT EXISTS (
+			SELECT 1
+			FROM ProductQuantitiesByWarehouse PQW WITH (NOLOCK)
+			WHERE PQW.ProductId = @ProductId
+				AND PQW.WarehouseId = WD.WarehouseId
+		);
+
+		DECLARE  @Inc INT = 1 
+		DECLARE  @Cnt INT = 0
+		DECLARE  @MWarehouseId BIGINT;
+		DECLARE  @MWarehouseName VARCHAR(50);
+
+		SELECT @Cnt = COUNT(1) FROM #UnmappedWarehouses;
+
+		WHILE @Cnt >= @Inc
+		BEGIN
+			SELECT @MWarehouseId = WarehouseId 
+			,@MWarehouseName = WareHouseName
+			FROM #UnmappedWarehouses 
+			WHERE Id = @Inc;
+
+
+			SET @Description = 'Inventory record created with as initial quantity of 0.00 in the' + @MWarehouseName + 'warehouse during delivery.'
+			EXEC dbo.PopulateProductWarehouseQuantity 
+				@TenantId = @TenantId
+				,@UserId = @UserId
+				,@ProductId = @ProductId
+				,@WarehouseId = @MWarehouseId
+				,@Quantity = 0
+				,@Description = @Description;
+
+			SET @Inc = @Inc + 1;
+		END;
+
+		DROP TABLE IF EXISTS #UnmappedWarehouses;
+
 	SELECT PQW.ProductQuantityByWarehouseId
 		,PQW.WarehouseId
 		,PQW.Quantity AS WarehouseQuantity
@@ -211,8 +259,8 @@ BEGIN
 		AND PM.SubjectTypeId = @RawMaterialSubjectTypeId
 	GROUP BY PM.SubjectId
 
-	DECLARE @Cnt INT = 0
-	DECLARE @Inc INT = 1
+	SET @Cnt  = 0
+	SET @Inc  = 1
 
 	SELECT @Cnt = COUNT(RawMaterialId)
 	FROM #RawMaterials
@@ -559,6 +607,3 @@ BEGIN
 			,@ReturnOrderId AS [ReturnOrderId]
 	END CATCH
 END
-
-GO
-

@@ -10,6 +10,7 @@ CREATE   PROCEDURE [dbo].[ListPOProductsByVendorId]
     ,@VendorId BIGINT
     ,@PONumber NVARCHAR(100) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

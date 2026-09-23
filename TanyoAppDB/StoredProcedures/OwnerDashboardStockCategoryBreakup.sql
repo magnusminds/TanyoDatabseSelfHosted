@@ -7,6 +7,7 @@
 
 CREATE   PROCEDURE [dbo].[OwnerDashboardStockCategoryBreakup]
     @TenantId INT
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

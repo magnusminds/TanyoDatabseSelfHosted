@@ -22,6 +22,7 @@ CREATE PROCEDURE [dbo].[Dashboard_GetOrderInProgressProductsCount]
     @CurrentUserId INT,
     @RoleId NVARCHAR(100)
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

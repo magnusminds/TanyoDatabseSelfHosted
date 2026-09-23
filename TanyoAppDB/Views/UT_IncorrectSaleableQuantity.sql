@@ -3,6 +3,7 @@
 
 --select * from UT_IncorrectSaleableQuantity order by TenantName
 CREATE VIEW [dbo].[UT_IncorrectSaleableQuantity]
+WITH ENCRYPTION
 AS
 with cte as (
 select 

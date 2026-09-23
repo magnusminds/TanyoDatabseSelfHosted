@@ -20,6 +20,7 @@ CREATE PROCEDURE [dbo].[ReportFlaggedInquiries]
     ,@SortOrder        VARCHAR(4)      = 'DESC'
     ,@PageNumber       INT             = 1
     ,@PageSize         INT             = 10
+WITH ENCRYPTION
 AS
 BEGIN
     BEGIN TRY

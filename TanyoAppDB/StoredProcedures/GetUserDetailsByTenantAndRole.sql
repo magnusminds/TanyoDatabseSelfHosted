@@ -1,4 +1,5 @@
 CREATE   PROCEDURE [dbo].[GetUserDetailsByTenantAndRole]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

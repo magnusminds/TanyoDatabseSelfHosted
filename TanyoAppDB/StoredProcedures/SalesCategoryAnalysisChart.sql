@@ -13,6 +13,7 @@ CREATE PROCEDURE [dbo].[SalesCategoryAnalysisChart] (
     @TenantId INT,
     @TargetYear INT
 )
+WITH ENCRYPTION
 AS
 BEGIN
     DECLARE @ProductSubjectTypeId INT;

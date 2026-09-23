@@ -1,6 +1,7 @@
 
 --select * from RunningQueries
 CREATE VIEW [dbo].[RunningQueries]
+WITH ENCRYPTION
 AS
 
 	SELECT 

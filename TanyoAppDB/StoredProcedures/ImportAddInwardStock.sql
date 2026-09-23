@@ -15,6 +15,7 @@ CREATE PROCEDURE [dbo].[ImportAddInwardStock] (
 	,@ProcessStartDate DATETIMEOFFSET = NULL
 	,@ProcessEndDate DATETIMEOFFSET = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -6,6 +6,7 @@ CREATE   PROC [dbo].[MigrationFabricToProduct]
 (
 	@TenantId INT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	

@@ -3,6 +3,7 @@
 
 --select * from vw_TanyoUsers ORDER BY TenantName
 CREATE VIEW [dbo].[vw_TanyoUsers]
+WITH ENCRYPTION
 AS
 	select t.TenantId, t.TenantName, u.Email, u.PhoneNumber, t.MasterOTP 
 			,r.NormalizedName

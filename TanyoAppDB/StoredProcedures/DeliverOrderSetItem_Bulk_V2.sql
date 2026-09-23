@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[DeliverOrderSetItem_Bulk_V2] (
 	,@Comment VARCHAR(MAX) = NULL
 	,@WarehouseId BIGINT = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

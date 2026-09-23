@@ -16,6 +16,7 @@ CREATE PROCEDURE [dbo].[SaveProductVariant] (
 	@tv_productvariant [dbo].[tt_productvariant] ReadOnly
 	,@CreatedBy INT = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON

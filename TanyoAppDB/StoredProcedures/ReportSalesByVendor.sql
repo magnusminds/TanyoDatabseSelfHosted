@@ -9,6 +9,7 @@ CREATE PROCEDURE [dbo].[ReportSalesByVendor] (
 	,@SortBy VARCHAR(50) = 'VendorName'
 	,@SortOrder VARCHAR(4) = 'ASC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

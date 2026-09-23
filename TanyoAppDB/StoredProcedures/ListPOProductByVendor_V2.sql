@@ -11,6 +11,7 @@ CREATE   PROCEDURE [dbo].[ListPOProductByVendor_V2]
     ,@VendorId BIGINT 
     ,@Search   VARCHAR(100) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

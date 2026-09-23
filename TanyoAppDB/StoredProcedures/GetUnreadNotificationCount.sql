@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[GetUnreadNotificationCount] (
 	,@ApplicationType INT
 	,@FromDate DATETIME
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

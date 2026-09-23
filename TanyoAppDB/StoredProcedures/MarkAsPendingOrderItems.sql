@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[MarkAsPendingOrderItems]
     , @UserId BIGINT
     , @PendingItemList VARCHAR(MAX)
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

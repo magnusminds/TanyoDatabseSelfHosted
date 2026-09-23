@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[UpdateImportProducts] (
 	,@ProcessStartDate DATETIMEOFFSET = NULL
 	,@ProcessEndDate DATETIMEOFFSET = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

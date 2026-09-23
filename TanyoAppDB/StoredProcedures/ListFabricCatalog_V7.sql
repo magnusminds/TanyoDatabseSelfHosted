@@ -7,6 +7,7 @@ CREATE   PROCEDURE [dbo].[ListFabricCatalog_V7] (
 	@TenantId INT
 	,@RoleId NVARCHAR(MAX)
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -2,6 +2,7 @@
 
 --select * from [UT_VW_CoverImage] ORDER BY 1
 CREATE VIEW [dbo].[UT_VW_CoverImage]
+WITH ENCRYPTION
 AS
 SELECT t.TenantName, p.ProductId
 	,p.ProductTitle

@@ -12,6 +12,7 @@ CREATE   PROCEDURE [dbo].[RemoveUnmappedPO]
     @UserId          BIGINT,
 	@ReturnMessage	 NVARCHAR(255) = '' OUTPUT
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

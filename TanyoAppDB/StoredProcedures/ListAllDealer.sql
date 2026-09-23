@@ -7,6 +7,7 @@ CREATE PROC [dbo].[ListAllDealer] (
 	@TenantId BIGINT
 	,@Search VARCHAR(50)
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -3,6 +3,7 @@ EXEC GetOrderCommentsByOrderId @OrderId = 260756
 */
 CREATE PROCEDURE [dbo].[GetOrderCommentsByOrderId] 
 (@OrderId BIGINT)
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

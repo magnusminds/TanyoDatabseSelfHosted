@@ -4,6 +4,7 @@ CREATE     PROCEDURE [dbo].[SaveOrderProductCharges]
 	,@UserID BIGINT
 	,@OrderID BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

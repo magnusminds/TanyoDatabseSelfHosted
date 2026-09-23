@@ -43,6 +43,7 @@ CREATE PROCEDURE [dbo].[zListProducts_20251006]
 	,@Quantity INT = NULL
 	,@StockFilterOperation VARCHAR(5) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	

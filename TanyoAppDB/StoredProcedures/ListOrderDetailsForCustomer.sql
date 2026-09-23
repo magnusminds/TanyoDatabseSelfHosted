@@ -9,6 +9,7 @@ Create   PROC [dbo].[ListOrderDetailsForCustomer]
 	@TenantID BIGINT
 	,@CustomerId INT = NULL	
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

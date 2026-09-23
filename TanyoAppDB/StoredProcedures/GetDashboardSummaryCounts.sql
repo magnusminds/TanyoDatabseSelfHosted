@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[GetDashboardSummaryCounts]
 	 @TenantId INT
 	,@LocationId BIGINT = NULL
 	,@UserId BIGINT 
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

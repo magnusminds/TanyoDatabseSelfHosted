@@ -1,4 +1,5 @@
 CREATE   PROCEDURE [dbo].[HFJob_GetRawMaterialPriceUpdateToSendEmail]
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON

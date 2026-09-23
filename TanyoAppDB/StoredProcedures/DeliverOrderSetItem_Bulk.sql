@@ -4,6 +4,7 @@ CREATE PROCEDURE [dbo].[DeliverOrderSetItem_Bulk] (
 	,@UserId INT
 	,@Comment VARCHAR(MAX) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -1,4 +1,5 @@
 CREATE   PROCEDURE dbo.GetReferalCode(@ReferalCode CHAR(6) OUTPUT)
+WITH ENCRYPTION
 AS
 BEGIN
     DECLARE @NewCode CHAR(6)

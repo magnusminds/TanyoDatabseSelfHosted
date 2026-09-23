@@ -8,6 +8,7 @@ CREATE PROC [dbo].[ReportOrdersValue] (
 	,@SortBy VARCHAR(50) = 'TotalOrder'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

@@ -3,6 +3,7 @@
 
 --SELECT * FROM UT_VW_OrderUnitPriceIncorrect where tenantid=156
 CREATE VIEW [dbo].[UT_VW_OrderUnitPriceIncorrect]
+WITH ENCRYPTION
 AS
 SELECT t.TenantId
 	,t.TenantName

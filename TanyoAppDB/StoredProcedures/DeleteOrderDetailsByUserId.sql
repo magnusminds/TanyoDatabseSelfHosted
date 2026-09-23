@@ -1,4 +1,5 @@
 CREATE PROCEDURE DeleteOrderDetailsByUserId (@UserId INT)
+WITH ENCRYPTION
 AS
 BEGIN
 

@@ -18,6 +18,7 @@ CREATE   PROC [dbo].[ListInteriorDetails]
  ,@RefferedBy BIGINT = NULL
  ,@SpecializedInId BIGINT = NULL
 )              
+WITH ENCRYPTION
 AS              
 BEGIN              
  SET NOCOUNT ON;              

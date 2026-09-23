@@ -45,6 +45,7 @@ CREATE   PROCEDURE [dbo].[SaveInward]
     @ReturnInwardId BIGINT = NULL OUTPUT,
     @Status BIT = 0 OUTPUT,
 	@SendPOEmail BIT = 0 OUTPUT
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

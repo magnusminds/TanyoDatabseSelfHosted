@@ -4,6 +4,7 @@ CREATE PROC [dbo].[UpdateOrderGST] (
 	,@UserID BIGINT
 	,@TenantID BIGINT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -13,6 +13,7 @@ CREATE PROCEDURE [dbo].[ApplyOffer_V2] (
 	,@UserId BIGINT
 	,@IsPublished BIT = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

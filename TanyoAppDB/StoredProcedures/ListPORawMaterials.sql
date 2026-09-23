@@ -15,6 +15,7 @@ CREATE   PROC [dbo].[ListPORawMaterials]
 	@SortBy NVARCHAR(50) = 'OrderDate',
 	@SortOrder NVARCHAR(4) = 'DESC'
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

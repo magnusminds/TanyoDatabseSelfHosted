@@ -6,6 +6,7 @@ CREATE     PROC [dbo].[GetContractorUsers]
 (
 	@TenantId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

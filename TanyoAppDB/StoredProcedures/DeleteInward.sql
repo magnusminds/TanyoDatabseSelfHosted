@@ -8,6 +8,7 @@ CREATE PROCEDURE [dbo].[DeleteInward]
 	,@ReturnInwardId BIGINT = NULL OUTPUT
 	,@Status BIT = 0 OUTPUT
 	,@ImagePaths NVARCHAR(MAX) = '' OUTPUT
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

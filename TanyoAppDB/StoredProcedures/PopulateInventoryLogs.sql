@@ -21,6 +21,7 @@ CREATE PROCEDURE [dbo].[PopulateInventoryLogs] (
 	,@CreatedDate DATETIMEOFFSET = NULL
 	,@CreatedUTCDate DATETIME = NULL
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

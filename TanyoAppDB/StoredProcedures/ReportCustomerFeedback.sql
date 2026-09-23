@@ -27,6 +27,7 @@ CREATE PROCEDURE [dbo].[ReportCustomerFeedback]
 	,@PageIndex INT = 1
 	,@PageSize INT = 100
 
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

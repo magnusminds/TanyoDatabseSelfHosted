@@ -21,6 +21,7 @@ CREATE PROCEDURE [dbo].[GetWarehousewiseInward]
     ,@ColorId INT = NULL
     ,@BrandId INT = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
     BEGIN TRY

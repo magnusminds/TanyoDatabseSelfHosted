@@ -12,6 +12,7 @@ CREATE   PROCEDURE [dbo].[MarkAsReadyToDelivered]
     , @Comments VARCHAR(MAX) = NULL
     , @DeliveredList VARCHAR(MAX)
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

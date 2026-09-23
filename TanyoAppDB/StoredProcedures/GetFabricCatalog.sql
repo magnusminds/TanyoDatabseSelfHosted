@@ -8,6 +8,7 @@ CREATE   PROC dbo.GetFabricCatalog
 	@TenantId BIGINT
 	,@RoleId NVARCHAR(50)
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

@@ -8,6 +8,7 @@ CREATE   PROC [dbo].[GetPORawMaterialById]
 	@PORawMaterialId BIGINT
 	,@TenantId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

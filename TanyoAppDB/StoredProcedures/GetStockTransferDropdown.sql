@@ -12,6 +12,7 @@ CREATE   PROCEDURE [dbo].[GetStockTransferDropdown]
 	@TenantId INT
 	,@Search NVARCHAR(200) = NULL
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

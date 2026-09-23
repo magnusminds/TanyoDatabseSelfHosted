@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[DeleteProduct] (
 	,@UserId INT
 	,@SkipInquiryCheck BIT = 0
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

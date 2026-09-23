@@ -15,6 +15,7 @@ CREATE PROCEDURE [dbo].[App_List_GetAllCustomer_ByArea] (
 	,@PageNumber INT = 1
 	,@PageSize INT = 100
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

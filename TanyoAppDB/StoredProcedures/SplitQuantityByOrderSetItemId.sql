@@ -14,6 +14,7 @@ CREATE     PROC [dbo].[SplitQuantityByOrderSetItemId]
 	,@TenantId BIGINT
 	,@UserId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

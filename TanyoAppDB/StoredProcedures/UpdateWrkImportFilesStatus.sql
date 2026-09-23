@@ -2,6 +2,7 @@ CREATE PROCEDURE [dbo].[UpdateWrkImportFilesStatus] (
 	@WrkImportFileID BIGINT
 	,@UserId INT
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	BEGIN TRY

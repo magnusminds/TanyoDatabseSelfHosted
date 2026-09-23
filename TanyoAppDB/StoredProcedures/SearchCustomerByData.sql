@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[SearchCustomerByData] @Search NVARCHAR(100)
 	,@RoleId NVARCHAR(450)
 	,@HasAnyPermission BIT = 0 OUTPUT
 	,@HiddenMatchType INT = 0 OUTPUT
+WITH ENCRYPTION
 AS
 BEGIN TRY
 	SET NOCOUNT ON;

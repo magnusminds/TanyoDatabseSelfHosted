@@ -34,6 +34,7 @@ CREATE PROCEDURE [dbo].[GetReadyToDeliverData] @TenantId INT = 1
 	,@PageSize INT = 100
 	,@SortBy VARCHAR(50) = '10'
 	,@SortOrder VARCHAR(50) = 'DESC'
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

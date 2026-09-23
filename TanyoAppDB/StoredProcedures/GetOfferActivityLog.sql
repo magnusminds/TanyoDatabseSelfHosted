@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[GetOfferActivityLog]
 	,@PageSize INT = 100
 	,@SortBy VARCHAR(50) = 'CreatedByName'
 	,@SortOrder VARCHAR(4) = 'DESC'
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

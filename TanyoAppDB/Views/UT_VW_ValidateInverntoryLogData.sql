@@ -1,4 +1,5 @@
 CREATE VIEW [dbo].[UT_VW_ValidateInverntoryLogData]
+WITH ENCRYPTION
 AS
 SELECT AL.*
 FROM ActivityLogs AL WITH (NOLOCK)

@@ -5,6 +5,7 @@
 
 		)
 	RETURNS TABLE
+WITH ENCRYPTION
 	AS
 	RETURN ( SELECT * FROM [dbo].[LeaveApplications]
 					WHERE (StartDate BETWEEN @startdate AND @enddate) 

@@ -25,6 +25,7 @@ CREATE   PROCEDURE [dbo].[OrderReadyToManufacturing] (
 	,@SortBy VARCHAR(50) = ''
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

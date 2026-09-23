@@ -19,6 +19,7 @@ CREATE   FUNCTION [dbo].[GetProductPriceBySQFT]
     ,@PriceType INT
 )
 RETURNS DECIMAL(18, 2)
+WITH ENCRYPTION
 AS
 BEGIN
 

@@ -16,6 +16,7 @@ CREATE   PROCEDURE [dbo].[GetProductListByPONumberId]
     ,@SortBy NVARCHAR(100) = 'Title'
     ,@SortOrder NVARCHAR(4) = 'ASC'
 )
+WITH ENCRYPTION
 AS
 BEGIN
     SET NOCOUNT ON;

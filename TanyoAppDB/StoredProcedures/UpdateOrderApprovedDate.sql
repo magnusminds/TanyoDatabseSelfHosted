@@ -5,6 +5,7 @@
 -- =============================================
 CREATE   PROCEDURE UpdateOrderApprovedDate 
 	@OrderNo VARCHAR(500)
+WITH ENCRYPTION
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from

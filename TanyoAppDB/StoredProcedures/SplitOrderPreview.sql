@@ -9,6 +9,7 @@ CREATE PROCEDURE [dbo].[SplitOrderPreview] (
 	,@OrderId BIGINT
 	,@MaxSplitAmount DECIMAL(18, 2)
 	)
+WITH ENCRYPTION
 AS
 BEGIN
     BEGIN TRY

@@ -20,6 +20,7 @@ CREATE PROCEDURE [dbo].[GetFabricByColor]
 	,@SortBy VARCHAR(50) = ''
 	,@SortOrder VARCHAR(50) = 'DESC'
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

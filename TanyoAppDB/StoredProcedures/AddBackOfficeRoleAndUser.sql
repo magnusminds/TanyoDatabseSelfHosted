@@ -24,6 +24,7 @@ CREATE PROCEDURE [dbo].[AddBackOfficeRoleAndUser]
 ,@PasswordHash VARCHAR(100)
 ,@PhoneNumber VARCHAR(20)
 )
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

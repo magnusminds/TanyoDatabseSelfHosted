@@ -5,6 +5,7 @@
 -- =============================================
 --SELECT * FROM GetRandomID 
 CREATE VIEW [dbo].[GetRandomID] 
+WITH ENCRYPTION
 AS
 SELECT NEWID() as RandomID
 

@@ -2,6 +2,7 @@
 	EXEC [dbo].[HFJob_SendProductStockUpdate]		
 */
 CREATE   PROCEDURE [dbo].[HFJob_SendProductStockUpdate]
+WITH ENCRYPTION
 AS
 BEGIN
 	SELECT PT.ProductTitle AS Title

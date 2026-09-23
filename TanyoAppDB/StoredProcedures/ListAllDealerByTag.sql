@@ -8,6 +8,7 @@ CREATE   PROC [dbo].[ListAllDealerByTag]
 	@TenantId BIGINT
 	,@TagId BIGINT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

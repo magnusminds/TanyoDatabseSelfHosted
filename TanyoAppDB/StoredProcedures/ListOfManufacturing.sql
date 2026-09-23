@@ -17,6 +17,7 @@ CREATE   PROC [dbo].[ListOfManufacturing]
     ,@PageIndex INT
     ,@PageSize INT
 )
+WITH ENCRYPTION
 AS
 BEGIN
 

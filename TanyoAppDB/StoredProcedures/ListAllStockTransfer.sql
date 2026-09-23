@@ -27,6 +27,7 @@ CREATE   PROCEDURE [dbo].[ListAllStockTransfer] (
 	,@SortBy VARCHAR(50) = 'CreatedDate'
 	,@SortOrder VARCHAR(4) = 'DESC'
 	)
+WITH ENCRYPTION
 AS
 BEGIN
 	SET NOCOUNT ON;

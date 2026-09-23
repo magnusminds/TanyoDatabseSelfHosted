@@ -40,6 +40,7 @@ CREATE PROCEDURE [dbo].[GetInwardAllData]
 	@SortBy VARCHAR(50) = 'Date',
 	@SortOrder VARCHAR(50) = 'ASC'
 )
+WITH ENCRYPTION
 AS
 BEGIN
 BEGIN TRY

@@ -14,6 +14,7 @@ CREATE   PROCEDURE [dbo].[ReportEmployeeDetails]
     @SortBy VARCHAR(50) = 'EmployeeName',
     @SortOrder VARCHAR(4) = 'ASC'
 )
+WITH ENCRYPTION
 AS  
 BEGIN  
     SET NOCOUNT ON;  

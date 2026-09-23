@@ -1,4 +1,5 @@
 Create VIEW  [dbo].[vw_SalesItemDetails]
+WITH ENCRYPTION
 AS
 SELECT T.TenantName
 ,CONCAT(CS.FirstName,' ' ,ISNULL(CS.LastName,'')) AS Customername
