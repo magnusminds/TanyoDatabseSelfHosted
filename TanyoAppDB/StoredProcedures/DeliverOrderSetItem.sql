@@ -1,3 +1,18 @@
+/*
+EXEC [dbo].[DeliverOrderSetItem]
+    @TenantId = 1207,
+    @ProductId = 402789,
+    @OrderSetItemId = 446052,
+    @OrderId = 260537,
+    @UserId = 13305,
+    @WarehouseDetails = '[
+        {
+            "WarehouseId": 10259,
+            "DeliverQuantity": 10.00
+        }
+    ]',
+    @Comment = NULL;
+*/
 CREATE PROCEDURE [dbo].[DeliverOrderSetItem] (
 	@TenantId INT 
 	,@ProductId BIGINT 
@@ -7,7 +22,6 @@ CREATE PROCEDURE [dbo].[DeliverOrderSetItem] (
 	,@WarehouseDetails VARCHAR(MAX)
 	,@Comment VARCHAR(MAX) = NULL
 	)
-WITH ENCRYPTION
 AS
 BEGIN
 	DECLARE @IsRestrictDeliveryWithoutFullPayment BIT
@@ -358,8 +372,8 @@ BEGIN
 
 				IF @PQResult = - 1
 				BEGIN
-					IF @@TRANCOUNT > 0
-						ROLLBACK;
+					IF XACT_State() <> 0
+						ROLLBACK TRANSACTION
 
 					SET @ReturnMessage = 'You have Maintain Positive Product Inventory enabled — ' + @WarehouseName + ' has no stock'
 					SET @ReturnStatus = 0;
@@ -372,8 +386,8 @@ BEGIN
 				END
 				ELSE IF @PQResult <> 1
 				BEGIN
-					IF @@TRANCOUNT > 0
-						ROLLBACK;
+					IF XACT_State() <> 0
+						ROLLBACK TRANSACTION
 
 					SET @ReturnMessage = 'Unable to deduct product quantity for warehouse ' + @WarehouseName + '.'
 					SET @ReturnStatus = 0;
@@ -424,7 +438,7 @@ BEGIN
 				,Description
 				)
 			SELECT RMIW.RawMaterialInventoryByWarehouseId
-				,'RawMaterial Inventory has been updated from ' + CAST(RMIW.Quantity + RMQ.ProvidedQuantity AS NVARCHAR(10)) + ' to ' + CAST((RMIW.Quantity) AS NVARCHAR(10)) + ' (-' + CAST((RMQ.ProvidedQuantity) AS NVARCHAR(10)) + ') for order ' + CAST(@OrderNo AS NVARCHAR(50))
+				,'RawMaterial Inventory has been updated from ' + CAST(RMIW.Quantity + RMQ.ProvidedQuantity AS NVARCHAR(100)) + ' to ' + CAST((RMIW.Quantity) AS NVARCHAR(100)) + ' (-' + CAST((RMQ.ProvidedQuantity) AS NVARCHAR(100)) + ') for order ' + CAST(@OrderNo AS NVARCHAR(500))
 			FROM RawMaterialInventoryByWarehouse rmiw
 			INNER JOIN #RawMaterialInventory RMI ON RMI.RawMaterialInventoryByWarehouseId = RMIW.RawMaterialInventoryByWarehouseId
 			INNER JOIN #RawMaterialQuantityDeduction RMQ ON RMQ.RawMaterialId = RMI.RawMaterialId;
@@ -590,8 +604,8 @@ BEGIN
 	END TRY
 
 	BEGIN CATCH
-		IF @@TRANCOUNT > 0
-			ROLLBACK TRANSACTION DeliverOrderSetItem;
+		IF XACT_State() <> 0
+			ROLLBACK TRANSACTION
 
 		DECLARE @ObjectName VARCHAR(500)
 			,@ErrorMsg VARCHAR(MAX);
@@ -607,3 +621,6 @@ BEGIN
 			,@ReturnOrderId AS [ReturnOrderId]
 	END CATCH
 END
+
+GO
+
