@@ -2,7 +2,7 @@ CREATE TABLE [dbo].[RawMaterials] (
     [RawMaterialId]  INT                                                 IDENTITY (1, 1) NOT NULL,
     [Title]          VARCHAR (150)                                       NOT NULL,
     [UnitId]         INT                                                 NOT NULL,
-    [UnitPrice]      NUMERIC (8, 2) MASKED WITH (FUNCTION = 'default()') NOT NULL,
+    [UnitPrice]      NUMERIC (8, 2) NOT NULL,
     [ImagePath]      VARCHAR (500)                                       NULL,
     [TenantId]       INT                                                 NOT NULL,
     [IsDeleted]      BIT                                                 DEFAULT ((0)) NOT NULL,

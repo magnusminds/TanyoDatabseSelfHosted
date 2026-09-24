@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[POProducts] (
     [VendorId]              BIGINT                                               NOT NULL,
     [PONumber]              VARCHAR (20)                                         NOT NULL,
     [OrderDate]             DATETIME                                             DEFAULT (getdate()) NOT NULL,
-    [TotalAmount]           DECIMAL (18, 2) MASKED WITH (FUNCTION = 'default()') NULL,
+    [TotalAmount]           DECIMAL (18, 2) NULL,
     [Status]                INT                                                  DEFAULT ((0)) NOT NULL,
     [IsDeleted]             BIT                                                  DEFAULT ((0)) NOT NULL,
     [CreatedBy]             INT                                                  NOT NULL,
@@ -19,12 +19,12 @@ CREATE TABLE [dbo].[POProducts] (
     [TentativePOPickupDate] DATETIME                                             NULL,
     [VendorOrderId]         BIGINT                                               NULL,
     [POMaterialReadyDate]   DATETIME                                             NULL,
-    [AmountBeforeGST]       NUMERIC (18, 2) MASKED WITH (FUNCTION = 'default()') NULL,
-    [CGSTAmount]            NUMERIC (18, 2) MASKED WITH (FUNCTION = 'default()') NULL,
-    [SGSTAmount]            NUMERIC (18, 2) MASKED WITH (FUNCTION = 'default()') NULL,
+    [AmountBeforeGST]       NUMERIC (18, 2) NULL,
+    [CGSTAmount]            NUMERIC (18, 2) NULL,
+    [SGSTAmount]            NUMERIC (18, 2) NULL,
     [GSTType]               BIT                                                  CONSTRAINT [DF_POProducts_GSTType] DEFAULT ((1)) NOT NULL,
     [IsInterState]          BIT                                                  DEFAULT ((0)) NOT NULL,
-    [IGSTAmount]            NUMERIC (18, 2) MASKED WITH (FUNCTION = 'default()') NULL,
+    [IGSTAmount]            NUMERIC (18, 2) NULL,
     PRIMARY KEY CLUSTERED ([POProductId] ASC)
 );
 

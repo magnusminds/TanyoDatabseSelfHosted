@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[OrderProductCharges] (
     [OrderSetItemId]       BIGINT                                               NOT NULL,
     [EntityTypeId]         BIGINT                                               NOT NULL,
     [EntityId]             BIGINT                                               NOT NULL,
-    [Price]                NUMERIC (18, 2) MASKED WITH (FUNCTION = 'default()') CONSTRAINT [df_OrderProductCharges_Price] DEFAULT ((0)) NOT NULL,
+    [Price]                NUMERIC (18, 2) CONSTRAINT [df_OrderProductCharges_Price] DEFAULT ((0)) NOT NULL,
     [CreatedBy]            BIGINT                                               NOT NULL,
     [CreatedDate]          DATETIMEOFFSET (7)                                   DEFAULT (sysdatetimeoffset()) NOT NULL,
     [CreatedUTCDate]       DATETIME                                             DEFAULT (getutcdate()) NOT NULL,

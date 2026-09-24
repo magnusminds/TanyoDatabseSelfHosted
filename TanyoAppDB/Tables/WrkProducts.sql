@@ -16,11 +16,11 @@ CREATE TABLE [dbo].[WrkProducts] (
     [UpdatedBy]       BIGINT                                             NULL,
     [UpdatedDate]     DATETIMEOFFSET (7)                                 NULL,
     [UpdatedUTCDate]  DATETIME                                           NULL,
-    [CostPrice]       VARCHAR (MAX) MASKED WITH (FUNCTION = 'default()') NULL,
+    [CostPrice]       VARCHAR (MAX) NULL,
     [StockQty]        VARCHAR (MAX)                                      NULL,
     [VendorName]      VARCHAR (MAX)                                      NULL,
-    [RetailerPrice]   VARCHAR (MAX) MASKED WITH (FUNCTION = 'default()') NULL,
-    [WholesalerPrice] VARCHAR (MAX) MASKED WITH (FUNCTION = 'default()') NULL,
+    [RetailerPrice]   VARCHAR (MAX) NULL,
+    [WholesalerPrice] VARCHAR (MAX) NULL,
     [WarehouseName]   VARCHAR (MAX)                                      NULL,
     PRIMARY KEY CLUSTERED ([WrkProductID] ASC) WITH (FILLFACTOR = 80)
 );

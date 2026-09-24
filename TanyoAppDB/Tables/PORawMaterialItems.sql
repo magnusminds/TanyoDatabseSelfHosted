@@ -3,7 +3,7 @@ CREATE TABLE [dbo].[PORawMaterialItems] (
     [PORawMaterialId]      BIGINT                                               NOT NULL,
     [RawMaterialId]        BIGINT                                               NOT NULL,
     [Quantity]             DECIMAL (18, 2)                                      NOT NULL,
-    [UnitPrice]            DECIMAL (18, 2) MASKED WITH (FUNCTION = 'default()') NOT NULL,
+    [UnitPrice]            DECIMAL (18, 2) NOT NULL,
     [ExpectedDeliveryDate] DATE                                                 NOT NULL,
     [Status]               INT                                                  DEFAULT ((0)) NOT NULL,
     [Remarks]              NVARCHAR (500)                                       NULL,

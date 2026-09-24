@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[ProductVendorMapping] (
     [UpdatedDate]            DATETIME                                             NULL,
     [UpdatedUTCDate]         DATETIME                                             NULL,
     [VendorModelNo]          VARCHAR (50)                                         NULL,
-    [VendorProductPrice]     NUMERIC (18, 2) MASKED WITH (FUNCTION = 'default()') NULL,
+    [VendorProductPrice]     NUMERIC (18, 2) NULL,
     CONSTRAINT [PK_ProductVendorMapping] PRIMARY KEY CLUSTERED ([ProductVendorMappingId] ASC) WITH (FILLFACTOR = 80)
 );
 

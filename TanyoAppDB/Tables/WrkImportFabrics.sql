@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[WrkImportFabrics] (
     [ModelNo]         VARCHAR (MAX)                                      NULL,
     [CompanyName]     VARCHAR (MAX)                                      NULL,
     [UnitName]        VARCHAR (MAX)                                      NULL,
-    [Price]           VARCHAR (MAX) MASKED WITH (FUNCTION = 'default()') NULL,
+    [Price]           VARCHAR (MAX) NULL,
     [Status]          INT                                                DEFAULT ((0)) NOT NULL,
     [ErrorMessage]    VARCHAR (MAX)                                      NULL,
     [CreatedBy]       BIGINT                                             NOT NULL,

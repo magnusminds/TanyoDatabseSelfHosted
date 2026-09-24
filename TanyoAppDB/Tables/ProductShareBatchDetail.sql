@@ -3,7 +3,7 @@ CREATE TABLE [dbo].[ProductShareBatchDetail] (
     [BatchId]         BIGINT                                               NOT NULL,
     [TenantId]        BIGINT                                               NOT NULL,
     [ProductId]       BIGINT                                               NOT NULL,
-    [WholesalerPrice] NUMERIC (18, 2) MASKED WITH (FUNCTION = 'default()') NOT NULL,
+    [WholesalerPrice] NUMERIC (18, 2) NOT NULL,
     [CustomerId]      BIGINT                                               NOT NULL,
     [TagId]           BIGINT                                               NULL,
     [ToTenantId]      BIGINT                                               NULL,

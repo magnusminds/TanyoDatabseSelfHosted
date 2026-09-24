@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[Polish] (
     [ModelNo]        VARCHAR (50)                                        NOT NULL,
     [CompanyId]      INT                                                 NULL,
     [UnitId]         INT                                                 NOT NULL,
-    [UnitPrice]      NUMERIC (8, 2) MASKED WITH (FUNCTION = 'default()') NOT NULL,
+    [UnitPrice]      NUMERIC (8, 2) NOT NULL,
     [ImagePath]      VARCHAR (500)                                       NULL,
     [TenantId]       INT                                                 NOT NULL,
     [IsDeleted]      BIT                                                 DEFAULT ((0)) NOT NULL,
