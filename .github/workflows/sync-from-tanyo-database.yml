@@ -1,0 +1,49 @@
+name: Sync from TanyoDatabase
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out self-hosted repository
+        uses: actions/checkout@v4
+
+      - name: Pull source repository
+        run: git clone --branch master https://github.com/magnusminds/TanyoDatabase.git "$RUNNER_TEMP/source"
+
+      - name: Copy source and remove table masking
+        run: |
+          source="$RUNNER_TEMP/source"
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            "$source/" "$GITHUB_WORKSPACE/"
+
+          find "$GITHUB_WORKSPACE/TanyoAppDB/Tables" "$GITHUB_WORKSPACE/TanyoLogsDB/Tables" \
+            -type f -name '*.sql' -print0 |
+            xargs -0 perl -0pi -e "s/\s+MASKED\s+WITH\s*\(\s*FUNCTION\s*=\s*'[^']*'\s*\)//gi"
+
+          if grep -R -n -E 'MASKED[[:space:]]+WITH' "$GITHUB_WORKSPACE/TanyoAppDB/Tables" "$GITHUB_WORKSPACE/TanyoLogsDB/Tables"; then
+            echo "Table masking was not fully removed."
+            exit 1
+          fi
+
+      - name: Commit and push synchronized changes
+        run: |
+          source_sha=$(git -C "$RUNNER_TEMP/source" rev-parse --short HEAD)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          if git diff --cached --quiet; then
+            echo "No synchronized changes to push."
+            exit 0
+          fi
+          git commit -m "Sync from TanyoDatabase ${source_sha}"
+          git push origin master
