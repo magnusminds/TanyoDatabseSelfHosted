@@ -16,7 +16,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Pull source repository
-        run: git clone --branch master https://github.com/magnusminds/TanyoDatabase.git "$RUNNER_TEMP/source"
+        env:
+          SOURCE_REPO_READ_TOKEN: ${{ secrets.SOURCE_REPO_READ_TOKEN }}
+        run: |
+          test -n "$SOURCE_REPO_READ_TOKEN" || {
+            echo "SOURCE_REPO_READ_TOKEN is not configured."
+            exit 1
+          }
+          git clone --branch master "https://x-access-token:${SOURCE_REPO_READ_TOKEN}@github.com/magnusminds/TanyoDatabase.git" "$RUNNER_TEMP/source"
 
       - name: Copy source and remove table masking
         run: |
