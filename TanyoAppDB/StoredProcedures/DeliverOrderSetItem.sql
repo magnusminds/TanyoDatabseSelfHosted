@@ -22,7 +22,7 @@ CREATE PROCEDURE [dbo].[DeliverOrderSetItem] (
 	,@WarehouseDetails VARCHAR(MAX)
 	,@Comment VARCHAR(MAX) = NULL
 	)
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	DECLARE @IsRestrictDeliveryWithoutFullPayment BIT
 		,@ReturnStatus BIT = 0

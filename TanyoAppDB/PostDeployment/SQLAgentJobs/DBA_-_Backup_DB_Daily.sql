@@ -7,7 +7,7 @@ WHILE EXISTS(SELECT 1 FROM msdb.dbo.sysjobsteps WHERE job_id=@JobId) BEGIN SELEC
 EXEC msdb.dbo.sp_add_jobstep @job_id=@JobId,@step_id=1,@step_name=N'Delete Old Backup',@subsystem=N'TSQL',@command=N'EXEC [dbo].[DeleteOldBackups]',@database_name=N'master',@database_user_name=NULL,@on_success_action=3,@on_success_step_id=0,@on_fail_action=2,@on_fail_step_id=0,@retry_attempts=0,@retry_interval=0,@cmdexec_success_code=0,@os_run_priority=0,@output_file_name=NULL,@flags=0,@proxy_name=NULL;
 EXEC msdb.dbo.sp_add_jobstep @job_id=@JobId,@step_id=2,@step_name=N'Backup Database',@subsystem=N'TSQL',@command=N'EXEC [dbo].[CreateDatabaseBackupDaily]',@database_name=N'master',@database_user_name=NULL,@on_success_action=3,@on_success_step_id=0,@on_fail_action=2,@on_fail_step_id=0,@retry_attempts=0,@retry_interval=0,@cmdexec_success_code=0,@os_run_priority=0,@output_file_name=NULL,@flags=0,@proxy_name=NULL;
 EXEC msdb.dbo.sp_add_jobstep @job_id=@JobId,@step_id=3,@step_name=N'Upload files to Azure Blob',@subsystem=N'PowerShell',@command=N'# Define variables
-$connectionString = "DefaultEndpointsProtocol=https;AccountName=tanyocrm;AccountKey=REMOVED_CREDENTIAL;EndpointSuffix=core.windows.net"
+$connectionString = "DefaultEndpointsProtocol=https;AccountName=tanyocrm;AccountKey=sB9ixKL/V/FgQmjMXLg0PWcJgRisGKui8/a9s8WrC6lkBz48uWpp3ljmYswRmFoheTuRbsenfR7M+AStPpwjqQ==;EndpointSuffix=core.windows.net"
 $containerName = "database-backup"
 $folderPath = "D:\Database\Backup"
 

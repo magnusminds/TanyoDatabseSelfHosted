@@ -16,9 +16,9 @@ dotnet build .\TanyoAppDB\TanyoAppDB.sqlproj
 
 The generated DACPAC files are written to each project's `bin\Debug` directory and are excluded from Git.
 
-## Automatic self-hosted sync
+## Self-hosted repository sync
 
-The `Sync from TanyoDatabase` GitHub Actions workflow runs every five minutes. It pulls the private source repository, removes `MASKED WITH (...)` from table definitions, adds `WITH ENCRYPTION` to stored procedures, functions, and views when missing, and commits the transformed project to this repository.
+The `magnusminds/TanyoDatabseSelfHosted` repository pulls this repository every five minutes through its own GitHub Actions workflow. The workflow keeps non-table SQL unchanged, including `WITH ENCRYPTION`, and removes dynamic data masking clauses from table definitions. It can also be started manually from the target repository's Actions page.
 
 ## Security
 
