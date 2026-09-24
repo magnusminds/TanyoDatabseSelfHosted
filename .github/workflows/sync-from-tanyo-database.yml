@@ -42,6 +42,21 @@ jobs:
             exit 1
           fi
 
+      - name: Add encryption to programmable objects
+        run: |
+          for directory in \
+            "$GITHUB_WORKSPACE/TanyoAppDB/StoredProcedures" \
+            "$GITHUB_WORKSPACE/TanyoAppDB/Functions" \
+            "$GITHUB_WORKSPACE/TanyoAppDB/Views" \
+            "$GITHUB_WORKSPACE/TanyoLogsDB/StoredProcedures" \
+            "$GITHUB_WORKSPACE/TanyoLogsDB/Functions" \
+            "$GITHUB_WORKSPACE/TanyoLogsDB/Views"; do
+            if [ -d "$directory" ]; then
+              find "$directory" -type f -name '*.sql' -print0 |
+                xargs -0 perl -0pi -e 'if (!/WITH\s+ENCRYPTION/i) { s/\r?\n(\s*AS\s*\r?\n)/\nWITH ENCRYPTION$1/i; }'
+            fi
+          done
+
       - name: Commit and push synchronized changes
         run: |
           source_sha=$(git -C "$RUNNER_TEMP/source" rev-parse --short HEAD)
