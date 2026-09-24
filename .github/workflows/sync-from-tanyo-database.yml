@@ -57,7 +57,7 @@ jobs:
             "$GITHUB_WORKSPACE/TanyoLogsDB/Views"; do
             if [ -d "$directory" ]; then
               find "$directory" -type f -name '*.sql' -print0 |
-                xargs -0 perl -0pi -e 'if (!/WITH\s+ENCRYPTION/i) { s/\r?\n(\s*AS\s*\r?\n)/\nWITH ENCRYPTION$1/i; }'
+                xargs -0 perl -0pi -e 's/^[ \t]*WITH[ \t]+ENCRYPTION(?:[ \t]*\r?\n[ \t]*)?AS[ \t]*$/WITH ENCRYPTION\nAS/gim; if (!/^[ \t]*WITH[ \t]+ENCRYPTION[ \t]*$/im) { s/\r?\n[ \t]*AS[ \t]*\r?\n/\nWITH ENCRYPTION\nAS\n/i; }'
             fi
           done
 
