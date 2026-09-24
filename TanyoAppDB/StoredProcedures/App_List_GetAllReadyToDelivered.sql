@@ -36,8 +36,7 @@ CREATE PROCEDURE [dbo].[App_List_GetAllReadyToDelivered]
     ,@SortOrder VARCHAR(4) = 'DESC'
     ,@PaymentCollectionStatusEnum INT = -1
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

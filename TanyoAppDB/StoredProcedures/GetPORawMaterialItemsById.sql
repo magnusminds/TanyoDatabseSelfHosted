@@ -8,8 +8,7 @@ CREATE   PROCEDURE [dbo].[GetPORawMaterialItemsById]
 	@TenantId INT
     ,@PORawMaterialId BIGINT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

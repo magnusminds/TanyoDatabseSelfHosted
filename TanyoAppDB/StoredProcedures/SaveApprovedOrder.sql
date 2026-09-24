@@ -13,8 +13,7 @@ CREATE PROCEDURE [dbo].[SaveApprovedOrder] (
 	,@Remarks NVARCHAR(MAX) = NULL
 	,@TentativeDeliveryDate DATE = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 
@@ -298,6 +297,10 @@ BEGIN
 			,UpdatedUTCDate = @DTUTC
 			,ApprovedDate = @DT
 			,SalesmanCommissionPer = @SalesmanCommissionPer
+			,IsPinned = CASE 
+                  WHEN IsPinned = 1 THEN 0
+                  ELSE 0
+             END
 		WHERE OrderId = @OrderId;
 
 		SELECT @OrderSubjectTypeId = SubjectTypeId
@@ -353,7 +356,7 @@ BEGIN
 	BEGIN CATCH
 		-- Rollback the transaction in case of an error
 		IF @@TRANCOUNT > 0
-			ROLLBACK TRAN SaveApprovedOrder;
+			ROLLBACK TRAN ;
 
 		SET @Status = 0;
 
@@ -389,6 +392,3 @@ BEGIN
 			,@Error AS [Error]
 	END CATCH;
 END;
-
-GO
-

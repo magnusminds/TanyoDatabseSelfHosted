@@ -5,8 +5,7 @@ CREATE     PROCEDURE [dbo].[DeleteProductOfferAndMapping] (
 	@TenantId INT = NULL
 	,@ProductIds VARCHAR(MAX) = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

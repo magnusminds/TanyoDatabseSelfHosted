@@ -26,7 +26,6 @@ CREATE PROCEDURE [dbo].[ReportCustomerFeedback]
 	,@SortOrder VARCHAR(4) = 'ASC'
 	,@PageIndex INT = 1
 	,@PageSize INT = 100
-
 WITH ENCRYPTION
 AS
 BEGIN

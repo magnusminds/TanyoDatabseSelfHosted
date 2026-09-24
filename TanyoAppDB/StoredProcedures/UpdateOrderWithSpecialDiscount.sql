@@ -4,8 +4,7 @@ CREATE PROC [dbo].[UpdateOrderWithSpecialDiscount] (
 	,@TenantID BIGINT
 	,@Status BIT = 0 OUTPUT
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

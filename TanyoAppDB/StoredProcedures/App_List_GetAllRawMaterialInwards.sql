@@ -22,8 +22,7 @@ CREATE   PROCEDURE [dbo].[App_List_GetAllRawMaterialInwards]
     ,@SortColumn VARCHAR(50) = 'Date'
     ,@SortDirection VARCHAR(4) = 'DESC'
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY

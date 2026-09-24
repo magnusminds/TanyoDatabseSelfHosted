@@ -45,8 +45,7 @@ CREATE   PROC [dbo].[LisOrderByModule]
     ,@TentativeDeliveryFromDate DATE = NULL
     ,@TentativeDeliveryToDate DATE = NULL
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -1,8 +1,7 @@
 
 --select * from [UT_Missing_RetailerPrice] order by tenantid
 CREATE VIEW [dbo].[UT_Missing_RetailerPrice]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 SELECT 
 		t.TenantId
 		,t.TenantName 

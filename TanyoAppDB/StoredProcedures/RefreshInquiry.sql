@@ -6,8 +6,7 @@ CREATE PROCEDURE [dbo].[RefreshInquiry]
 	,@FabricSubjectTypeId BIGINT
 	,@PolishSubjectTypeId BIGINT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	
 	SET NOCOUNT ON;

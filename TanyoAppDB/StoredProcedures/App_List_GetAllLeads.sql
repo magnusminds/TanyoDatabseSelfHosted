@@ -26,8 +26,7 @@ CREATE PROCEDURE [dbo].[App_List_GetAllLeads] (
 	,@PriorityId INT = NULL
 	,@BuyingRangeValueId BIGINT = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -3,8 +3,7 @@ CREATE   PROCEDURE HFJob_UpdateCustomerAddressLatAndLong (
 	,@Latitude VARCHAR(25)
 	,@Longitude VARCHAR(25)
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	UPDATE CA
 	SET CA.Latitude = @Latitude

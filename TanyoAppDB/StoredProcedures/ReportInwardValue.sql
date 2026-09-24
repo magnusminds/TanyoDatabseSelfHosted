@@ -25,8 +25,7 @@ CREATE PROCEDURE [dbo].[ReportInwardValue] (
 	,@SortBy VARCHAR(50) = 'InwardGood'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

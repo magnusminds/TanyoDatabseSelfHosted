@@ -1,6 +1,5 @@
 CREATE VIEW [dbo].[UT_VW_OrphanOrderSetItem]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 SELECT osi.*
 FROM OrderSetItems osi WITH (NOLOCK)
 LEFT JOIN Orders o WITH (NOLOCK) ON o.OrderId = osi.OrderId

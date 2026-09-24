@@ -10,8 +10,7 @@ CREATE PROCEDURE [dbo].[ReportConsolidatedPODetailsByVendor] (
 	,@SortBy VARCHAR(50) = 'TotalQuantity'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

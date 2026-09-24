@@ -1,8 +1,7 @@
 
 --SELECT * FROM dbo.UT_VW_IncorrectSQFTRetailerPrice
 CREATE   VIEW [dbo].[UT_VW_IncorrectSQFTRetailerPrice]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 WITH SQFTProducts AS (
 	SELECT p.TenantId
 		,p.ProductId

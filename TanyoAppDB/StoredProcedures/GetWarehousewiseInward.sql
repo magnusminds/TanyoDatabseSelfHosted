@@ -21,8 +21,7 @@ CREATE PROCEDURE [dbo].[GetWarehousewiseInward]
     ,@ColorId INT = NULL
     ,@BrandId INT = NULL
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     BEGIN TRY
     DECLARE @cols NVARCHAR(MAX)

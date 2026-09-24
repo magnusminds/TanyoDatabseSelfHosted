@@ -3,8 +3,7 @@ CREATE     PROCEDURE [dbo].[GetPOInwardCompletionStatus]
     @TenantId INT,
     @POProductId BIGINT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

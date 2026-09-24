@@ -30,8 +30,7 @@ CREATE PROCEDURE [dbo].[App_List_GetAllOrders_ByStatus] (
 	,@SortBy NVARCHAR(50) = 'OrderDate'
 	,@SortOrder NVARCHAR(4) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

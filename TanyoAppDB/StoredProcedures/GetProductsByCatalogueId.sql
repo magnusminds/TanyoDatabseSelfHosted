@@ -9,8 +9,7 @@ CREATE PROCEDURE [dbo].[GetProductsByCatalogueId] (
 	,@TenantId INT
 	,@HostUrl NVARCHAR(500)
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

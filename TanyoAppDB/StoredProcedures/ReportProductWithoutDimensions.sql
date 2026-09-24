@@ -20,8 +20,7 @@ CREATE PROCEDURE [dbo].[ReportProductWithoutDimensions] (
 	,@SortBy VARCHAR(50) = 'CategoryName'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

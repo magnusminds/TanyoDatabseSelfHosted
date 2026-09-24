@@ -14,8 +14,7 @@ CREATE   PROCEDURE [dbo].[ReportPaymentCollection]
 ,@CustomerId BIGINT = NULL
 ,@ReceivedBy BIGINT = NULL
 )  
-WITH ENCRYPTION
-AS  
+WITH ENCRYPTIONAS  
 BEGIN  
 SET NOCOUNT ON;  
 

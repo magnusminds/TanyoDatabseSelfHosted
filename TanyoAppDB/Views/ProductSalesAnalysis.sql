@@ -1,5 +1,5 @@
 
-Create view [dbo].[ProductSalesAnalysis] WITH ENCRYPTION
+Create view [dbo].[ProductSalesAnalysis]
 as with cte as(
 SELECT 
 osi.CreatedDate as dt,

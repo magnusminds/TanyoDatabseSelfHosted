@@ -10,8 +10,7 @@ CREATE   PROCEDURE [dbo].[GetPortalInwardDetails]
     @CategoryTypeId BIGINT,
     @WarehouseId BIGINT = NULL
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

@@ -21,8 +21,7 @@ CREATE   PROCEDURE [dbo].[ReportLaborbyContractor] (
 	,@OrderNo VARCHAR(50) = NULL
 	,@ProductName VARCHAR(150) = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

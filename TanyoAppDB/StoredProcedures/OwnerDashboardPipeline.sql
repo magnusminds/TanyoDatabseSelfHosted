@@ -19,8 +19,7 @@ CREATE   PROCEDURE [dbo].[OwnerDashboardPipeline]
     @TenantId INT,
     @Month    INT,
     @Year     INT
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

@@ -4,8 +4,7 @@ CREATE PROCEDURE [dbo].[UpdatePOToPending]
     @UserID INT,
     @TenantId INT,
     @ReturnMessage NVARCHAR(100) = '' OUTPUT
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

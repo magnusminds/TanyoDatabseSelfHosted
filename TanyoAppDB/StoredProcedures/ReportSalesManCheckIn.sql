@@ -8,8 +8,7 @@ CREATE PROCEDURE [dbo].[ReportSalesManCheckIn] (
 	,@SortBy NVARCHAR(50) = 'CheckInTime'
 	,@SortOrder NVARCHAR(4) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	BEGIN TRY
 		SELECT CONCAT (

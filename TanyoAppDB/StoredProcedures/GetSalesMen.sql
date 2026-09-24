@@ -1,8 +1,7 @@
 --GetSalesMen  2
 CREATE PROC [dbo].[GetSalesMen] 
  @TenantID INT
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 
  SELECT au.UserId

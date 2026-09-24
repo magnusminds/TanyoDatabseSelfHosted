@@ -5,8 +5,7 @@
 
 		)
 	RETURNS TABLE
-WITH ENCRYPTION
-	AS
+WITH ENCRYPTION	AS
 	RETURN ( SELECT * FROM [dbo].[LeaveApplications]
 					WHERE (StartDate BETWEEN @startdate AND @enddate) 
 							AND UserID = @optional_user_id

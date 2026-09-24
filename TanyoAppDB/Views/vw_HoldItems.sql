@@ -1,7 +1,6 @@
 --SELECT * FROM vw_HoldItems
 CREATE VIEW [dbo].[vw_HoldItems]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 	SELECT o.OrderId
 		,o.TenantId
 		,osi.SubjectId

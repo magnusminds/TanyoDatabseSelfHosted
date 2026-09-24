@@ -10,8 +10,7 @@ CREATE   PROCEDURE [dbo].[GetStockTransferById] @TenantId INT
 	--,@PageSize INT = 25
 	--,@SortBy VARCHAR(50) = 'ProductTitle'
 	--,@SortOrder VARCHAR(4) = 'ASC'
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

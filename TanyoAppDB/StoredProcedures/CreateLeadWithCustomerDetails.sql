@@ -41,8 +41,7 @@ CREATE PROCEDURE [dbo].[CreateLeadWithCustomerDetails]
     ,@TenantId         BIGINT  
     ,@UserId           BIGINT  
 )
-WITH ENCRYPTION
-AS  
+WITH ENCRYPTIONAS  
 BEGIN  
     SET NOCOUNT ON;  
   

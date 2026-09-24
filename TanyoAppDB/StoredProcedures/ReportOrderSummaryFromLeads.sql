@@ -12,8 +12,7 @@ CREATE   PROCEDURE [dbo].[ReportOrderSummaryFromLeads] (
 	,@SortBy NVARCHAR(50) = 'OrderCount'
 	,@SortOrder NVARCHAR(4) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SELECT L.CreatedDate AS LeadCreatedDate
 		,CONCAT (

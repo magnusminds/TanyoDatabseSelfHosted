@@ -17,8 +17,7 @@ CREATE   PROC [dbo].[ListOfManufacturing]
     ,@PageIndex INT
     ,@PageSize INT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 
 	SET NOCOUNT ON;

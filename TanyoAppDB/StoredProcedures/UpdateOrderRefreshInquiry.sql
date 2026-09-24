@@ -10,8 +10,7 @@ CREATE PROC [dbo].[UpdateOrderRefreshInquiry] (
 	,@UserId BIGINT
 	,@debug BIT = 0
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

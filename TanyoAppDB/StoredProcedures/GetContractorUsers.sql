@@ -6,8 +6,7 @@ CREATE     PROC [dbo].[GetContractorUsers]
 (
 	@TenantId BIGINT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 
 	SET NOCOUNT ON;

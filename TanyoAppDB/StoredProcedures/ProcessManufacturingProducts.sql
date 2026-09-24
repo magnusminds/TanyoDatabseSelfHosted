@@ -8,8 +8,7 @@ CREATE   PROCEDURE [dbo].[ProcessManufacturingProducts] (
 	--,@Message NVARCHAR(MAX) = NULL OUTPUT
 	--,@Error NVARCHAR(MAX) = NULL OUTPUT
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	IF OBJECT_ID('tempdb..#OrderSetItemsData') IS NOT NULL
 		DROP TABLE #OrderSetItemsData

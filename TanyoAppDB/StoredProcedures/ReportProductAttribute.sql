@@ -24,8 +24,7 @@ CREATE PROCEDURE [dbo].[ReportProductAttribute]
     @SortBy VARCHAR(50) = 'ProductTitle',
     @SortOrder VARCHAR(4) = 'ASC'
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

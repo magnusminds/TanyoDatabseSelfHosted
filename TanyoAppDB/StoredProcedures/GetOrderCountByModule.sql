@@ -45,8 +45,7 @@ CREATE   PROC [dbo].[GetOrderCountByModule]
 	,@TentativeDeliveryFromDate DATE = NULL
 	,@TentativeDeliveryToDate DATE = NULL
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

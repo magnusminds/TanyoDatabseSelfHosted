@@ -29,8 +29,7 @@ CREATE   PROCEDURE [dbo].[GlobalReportInventoryAsOfNow]
 	,@SortOrder VARCHAR(50) = 'ASC'
 	,@CategoryId BIGINT = NULL
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

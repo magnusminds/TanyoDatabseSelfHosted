@@ -2,8 +2,7 @@ CREATE PROCEDURE [dbo].[UpdateSalesmanCommissionByOrder]
 (
 @OrderID BIGINT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	BEGIN TRY
 		UPDATE os

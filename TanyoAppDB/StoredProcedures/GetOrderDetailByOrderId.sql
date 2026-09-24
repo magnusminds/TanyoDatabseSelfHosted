@@ -7,8 +7,7 @@ CREATE PROCEDURE [dbo].[GetOrderDetailByOrderId] (
 	@TenantId INT
 	,@OrderId BIGINT
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	BEGIN TRY
 		DECLARE @ProductSubjectTypeId INT
@@ -119,6 +118,7 @@ BEGIN
 						END
 					) - ISNULL(ORD.LumpsumDiscount, 0), 0) AS TotalPayableAmount
 			,AU.IsDeleted AS IsSalesmanDeleted
+			,ORD.RefferedBy
 		FROM Orders ORD WITH (NOLOCK)
 		INNER JOIN AspNetUsers AU WITH (NOLOCK) ON AU.UserId = ORD.SalesmanId
 		INNER JOIN Customers C WITH (NOLOCK) ON C.CustomerId = ORD.CustomerID
@@ -138,6 +138,3 @@ BEGIN
 			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
-
-GO
-

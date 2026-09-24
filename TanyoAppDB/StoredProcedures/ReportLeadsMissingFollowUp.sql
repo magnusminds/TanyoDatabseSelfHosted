@@ -21,8 +21,7 @@ CREATE PROCEDURE [dbo].[ReportLeadsMissingFollowUp] (
 	,@SortBy NVARCHAR(50) = 'CustomerName'
 	,@SortOrder NVARCHAR(4) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

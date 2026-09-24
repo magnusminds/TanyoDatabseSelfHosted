@@ -5,8 +5,7 @@ CREATE PROCEDURE [dbo].[UpdateProductSellableQuantity] (
 	,@Remarks NVARCHAR(1000)
 	,@UserId BIGINT
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

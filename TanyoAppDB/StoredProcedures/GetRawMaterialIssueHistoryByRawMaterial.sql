@@ -15,8 +15,7 @@ CREATE   PROCEDURE GetRawMaterialIssueHistoryByRawMaterial (
 ,@SortBy VARCHAR(50) = 'RawMaterialName'
 ,@SortOrder VARCHAR(4) = 'DESC'	
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 
 	SET NOCOUNT ON;	

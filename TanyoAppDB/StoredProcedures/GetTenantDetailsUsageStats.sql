@@ -7,8 +7,7 @@ CREATE   PROCEDURE [dbo].[GetTenantDetailsUsageStats] (
 	,@SortBy VARCHAR(50) = 'TenantName'
 	,@SortOrder VARCHAR(4) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

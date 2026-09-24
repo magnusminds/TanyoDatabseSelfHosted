@@ -31,8 +31,7 @@ CREATE PROCEDURE [dbo].[PopulateProductPriceById] (
 	,@ShouldUpdateInquiries BIT = 0
 	,@AffectedInquiriesCount INT = 0
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

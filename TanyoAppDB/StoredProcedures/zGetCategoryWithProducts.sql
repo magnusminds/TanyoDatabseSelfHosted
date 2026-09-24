@@ -22,8 +22,7 @@ CREATE   PROCEDURE [dbo].[zGetCategoryWithProducts]
 	,@PageIndex INT = 1
 	,@PageSize INT = 25
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

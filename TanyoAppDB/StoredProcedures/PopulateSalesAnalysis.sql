@@ -1,8 +1,7 @@
 --EXEC PopulateSalesAnalysis 1
 CREATE PROCEDURE [dbo].[PopulateSalesAnalysis]
 	@TenantID INT = 1
-WITH ENCRYPTION
-AS 
+WITH ENCRYPTIONAS 
 	BEGIN
 		
 		TRUNCATE TABLE SalesAnalysis ;

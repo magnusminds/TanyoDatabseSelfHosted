@@ -1,6 +1,5 @@
 CREATE VIEW Cust_Visited_not_Ordered
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 SELECT c.CustomerId,
     c.FirstName,
     c.LastName,

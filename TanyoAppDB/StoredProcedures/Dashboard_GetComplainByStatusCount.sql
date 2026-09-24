@@ -25,8 +25,7 @@ CREATE   PROCEDURE [dbo].[Dashboard_GetComplainByStatusCount]
     @RoleId NVARCHAR(100),
 	@Status INT,
     @LocationID INT = NULL
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

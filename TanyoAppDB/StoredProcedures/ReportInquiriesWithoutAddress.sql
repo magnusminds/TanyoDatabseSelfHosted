@@ -21,8 +21,7 @@ CREATE PROCEDURE [dbo].[ReportInquiriesWithoutAddress]
  ,@SortOrder VARCHAR(10) = 'ASC'  
   
 )  
-WITH ENCRYPTION
-AS  
+WITH ENCRYPTIONAS  
 BEGIN  
   
  SET NOCOUNT ON;  

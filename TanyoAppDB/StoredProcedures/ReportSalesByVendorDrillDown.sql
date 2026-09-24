@@ -21,8 +21,7 @@ CREATE PROCEDURE [dbo].[ReportSalesByVendorDrillDown] (
 	,@SortBy VARCHAR(50) = 'InquiryDate'
 	,@SortOrder VARCHAR(4) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;;
 

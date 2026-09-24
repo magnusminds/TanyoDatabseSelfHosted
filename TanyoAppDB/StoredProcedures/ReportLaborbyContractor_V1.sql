@@ -22,8 +22,7 @@ CREATE PROCEDURE [dbo].[ReportLaborbyContractor_V1]
     ,@SortBy VARCHAR(50) = 'CompletionDate'
     ,@SortOrder VARCHAR(50) = 'DESC'
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
     

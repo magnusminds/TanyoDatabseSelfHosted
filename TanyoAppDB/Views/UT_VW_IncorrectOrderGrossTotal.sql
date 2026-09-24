@@ -2,8 +2,7 @@
 
 --SELECT * FROM UT_VW_IncorrectOrderGrossTotal
 CREATE VIEW [dbo].[UT_VW_IncorrectOrderGrossTotal]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 SELECT o.TenantId
 	,t.TenantName
 	,o.OrderId

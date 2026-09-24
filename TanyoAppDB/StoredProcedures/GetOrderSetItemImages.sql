@@ -3,8 +3,7 @@ EXEC GetOrderSetItemImages
 	@OrderId =1
 */
 CREATE   PROCEDURE [dbo].[GetOrderSetItemImages] (@OrderId BIGINT)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	IF OBJECT_ID('tempdb..#OrderSetItems') IS NOT NULL
 		DROP TABLE #OrderSetItems

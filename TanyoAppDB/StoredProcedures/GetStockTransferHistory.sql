@@ -3,8 +3,7 @@ CREATE  PROCEDURE [dbo].[GetStockTransferHistory]
         @TenantId BIGINT,
         @ProductId BIGINT = NULL
     )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
     SELECT

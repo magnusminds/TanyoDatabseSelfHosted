@@ -6,8 +6,7 @@
 CREATE   PROCEDURE [dbo].[GetRawMaterialInventoryWarehouseDetails]
     @RawMaterialId BIGINT
     ,@WarehouseId BIGINT = NULL
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

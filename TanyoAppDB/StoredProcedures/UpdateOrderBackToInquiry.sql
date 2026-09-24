@@ -14,8 +14,7 @@ CREATE PROCEDURE [dbo].[UpdateOrderBackToInquiry] (
 	,@TenantId INT
 	,@UserId INT
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

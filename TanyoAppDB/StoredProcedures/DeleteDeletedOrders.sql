@@ -1,6 +1,5 @@
 CREATE Procedure DeleteDeletedOrders
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 
 /* Take Backup of the data which will going to be be deleted

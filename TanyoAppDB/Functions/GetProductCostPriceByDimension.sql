@@ -6,8 +6,7 @@ CREATE FUNCTION [dbo].[GetProductCostPriceByDimension]
     @Depth DECIMAL(18, 2)
 )
 RETURNS DECIMAL(18, 2)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     DECLARE @TotalAmount DECIMAL(18, 2) = 0;
     DECLARE @CostPrice DECIMAL(18, 2);

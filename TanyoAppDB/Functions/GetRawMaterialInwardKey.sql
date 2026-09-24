@@ -7,8 +7,7 @@
 --SELECT dbo.GetRawMaterialInwardKey('IN')
 CREATE   FUNCTION [dbo].[GetRawMaterialInwardKey] (@Type VARCHAR(2))
 RETURNS VARCHAR(16)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	DECLARE @InwardEntryNumber VARCHAR(16)
 

@@ -21,8 +21,7 @@ CREATE PROCEDURE [dbo].[ReportInwardDetails] (
 	,@SortBy VARCHAR(50) = ''
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	
 	SET NOCOUNT ON;

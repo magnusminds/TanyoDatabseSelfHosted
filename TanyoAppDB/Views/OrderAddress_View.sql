@@ -1,8 +1,7 @@
 
 --SELECT * FROM [dbo].[OrderAddress_View] WHERE TenantId = 1 ORDER BY 2
 CREATE VIEW [dbo].[OrderAddress_View]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 SELECT o.TenantId
 	,o.OrderId
     ,o.Status

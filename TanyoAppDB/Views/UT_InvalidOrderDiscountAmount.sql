@@ -2,8 +2,7 @@
 
 --SELECT * FROM UT_InvalidOrderDiscountAmount order by CreatedDate DESC
 CREATE VIEW [dbo].[UT_InvalidOrderDiscountAmount]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 SELECT o.TenantId
 	,t.TenantName
 	,o.OrderId

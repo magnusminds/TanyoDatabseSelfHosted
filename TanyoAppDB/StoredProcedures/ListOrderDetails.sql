@@ -24,8 +24,7 @@ CREATE   PROC [dbo].[ListOrderDetails] (
 	,@IsStockOnHold BIT = NULL
 	,@IsArchive BIT = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

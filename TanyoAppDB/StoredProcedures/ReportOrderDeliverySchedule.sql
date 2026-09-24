@@ -12,8 +12,7 @@ CREATE PROCEDURE [dbo].[ReportOrderDeliverySchedule] (
  ,@SortBy VARCHAR(50) = 'TentativeDeliveryDate'  
  ,@SortOrder VARCHAR(50) = 'DESC'  
  )  
-WITH ENCRYPTION
-AS  
+WITH ENCRYPTIONAS  
 BEGIN  
  SET NOCOUNT ON;  
   

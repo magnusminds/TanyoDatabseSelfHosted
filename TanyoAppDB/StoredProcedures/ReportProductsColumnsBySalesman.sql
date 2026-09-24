@@ -11,8 +11,7 @@ CREATE PROCEDURE [dbo].[ReportProductsColumnsBySalesman] (
 	,@ToDate DATE
 	,@SalesmanId BIGINT = - 1
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

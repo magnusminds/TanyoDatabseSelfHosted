@@ -31,8 +31,7 @@ CREATE PROCEDURE [dbo].[ReportMissedFollowup]
     ,@SortBy VARCHAR(50) = 'FollowUpDate'
     ,@SortOrder VARCHAR(50) = 'DESC'
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

@@ -5,8 +5,7 @@ CREATE PROCEDURE [dbo].[GetUsersWithFCMToken] (
 	@TenantId BIGINT
 	,@RoleName VARCHAR(MAX) = 'Administrator,Contractor'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

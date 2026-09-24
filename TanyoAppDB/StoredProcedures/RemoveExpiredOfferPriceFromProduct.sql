@@ -7,8 +7,7 @@
 	EXEC [dbo].[RemoveExpiredOfferPriceFromProduct]
 */
 CREATE PROCEDURE [dbo].[RemoveExpiredOfferPriceFromProduct]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT OFF;
 

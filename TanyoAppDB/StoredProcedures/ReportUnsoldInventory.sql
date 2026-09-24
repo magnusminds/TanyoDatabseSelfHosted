@@ -8,8 +8,7 @@ CREATE   PROC [dbo].[ReportUnsoldInventory] (
 	,@OfferId INT = NULL
 	,@ProductName VARCHAR(256) = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

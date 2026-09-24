@@ -7,8 +7,7 @@
 	EXEC [dbo].[PopulateProductCoverImage]
 */
 CREATE PROCEDURE [dbo].[PopulateProductCoverImage]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT OFF;
 

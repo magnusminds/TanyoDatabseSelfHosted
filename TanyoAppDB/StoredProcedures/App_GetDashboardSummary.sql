@@ -29,8 +29,7 @@ CREATE PROCEDURE [dbo].[App_GetDashboardSummary]
      @TenantId INT
 	,@UserId BIGINT
 	,@RoleId NVARCHAR(100)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 
@@ -54,7 +53,8 @@ BEGIN
 			,@OrderPendingApprovalStatus INT = 1
 			,
 			-- Stock On Hold
-			@StockOnHoldDate DATE
+			@StockOnHoldUserId BIGINT
+			,@StockOnHoldDate DATE
 			,
 			-- Complaint permissions
 			@IsComplainAdmin BIT = 0
@@ -105,6 +105,7 @@ BEGIN
 		---------------------------------------------------------
 		-- 4. Set other variable values
 		---------------------------------------------------------
+		SET @StockOnHoldUserId = @UserId;
 		SET @StockOnHoldDate = CAST(GETDATE() AS DATE);
 
 		---------------------------------------------------------
@@ -166,6 +167,7 @@ BEGIN
 				-- Tile: Archived Orders
 				,ISNULL(SUM(CASE 
 							WHEN o.IsArchive = 1
+								AND o.Status <> 9
 								THEN 1
 							ELSE 0
 							END), 0) AS ArchivedOrderCount
@@ -290,7 +292,7 @@ BEGIN
 							WHEN osi.ItemStatus = 2
 								THEN 1
 							ELSE 0
-							END), 0)  AS OrderInProgressProductsReadyToDeliverCount
+							END), 0) AS OrderInProgressProductsReadyToDeliverCount
 			FROM OrderSetItems osi WITH (NOLOCK)
 			INNER JOIN Orders o WITH (NOLOCK) ON o.OrderId = osi.OrderId
 				AND o.TenantId = @TenantId
@@ -353,6 +355,7 @@ BEGIN
 		WHERE i.TenantId = @TenantId
 			AND i.IsDeleted = 0;
 
+		
 		---------------------------------------------------------
 		-- 15. Stock On Hold Count
 		--     Tile: Stock Hold
@@ -374,6 +377,10 @@ BEGIN
 				) -- Inquiry, Pending For Approval
 			AND o.IsArchive = 0
 			AND DATEADD(DAY, TRY_CAST(soh.TimePeriod AS INT), soh.CreatedDate) > @StockOnHoldDate
+			AND (
+				@StockOnHoldUserId IS NULL
+				OR soh.CreatedBy = @StockOnHoldUserId
+				);
 
 		---------------------------------------------------------
 		-- 16. Stock Transfer Count
@@ -491,6 +498,3 @@ BEGIN
 			,@ErrorMsg = @ErrorMsg;
 	END CATCH
 END
-
-GO
-

@@ -9,8 +9,7 @@ CREATE PROCEDURE [dbo].[ReportMaterialReadyPOItems] (
 	,@SortOrder VARCHAR(10) = 'DESC'
 	,@VendorLocation NVARCHAR(100) = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

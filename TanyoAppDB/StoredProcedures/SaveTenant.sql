@@ -21,8 +21,7 @@ CREATE   PROCEDURE [dbo].[SaveTenant] (
 	,@IsAutoManufacture BIT = 0
 	,@WebsiteURL VARCHAR (250) = NULL
 	)
-WITH ENCRYPTION	
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

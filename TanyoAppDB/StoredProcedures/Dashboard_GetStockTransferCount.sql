@@ -9,8 +9,7 @@ EXEC Dashboard_GetStockTransferCount
 */ 
 CREATE   PROCEDURE [dbo].[Dashboard_GetStockTransferCount]
     @TenantId INT
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY

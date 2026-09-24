@@ -1,6 +1,5 @@
 CREATE PROCEDURE [dbo].[HFJob_DailyProductQuantitySales]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	
 	IF OBJECT_ID('tempdb..#OwnerPhoneNumbers') IS NOT NULL

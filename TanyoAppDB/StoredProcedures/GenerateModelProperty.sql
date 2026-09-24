@@ -13,8 +13,7 @@ CREATE PROCEDURE [dbo].[GenerateModelProperty]
 	@TableName SYSNAME
 	,@ClassName VARCHAR(150) = 'public class'
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 DECLARE @Result VARCHAR(MAX)  
   

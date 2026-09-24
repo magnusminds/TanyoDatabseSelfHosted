@@ -13,8 +13,7 @@ CREATE   PROC [dbo].[ListDealerDetails] (
 	,@SortBy VARCHAR(50) = 'LastModifiedOn'
 	,@SortOrder VARCHAR(10) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -10,8 +10,7 @@ CREATE   PROC [dbo].[ListAllCustomers]
 	,@Search VARCHAR(50)
 	,@CustomerTypeId INT = -1
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 
 	SET NOCOUNT ON;

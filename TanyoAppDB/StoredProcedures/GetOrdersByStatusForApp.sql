@@ -1,5 +1,5 @@
 /*
-EXEC [dbo].[GetOrdersByStatusForApp]
+ EXEC [dbo].[GetOrdersByStatusForApp]
   @StatusValue = 2,
   @IsArchiveOrders = 0,
   @TenantID = 1207,
@@ -40,18 +40,17 @@ CREATE PROCEDURE [dbo].[GetOrdersByStatusForApp]
     @TentativeDeliveryFromDate DATE = NULL,
     @TentativeDeliveryToDate DATE = NULL
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 
     BEGIN TRY
-        DECLARE @OrderType SMALLINT = CASE WHEN @WholesalerFlag = 1 THEN 2 ELSE 1 END;
+        DECLARE @OrderType SMALLINT = CASE WHEN @WholesalerFlag = 1 THEN 2 ELSE 1 END;      
 
         ;WITH LatestFollowUp AS (
             SELECT OrderId, FollowUpDate, FollowUpComment,
                    ROW_NUMBER() OVER (PARTITION BY OrderId ORDER BY CreatedDate DESC) AS rn
-            FROM FollowUpOrders
+            FROM FollowUpOrders WITH (NOLOCK)
         )
         SELECT
             o.OrderId,
@@ -99,18 +98,26 @@ BEGIN
             o.SalesmanId,
             o.UpdatedDate,
             o.OrderType
-        FROM Orders o
-        INNER JOIN Customers c ON o.CustomerID = c.CustomerId
-        INNER JOIN AspNetUsers u ON o.SalesmanId = u.UserId
-        LEFT JOIN Labels l ON o.LabelId = l.LabelId
-        LEFT JOIN LatestFollowUp lf ON o.OrderId = lf.OrderId AND lf.rn = 1
+        FROM Orders o WITH (NOLOCK)
+        INNER JOIN Customers c WITH (NOLOCK) ON o.CustomerID = c.CustomerId
+        INNER JOIN AspNetUsers u WITH (NOLOCK) ON o.SalesmanId = u.UserId
+        LEFT JOIN Labels l WITH (NOLOCK) ON o.LabelId = l.LabelId
+        LEFT JOIN LatestFollowUp lf WITH (NOLOCK) ON o.OrderId = lf.OrderId AND lf.rn = 1
         WHERE o.TenantId = @TenantID
-          AND o.IsArchive = @IsArchiveOrders
-          AND (@CustomerId IS NOT NULL OR @StatusValue IS NULL OR o.Status = @StatusValue)
+          AND o.Status <> 9
+          AND ( o.IsArchive = @IsArchiveOrders )
+          --AND (@CustomerId IS NOT NULL OR @StatusValue IS NULL OR o.Status = @StatusValue)
+          AND (
+              (@CustomerId IS NOT NULL AND @StatusValue IS NULL AND o.Status <> 9)
+              OR (@StatusValue IS NOT NULL AND o.Status = @StatusValue)
+              OR (@CustomerId IS NULL AND @StatusValue IS NULL)
+          )
           AND (
               @IsAdmin = 1
               OR (@SuperAccess = 1 AND o.OrderType = @OrderType)
-              OR (@CustomerId IS NOT NULL AND o.CreatedBy = @UserId AND o.OrderType = @OrderType)
+              OR (@CustomerId IS NOT NULL 
+                    --AND o.CreatedBy = @UserId AND o.OrderType = @OrderType
+                 )
               OR (@CustomerId IS NULL AND o.SalesmanId = @UserId AND o.OrderType = @OrderType)
           )
           AND (@CustomerId IS NULL OR o.CustomerID = @CustomerId)
@@ -131,8 +138,6 @@ BEGIN
     END TRY
 
     BEGIN CATCH
-        IF @@TRANCOUNT > 0
-            ROLLBACK;
 
         DECLARE @ObjectName VARCHAR(500),
                 @ErrorMsg NVARCHAR(4000);
@@ -145,6 +150,3 @@ BEGIN
             @ErrorMsg = @ErrorMsg;
     END CATCH
 END
-
-GO
-

@@ -15,8 +15,7 @@ CREATE PROCEDURE [dbo].[RPT_ProductSoldBySalesman] (
 	,@SortBy VARCHAR(50) = 'NoofOrders'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

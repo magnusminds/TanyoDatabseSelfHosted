@@ -20,8 +20,7 @@ CREATE   PROC [dbo].[Report_ListShareProduct_V2]
 	,@SortBy VARCHAR(100) = 'SharedDate'
 	,@SortOrder VARCHAR(4) = 'DESC'
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

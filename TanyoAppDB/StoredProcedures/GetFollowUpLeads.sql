@@ -2,8 +2,7 @@
 	EXEC [dbo].[GetFollowUpLeads]
 */
 CREATE   PROC [dbo].[GetFollowUpLeads]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

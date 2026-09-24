@@ -16,8 +16,7 @@ CREATE PROC [dbo].[PopulateProductWarehouseQuantity] (
 	,@Description VARCHAR(500)
 	,@Remarks VARCHAR(1000) = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

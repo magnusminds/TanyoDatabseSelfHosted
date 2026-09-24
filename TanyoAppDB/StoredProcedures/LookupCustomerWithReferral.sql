@@ -8,8 +8,7 @@ CREATE   PROCEDURE [dbo].[LookupCustomerWithReferral]
     @Search VARCHAR(200),
     @TenantId INT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

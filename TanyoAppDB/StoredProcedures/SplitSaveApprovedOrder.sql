@@ -13,8 +13,7 @@ CREATE PROCEDURE [dbo].[SplitSaveApprovedOrder] (
 	,@Remarks NVARCHAR(MAX) = NULL
 	,@TentativeDeliveryDate DATE = NULL
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

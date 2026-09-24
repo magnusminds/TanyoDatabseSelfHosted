@@ -1,8 +1,7 @@
 --select * from [GetRowCount]() ORDER By 2 DESC
 CREATE FUNCTION [dbo].[GetRowCount]()
 RETURNS TABLE
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 RETURN
 SELECT
     st.Name AS TableName,

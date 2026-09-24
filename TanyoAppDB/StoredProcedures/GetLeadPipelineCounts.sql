@@ -5,8 +5,7 @@ CREATE PROCEDURE [dbo].[GetLeadPipelineCounts]
 (  
    @TenantId INT  
 )  
-WITH ENCRYPTION
-AS  
+WITH ENCRYPTIONAS  
 BEGIN  
     SET NOCOUNT ON;  
   

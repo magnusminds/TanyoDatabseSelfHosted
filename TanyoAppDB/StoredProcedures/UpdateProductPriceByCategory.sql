@@ -9,8 +9,7 @@ CREATE PROC [dbo].[UpdateProductPriceByCategory] (
 	,@CategoryID BIGINT
 	,@ProductID BIGINT = 0
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;;
 

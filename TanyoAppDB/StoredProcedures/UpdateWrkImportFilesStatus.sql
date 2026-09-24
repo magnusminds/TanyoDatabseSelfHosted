@@ -2,8 +2,7 @@ CREATE PROCEDURE [dbo].[UpdateWrkImportFilesStatus] (
 	@WrkImportFileID BIGINT
 	,@UserId INT
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN UpdateWrkImportFilesStatus

@@ -9,8 +9,7 @@ CREATE PROCEDURE [dbo].[ReportOrderDataWithInteriors] (
 	,@SortBy VARCHAR(50) = 'OrderNo'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

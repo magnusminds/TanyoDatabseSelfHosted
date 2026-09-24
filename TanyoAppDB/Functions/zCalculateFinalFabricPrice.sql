@@ -7,8 +7,7 @@ Create   FUNCTION [dbo].[zCalculateFinalFabricPrice]
     @TenantId INT
 )
 RETURNS DECIMAL(18, 2)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     DECLARE @HasWholesalerPrice BIT = 0;
     DECLARE @FabricUnitPrice DECIMAL(18, 2);

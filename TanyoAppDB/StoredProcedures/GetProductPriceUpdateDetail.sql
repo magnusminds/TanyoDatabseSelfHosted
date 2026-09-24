@@ -6,8 +6,7 @@ CREATE   PROCEDURE [dbo].[GetProductPriceUpdateDetail] (
 	,@SortBy NVARCHAR(50) = 'UpdatedDate'
 	,@SortOrder NVARCHAR(4) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

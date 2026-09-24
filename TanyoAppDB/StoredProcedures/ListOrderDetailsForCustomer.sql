@@ -9,8 +9,7 @@ Create   PROC [dbo].[ListOrderDetailsForCustomer]
 	@TenantID BIGINT
 	,@CustomerId INT = NULL	
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 
 	SET NOCOUNT ON;		

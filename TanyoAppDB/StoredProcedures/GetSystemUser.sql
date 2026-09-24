@@ -11,8 +11,7 @@ CREATE PROCEDURE [dbo].[GetSystemUser]
 (
     @TenantId INT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
         SELECT TOP 1 u.FirstName

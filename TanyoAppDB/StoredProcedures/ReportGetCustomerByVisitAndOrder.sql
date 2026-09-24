@@ -29,8 +29,7 @@ CREATE   PROCEDURE [dbo].[ReportGetCustomerByVisitAndOrder] (
 	,@SortBy VARCHAR(50) = 'CustomerName'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

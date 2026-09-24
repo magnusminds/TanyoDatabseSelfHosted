@@ -3,8 +3,7 @@ CREATE   FUNCTION [dbo].[fn_SaleableQuantityByWarehouse]
     @ProductId BIGINT
 )
 RETURNS NUMERIC(18,2)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     DECLARE
         @ReadyToDeliver      NUMERIC(18,2) = 0,

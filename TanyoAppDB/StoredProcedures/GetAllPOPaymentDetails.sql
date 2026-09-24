@@ -5,8 +5,7 @@ CREATE   PROCEDURE [dbo].[GetAllPOPaymentDetails] (
 	,@SortBy NVARCHAR(50) = 'PaymentDate'
 	,@SortOrder NVARCHAR(4) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

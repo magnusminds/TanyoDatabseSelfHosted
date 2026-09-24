@@ -32,8 +32,7 @@ CREATE   PROCEDURE [dbo].[ManufacturingOrdersList] (
 	,@SortBy VARCHAR(50) = 'ManufacturingOrderNumber'
 	,@SortOrder VARCHAR(4) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

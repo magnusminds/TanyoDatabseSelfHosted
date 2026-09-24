@@ -10,8 +10,7 @@ CREATE PROCEDURE [dbo].[GetProductStockDetails]
 	,@ProductId BIGINT
 	,@WarehouseId BIGINT = NULL
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	
 	SET NOCOUNT ON;

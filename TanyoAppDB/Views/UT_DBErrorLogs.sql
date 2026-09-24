@@ -1,6 +1,5 @@
 CREATE VIEW UT_DBErrorLogs
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 select * from DBErrorLogs
 
 GO

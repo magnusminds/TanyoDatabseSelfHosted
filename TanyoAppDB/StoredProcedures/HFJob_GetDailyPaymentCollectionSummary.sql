@@ -26,8 +26,7 @@ Output:
 */
 
 CREATE   PROCEDURE [dbo].[HFJob_GetDailyPaymentCollectionSummary]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

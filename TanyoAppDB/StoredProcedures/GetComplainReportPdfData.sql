@@ -61,8 +61,7 @@ CREATE   PROCEDURE [dbo].[GetComplainReportPdfData]
     @Address NVARCHAR(500) = NULL,
     @IsPortal BIT = 0
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

@@ -11,8 +11,7 @@ CREATE PROCEDURE [dbo].[DeleteOrderSetItems_V2] (
 	,@TenantId INT
 	,@ResultMessage VARCHAR(500) = '' OUTPUT
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

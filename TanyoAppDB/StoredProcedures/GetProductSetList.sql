@@ -16,8 +16,7 @@ CREATE   PROCEDURE [dbo].[GetProductSetList] (
 	,@SortBy NVARCHAR(50) = 'ProductCount'
 	,@SortOrder NVARCHAR(4) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

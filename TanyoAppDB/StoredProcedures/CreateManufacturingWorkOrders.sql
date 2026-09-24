@@ -10,8 +10,7 @@ CREATE PROCEDURE [dbo].[CreateManufacturingWorkOrders]
     @TenantId BIGINT,
     @UserId INT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

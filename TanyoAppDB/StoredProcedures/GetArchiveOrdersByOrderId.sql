@@ -16,8 +16,7 @@ CREATE   PROCEDURE [dbo].[GetArchiveOrdersByOrderId]
     ,@SortBy VARCHAR(50) = 'VersionId'
 	,@SortOrder VARCHAR(50) = 'DESC'
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	DECLARE @Archive_OrderId BIGINT
 	DECLARE @UpdatedDate DATE;

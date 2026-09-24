@@ -2,8 +2,7 @@
 
 
 CREATE ViEW [dbo].[UT_VW_IncorrectOfferPrice]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 SELECT p.ProductId
 	,p.ProductTitle
 	,[dbo].[CalculateTotalOfferAmount](p.RetailerPrice,o.OfferPercentage) AS RetailOfferPriceFromFunction

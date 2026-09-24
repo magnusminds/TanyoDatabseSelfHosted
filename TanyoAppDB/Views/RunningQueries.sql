@@ -1,8 +1,7 @@
 
 --select * from RunningQueries
 CREATE VIEW [dbo].[RunningQueries]
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 
 	SELECT 
 		object_name(objectid) as ObjectName

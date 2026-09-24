@@ -12,8 +12,7 @@ CREATE PROCEDURE [dbo].[CalculateLumpsumDiscount] (
 	,@TenantId INT
 	,@AppType VARCHAR(128)
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

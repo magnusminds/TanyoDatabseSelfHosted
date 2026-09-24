@@ -13,8 +13,7 @@ CREATE PROCEDURE [dbo].[SaveOfferProducts] (
 	,@UserId BIGINT
 	,@IsApplyFromOffer BIT = 0
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

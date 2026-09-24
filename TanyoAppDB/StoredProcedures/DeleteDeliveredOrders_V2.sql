@@ -17,8 +17,7 @@ CREATE PROCEDURE [dbo].[DeleteDeliveredOrders_V2]
     @DeletedBy BIGINT,
     @ResultMessage VARCHAR(MAX) = '' OUTPUT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

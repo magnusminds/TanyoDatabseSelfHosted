@@ -10,8 +10,7 @@ CREATE PROCEDURE [dbo].[ReportUpcomingFollowup] (
 	,@SortBy VARCHAR(50) = 'FollowUpDate'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	BEGIN TRY
 		SET NOCOUNT ON;

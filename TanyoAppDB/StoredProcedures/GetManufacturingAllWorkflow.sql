@@ -6,8 +6,7 @@ CREATE   PROCEDURE [dbo].[GetManufacturingAllWorkflow]
 (
     @TenantId BIGINT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
     SET NOCOUNT ON;
 

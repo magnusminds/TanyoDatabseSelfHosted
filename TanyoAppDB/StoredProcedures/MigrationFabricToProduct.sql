@@ -6,8 +6,7 @@ CREATE   PROC [dbo].[MigrationFabricToProduct]
 (
 	@TenantId INT
 )
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	
 	SET NOCOUNT ON;

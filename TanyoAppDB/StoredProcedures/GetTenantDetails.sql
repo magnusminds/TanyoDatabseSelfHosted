@@ -1,6 +1,5 @@
 CREATE PROCEDURE GetTenantDetails (@TenantID INT)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SELECT TenantName
 		,PhoneNumber

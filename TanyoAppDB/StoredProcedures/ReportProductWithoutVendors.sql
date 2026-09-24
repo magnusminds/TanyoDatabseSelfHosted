@@ -24,8 +24,7 @@ CREATE   PROCEDURE [dbo].[ReportProductWithoutVendors] (
 	,@SortBy VARCHAR(50) = 'ProductTitle'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 

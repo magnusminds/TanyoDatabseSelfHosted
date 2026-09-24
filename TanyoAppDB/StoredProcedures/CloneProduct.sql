@@ -11,8 +11,7 @@ CREATE PROCEDURE [dbo].[CloneProduct] (
 	,@ModelNo VARCHAR(50) = NULL
 	,@VendorProductPrice DECIMAL(18, 2) = 0
 	)
-WITH ENCRYPTION
-AS
+WITH ENCRYPTIONAS
 BEGIN
 	SET NOCOUNT ON;
 
