@@ -20,7 +20,8 @@ CREATE   PROCEDURE [dbo].[SaveTenant] (
 	,@GSTType BIT = 1
 	,@IsAutoManufacture BIT = 0
 	,@WebsiteURL VARCHAR (250) = NULL
-	)	
+	)
+WITH ENCRYPTION	
 AS
 BEGIN
 	SET NOCOUNT ON;
