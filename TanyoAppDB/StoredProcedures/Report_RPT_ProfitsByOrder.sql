@@ -32,7 +32,8 @@ CREATE PROCEDURE [dbo].[Report_RPT_ProfitsByOrder] (
 	,@DeliveryToDate DATE = NULL
 	,@CustomerId BIGINT = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

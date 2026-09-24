@@ -9,7 +9,8 @@ EXEC Dashboard_GetInwardCount
 */ 
 CREATE   PROCEDURE [dbo].[Dashboard_GetInwardCount]
     @TenantId INT
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY

@@ -14,7 +14,8 @@ CREATE   PROC [dbo].[AutoCreatePurchaseOrder] (
 	,@OrderID BIGINT = 0 OUTPUT
 	,@ReturnPOProductId BIGINT = 0 OUTPUT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

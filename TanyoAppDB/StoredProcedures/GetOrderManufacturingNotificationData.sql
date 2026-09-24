@@ -9,7 +9,8 @@ CREATE   PROCEDURE [dbo].[GetOrderManufacturingNotificationData] (
 	@OrderId BIGINT
 	,@TenantId BIGINT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;;
 

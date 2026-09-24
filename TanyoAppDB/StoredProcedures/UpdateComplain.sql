@@ -4,7 +4,8 @@ CREATE PROCEDURE [dbo].[UpdateComplain]
     ,@TenantId               BIGINT
     ,@UserId                 BIGINT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

@@ -21,7 +21,8 @@ CREATE PROCEDURE [dbo].[RPT_GetOrderPaymentDue] (
 	,@SortBy VARCHAR(50) = 'ApprovedDate'
 	,@SortOrder VARCHAR(4) = 'DESC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

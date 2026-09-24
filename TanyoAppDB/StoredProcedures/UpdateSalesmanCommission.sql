@@ -6,7 +6,8 @@ CREATE PROCEDURE [dbo].[UpdateSalesmanCommission]
 	,@TenantID INT
 	,@UserID INT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

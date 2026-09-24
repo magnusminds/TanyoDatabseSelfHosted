@@ -16,7 +16,8 @@ CREATE PROC [dbo].[ListCustomers] (
  ,@SortOrder VARCHAR(10) = 'DESC'            
  ,@ProfessionId INT = NULL        
  )            
-WITH ENCRYPTIONAS            
+WITH ENCRYPTION
+AS
 BEGIN            
  SET NOCOUNT ON;            
                        

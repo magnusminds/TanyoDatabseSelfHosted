@@ -29,7 +29,8 @@ CREATE PROCEDURE [dbo].[ListTenantAppVersion]
     ,@SortBy VARCHAR(50) = 'TenantName'
     ,@SortOrder VARCHAR(4) = 'ASC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

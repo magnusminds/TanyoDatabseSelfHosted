@@ -10,7 +10,8 @@ CREATE   PROC [dbo].[ReportOrderDueAmount] (
  ,@SortBy VARCHAR(50) = 'SalesmanName'  
  ,@SortOrder VARCHAR(50) = 'DESC'  
  )  
-WITH ENCRYPTIONAS  
+WITH ENCRYPTION
+AS
 BEGIN  
  SET NOCOUNT ON;  
   

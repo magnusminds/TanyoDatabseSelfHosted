@@ -1,5 +1,6 @@
 CREATE PROCEDURE [dbo].[HFJob_SendCustomerBirthdayOrAnniversaryNotifications]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 	DECLARE @Today DATE = GETDATE();

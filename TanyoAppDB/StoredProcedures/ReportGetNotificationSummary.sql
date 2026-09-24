@@ -20,7 +20,8 @@ CREATE PROCEDURE [dbo].[ReportGetNotificationSummary]
 	,@SortBy VARCHAR(50) = 'NotificationType'
 	,@SortOrder VARCHAR(50) = 'ASC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 	BEGIN TRY

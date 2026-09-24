@@ -9,7 +9,8 @@ CREATE PROCEDURE [dbo].[ReportProductSalesDetailsDrill] (
  ,@SortBy VARCHAR(50) = 'CountOfCategory'  
  ,@SortOrder VARCHAR(50) = 'ASC'  
  )  
-WITH ENCRYPTIONAS  
+WITH ENCRYPTION
+AS
 BEGIN  
  SET NOCOUNT ON;  
   

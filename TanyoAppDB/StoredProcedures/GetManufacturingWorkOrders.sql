@@ -24,7 +24,8 @@ CREATE   PROCEDURE [dbo].[GetManufacturingWorkOrders]
     @SortBy VARCHAR(50) = 'ManufacturingOrderNo',
     @SortOrder VARCHAR(4) = 'DESC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

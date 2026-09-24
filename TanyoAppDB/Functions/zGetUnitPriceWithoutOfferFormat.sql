@@ -14,7 +14,8 @@ CREATE FUNCTION [dbo].[zGetUnitPriceWithoutOfferFormat]
     @Quantity DECIMAL(18, 2)
 )
 RETURNS DECIMAL(18, 2)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     DECLARE @TotalPrice DECIMAL(18, 2);
     DECLARE @CostPerCubic DECIMAL(18, 2);

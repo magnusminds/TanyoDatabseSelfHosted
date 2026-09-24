@@ -28,7 +28,8 @@ CREATE  PROCEDURE [dbo].[GetOrderDataByStatus] (
 	,@PaymentCollectionStatus INT = - 1
 	,@ModelNo VARCHAR(100) = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

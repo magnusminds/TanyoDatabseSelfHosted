@@ -19,7 +19,8 @@ CREATE   PROCEDURE [dbo].[SubmitWorkOrderMaterials]
     @ReceivedBy BIGINT,
     @JsonData NVARCHAR(MAX)
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

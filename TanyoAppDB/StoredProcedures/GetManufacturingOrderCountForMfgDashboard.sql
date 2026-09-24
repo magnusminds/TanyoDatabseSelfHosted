@@ -3,7 +3,8 @@
 */
 CREATE PROCEDURE [dbo].[GetManufacturingOrderCountForMfgDashboard] 
 	@TenantId BIGINT
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -1,6 +1,7 @@
 --select * from [UT_Location_NULL]
 CREATE VIEW [dbo].[UT_Location_NULL]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 	SELECT 'Leads' AS TableName, COUNT(1) AS TotalCount
 	FROM Leads l1 WITH (NOLOCK)
 	INNER JOIN Locations l ON l.TenantID = l1.TenantId

@@ -13,7 +13,8 @@ CREATE   PROC [dbo].[CountOfManufacturing]
     ,@ManufacturingWorkflowId int
     ,@ManufacturingStatus int
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 
 	SET NOCOUNT ON;

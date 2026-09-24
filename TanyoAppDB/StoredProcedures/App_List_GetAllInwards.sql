@@ -24,7 +24,8 @@ CREATE   PROCEDURE [dbo].[App_List_GetAllInwards]
     @PageSize INT = 25,
     @SortColumn VARCHAR(50) = 'Date',
     @SortDirection VARCHAR(4) = 'DESC'
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY

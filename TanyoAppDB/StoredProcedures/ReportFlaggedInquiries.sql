@@ -20,7 +20,8 @@ CREATE PROCEDURE [dbo].[ReportFlaggedInquiries]
     ,@SortOrder        VARCHAR(4)      = 'DESC'
     ,@PageNumber       INT             = 1
     ,@PageSize         INT             = 10
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     BEGIN TRY
     SET NOCOUNT ON;

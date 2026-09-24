@@ -10,7 +10,8 @@ CREATE     PROC [dbo].[ListPORawMaterialByVendor]
 	,@VendorId BIGINT
 	,@Search VARCHAR(50) = NULL
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -24,7 +24,8 @@ CREATE PROCEDURE [dbo].[StockValuationReport] (
 	,@SortBy VARCHAR(50) = 'ProductTitle'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		SET NOCOUNT ON;

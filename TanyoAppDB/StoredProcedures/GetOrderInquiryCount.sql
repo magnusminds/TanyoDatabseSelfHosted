@@ -9,7 +9,8 @@ CREATE PROC [dbo].[GetOrderInquiryCount] (
 	,@InquiryOption BIGINT
 	,@LocationID BIGINT = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		SET NOCOUNT ON;

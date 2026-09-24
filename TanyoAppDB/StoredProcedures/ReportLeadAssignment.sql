@@ -6,7 +6,8 @@ CREATE PROCEDURE [dbo].[ReportLeadAssignment] (
  ,@SortBy VARCHAR(50) = 'SalesmanName'  
  ,@SortOrder VARCHAR(50) = 'ASC'  
  )  
-WITH ENCRYPTIONAS  
+WITH ENCRYPTION
+AS
 BEGIN  
  SET NOCOUNT ON;  
   

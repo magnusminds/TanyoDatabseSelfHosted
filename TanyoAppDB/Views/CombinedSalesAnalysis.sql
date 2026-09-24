@@ -1,5 +1,6 @@
 CREATE VIEW [dbo].[CombinedSalesAnalysis]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 WITH cte AS (
 	SELECT
     	osi.CreatedDate AS dt,

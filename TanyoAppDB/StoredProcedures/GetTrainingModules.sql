@@ -2,7 +2,8 @@
 exec GetTrainingModules
 */
 CREATE   PROCEDURE dbo.GetTrainingModules
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

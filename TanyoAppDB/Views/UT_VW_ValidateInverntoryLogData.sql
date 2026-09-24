@@ -1,5 +1,6 @@
 CREATE VIEW [dbo].[UT_VW_ValidateInverntoryLogData]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 SELECT AL.*
 FROM ActivityLogs AL WITH (NOLOCK)
 INNER JOIN SubjectTypes ST WITH (NOLOCK) ON AL.SubjectTypeId = ST.SubjectTypeId

@@ -1,5 +1,6 @@
 CREATE VIEW [dbo].[UT_VW_DeletedProductsInQuotations]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 SELECT t.TenantId
 	,t.TenantName
 	,o.OrderNo

@@ -9,7 +9,8 @@ CREATE PROCEDURE [dbo].[DeleteOrderSetItems] (
  ,@DeletedBy BIGINT
  ,@TenantId INT
  )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
  SET NOCOUNT ON;
 

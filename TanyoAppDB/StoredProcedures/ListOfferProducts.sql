@@ -16,7 +16,8 @@ CREATE PROCEDURE [dbo].[ListOfferProducts] (
 	,@SortBy VARCHAR(50) = 'ProductTitle'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

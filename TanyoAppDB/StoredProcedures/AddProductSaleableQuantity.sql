@@ -20,7 +20,8 @@ CREATE   PROC [dbo].[AddProductSaleableQuantity]
 	,@PurchaseOrderNo VARCHAR(50) = NULL
 	,@StockTransferNo VARCHAR(50) = NULL
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 	

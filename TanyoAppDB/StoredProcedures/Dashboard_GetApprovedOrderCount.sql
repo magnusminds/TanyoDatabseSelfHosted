@@ -21,7 +21,8 @@ CREATE   PROCEDURE [dbo].[Dashboard_GetApprovedOrderCount]
     @TenantId INT,
     @CurrentUserId INT,
     @RoleId NVARCHAR(100)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

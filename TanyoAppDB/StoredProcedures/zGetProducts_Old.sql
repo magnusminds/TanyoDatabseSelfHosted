@@ -14,7 +14,8 @@ CREATE PROCEDURE [dbo].[zGetProducts_Old] (
 	,@SortBy VARCHAR(50) = '10'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	DECLARE @ProductSubjectTypeId INT;
 	DECLARE @dt DATE

@@ -7,7 +7,8 @@ CREATE PROCEDURE [dbo].[GetOrderDetailByOrderId] (
 	@TenantId INT
 	,@OrderId BIGINT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		DECLARE @ProductSubjectTypeId INT

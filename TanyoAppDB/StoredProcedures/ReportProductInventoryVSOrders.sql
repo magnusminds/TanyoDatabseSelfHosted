@@ -26,7 +26,8 @@ CREATE PROCEDURE [dbo].[ReportProductInventoryVSOrders] (
 	,@SortOrder VARCHAR(50) = 'ASC'
 	,@CategoryId BIGINT = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

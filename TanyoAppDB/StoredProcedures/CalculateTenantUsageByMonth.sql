@@ -8,7 +8,8 @@
 	EXEC dbo.CalculateTenantUsageByMonth
 */
 CREATE   PROC [dbo].[CalculateTenantUsageByMonth]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	
 	SET NOCOUNT ON;

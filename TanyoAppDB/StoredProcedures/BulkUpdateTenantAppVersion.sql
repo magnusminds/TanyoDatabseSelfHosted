@@ -34,7 +34,8 @@ CREATE PROCEDURE [dbo].[BulkUpdateTenantAppVersion] (
 	,@IsMaintenance BIT
 	,@LastModifiedBy BIGINT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

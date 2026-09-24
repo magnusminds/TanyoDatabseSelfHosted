@@ -1,7 +1,8 @@
 CREATE   PROCEDURE [dbo].[SetNotificationStatusPending]
 	 @Status INT
 	,@NotificationMethod VARCHAR(128)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
   BEGIN TRY
 	SET NOCOUNT ON;

@@ -13,7 +13,8 @@ CREATE PROCEDURE [dbo].[SaveApprovedOrder] (
 	,@Remarks NVARCHAR(MAX) = NULL
 	,@TentativeDeliveryDate DATE = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

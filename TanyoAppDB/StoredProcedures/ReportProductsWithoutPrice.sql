@@ -13,7 +13,8 @@ CREATE PROCEDURE [dbo].[ReportProductsWithoutPrice] (
 	,@SortBy VARCHAR(50) = 'CategoryName'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

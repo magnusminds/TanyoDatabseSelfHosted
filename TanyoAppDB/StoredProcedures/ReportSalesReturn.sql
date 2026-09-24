@@ -37,7 +37,8 @@ CREATE   PROCEDURE [dbo].[ReportSalesReturn]
     ,@SortBy VARCHAR(50) = 'ReturnDate'
     ,@SortOrder VARCHAR(4) = 'DESC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

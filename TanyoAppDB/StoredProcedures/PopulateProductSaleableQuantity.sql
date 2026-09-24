@@ -17,7 +17,8 @@ CREATE   PROC [dbo].[PopulateProductSaleableQuantity]
 	,@MinimumLimit INT = NULL
 	,@Remarks VARCHAR(1000) = NULL
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 	

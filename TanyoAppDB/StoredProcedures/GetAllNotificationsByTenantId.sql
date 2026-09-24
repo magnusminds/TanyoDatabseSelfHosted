@@ -11,7 +11,8 @@ CREATE PROCEDURE [dbo].[GetAllNotificationsByTenantId]
 ,@PageIndex INT = 1
 ,@PageSize INT = 25
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

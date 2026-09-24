@@ -2,7 +2,8 @@ CREATE PROCEDURE [dbo].[UpdateInteriorCommissionByOrder]
 (
 	@OrderID BIGINT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		UPDATE os

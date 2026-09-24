@@ -30,7 +30,8 @@ CREATE   PROCEDURE [dbo].[GetPortalInwardList]
     @SortBy NVARCHAR(50) = N'UpdatedDate',
     @SortOrder NVARCHAR(10) = N'DESC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

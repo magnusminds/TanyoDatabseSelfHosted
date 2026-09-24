@@ -5,7 +5,8 @@ CREATE   PROCEDURE  [dbo].[GetProductsByTenantId](
 @ModelNo nvarchar(4000)=NULL,
 @ProductQuantityDate datetimeoffset = NULL
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN 
 SET NOCOUNT ON;
 DECLARE @DEFAULT_IAMGE_PATH nvarchar(4000) = N'https://localhost:7253//images/no-coverimage.png';

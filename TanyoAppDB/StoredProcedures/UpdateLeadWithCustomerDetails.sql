@@ -4,7 +4,8 @@ CREATE PROCEDURE [dbo].[UpdateLeadWithCustomerDetails] (
 	,@UserId BIGINT
 	,@IsPortal BIT = 0
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

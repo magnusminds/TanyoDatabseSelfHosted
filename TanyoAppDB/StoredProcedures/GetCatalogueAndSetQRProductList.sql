@@ -18,7 +18,8 @@ CREATE PROCEDURE [dbo].[GetCatalogueAndSetQRProductList] (
 	,@DiameterOperator VARCHAR(2) = NULL
 	,@Diameter DECIMAL(18,2) = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

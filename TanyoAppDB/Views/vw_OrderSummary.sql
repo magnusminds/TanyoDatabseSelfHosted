@@ -1,5 +1,6 @@
 Create VIEW  [vw_OrderSummary]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 SELECT T.TenantName
 ,CONCAT(CS.FirstName,' ' ,ISNULL(CS.LastName,'')) AS Customername
 ,ORD.OrderNo

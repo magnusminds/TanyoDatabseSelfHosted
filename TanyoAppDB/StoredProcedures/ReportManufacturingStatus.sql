@@ -20,7 +20,8 @@ CREATE PROCEDURE [dbo].[ReportManufacturingStatus] (
 	,@SortBy VARCHAR(50) = 'ModelNo'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -27,7 +27,8 @@ CREATE   PROCEDURE [dbo].[ReportOrderInquiry] (
 	,@SortBy VARCHAR(50) = 'CreatedDate'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		SET NOCOUNT ON;

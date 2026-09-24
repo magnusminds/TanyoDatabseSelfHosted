@@ -25,7 +25,8 @@ CREATE   PROCEDURE [dbo].[ReportWorkOrderExcessUsage]
     @SortBy VARCHAR(50) = 'OrderNo',
     @SortOrder VARCHAR(4) = 'ASC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
   SET NOCOUNT ON;
     BEGIN TRY

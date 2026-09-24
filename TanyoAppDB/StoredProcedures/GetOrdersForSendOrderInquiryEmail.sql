@@ -8,7 +8,8 @@ EXEC [GetOrdersForSendOrderInquiryEmail]
 CREATE   PROCEDURE [dbo].[GetOrdersForSendOrderInquiryEmail] (
 	@TenantId INT	
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	DECLARE @Reminder1 INT
     	,@Reminder2 INT

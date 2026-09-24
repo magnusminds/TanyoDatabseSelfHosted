@@ -6,7 +6,8 @@ CREATE   FUNCTION [dbo].[zCalculateRetailerPrice]
     ,@TenantId INT
 )
 RETURNS DECIMAL(18, 2)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     DECLARE @CategoryWSPPercentage DECIMAL(18, 2);
     DECLARE @CategoryRSPPercentage DECIMAL(18, 2);

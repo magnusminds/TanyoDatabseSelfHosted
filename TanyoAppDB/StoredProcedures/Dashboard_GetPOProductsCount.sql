@@ -9,7 +9,8 @@
 */ 
 CREATE   PROCEDURE [dbo].[Dashboard_GetPOProductsCount]
     @TenantId INT
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

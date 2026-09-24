@@ -4,7 +4,8 @@ CREATE   PROCEDURE [dbo].[UpdateRecalculateOrderAmountOnDelete]
     ,@TenantId INT
     ,@UserId BIGINT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

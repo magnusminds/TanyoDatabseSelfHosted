@@ -3,6 +3,7 @@ CREATE FUNCTION [dbo].[MinutesToDuration]
     @minutes int 
 )
 RETURNS NVARCHAR(30)
+
 WITH ENCRYPTION
 AS
 BEGIN

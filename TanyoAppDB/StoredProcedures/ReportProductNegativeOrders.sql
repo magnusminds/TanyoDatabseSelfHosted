@@ -21,7 +21,8 @@ CREATE   PROCEDURE [dbo].[ReportProductNegativeOrders] (
 	,@SortOrder VARCHAR(50) = 'ASC'
 	,@InventoryDate DATE = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

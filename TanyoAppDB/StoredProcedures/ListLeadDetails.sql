@@ -31,7 +31,8 @@ CREATE PROC [dbo].[ListLeadDetails] (
 	,@InquiryFor VARCHAR(100) = NULL
 	,@BuyingRangeValueId BIGINT = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

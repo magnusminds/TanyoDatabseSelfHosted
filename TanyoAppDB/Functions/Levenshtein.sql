@@ -3,7 +3,8 @@ CREATE FUNCTION dbo.Levenshtein (
     @s2 NVARCHAR(100)
 )
 RETURNS INT
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     DECLARE @lenS1 INT = LEN(@s1),
             @lenS2 INT = LEN(@s2),

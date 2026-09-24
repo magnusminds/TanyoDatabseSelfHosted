@@ -3,7 +3,8 @@ CREATE   PROCEDURE [dbo].[DeleteMultiplePOProducts]
     @POProductIds NVARCHAR(MAX),
     @UserID INT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

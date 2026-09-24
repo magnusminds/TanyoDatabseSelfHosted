@@ -14,7 +14,8 @@ CREATE   PROCEDURE [dbo].[GetLeadAllFollowUps]
     ,@CustomerId BIGINT = NULL
     ,@LeadId BIGINT = NULL
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SELECT @ToDate = DATEADD(DAY, 1, @ToDate)
 

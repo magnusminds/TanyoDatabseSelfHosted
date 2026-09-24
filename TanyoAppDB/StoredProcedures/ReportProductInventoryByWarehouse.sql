@@ -25,7 +25,8 @@ CREATE PROCEDURE ReportProductInventoryByWarehouse
 ,@SortBy VARCHAR(50) = 'Quantity'
 ,@SortOrder VARCHAR(50) = 'DESC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 
 	SELECT PT.ProductId

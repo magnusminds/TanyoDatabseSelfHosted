@@ -10,7 +10,8 @@ CREATE PROCEDURE [dbo].[SaveOrderAfterApproved] (
 	,@ReturnStatus BIT = 0 OUTPUT
 	,@ReturnMessage VARCHAR(100) = NULL OUTPUT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

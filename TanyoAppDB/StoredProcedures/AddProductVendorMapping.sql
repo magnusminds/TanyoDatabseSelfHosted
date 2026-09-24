@@ -6,7 +6,8 @@ CREATE PROCEDURE [dbo].[AddProductVendorMapping]
     @POProductId     BIGINT,
     @ProductMappings NVARCHAR(MAX)
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

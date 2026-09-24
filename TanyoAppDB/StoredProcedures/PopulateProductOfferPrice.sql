@@ -9,7 +9,8 @@ CREATE PROCEDURE [dbo].[PopulateProductOfferPrice] (
 	,@OldOfferPercentage INT = NULL
 	,@UserID INT = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		--SET NOCOUNT ON; 

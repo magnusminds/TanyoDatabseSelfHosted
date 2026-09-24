@@ -8,7 +8,8 @@ CREATE PROC [dbo].[DeleteTenant]
  @TenantId BIGINT
  ,@Type INT--2: Delete all, 1: Delete Products,0: delete Masters
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	-- OTP / Auth Cleanup
 	DELETE FROM OTPLogin WHERE PhoneNumber IN (SELECT PhoneNumber FROM Customers WHERE TenantId = @TenantId UNION ALL SELECT PhoneNumber FROM AspNetUsers INNER JOIN UserTenantMapping ON AspNetUsers.UserId = UserTenantMapping.UserId WHERE UserTenantMapping.TenantId = @TenantId)

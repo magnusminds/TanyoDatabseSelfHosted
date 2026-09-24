@@ -1,5 +1,6 @@
 CREATE   PROCEDURE HFJob_GetCustomerAddressesWithMissingLatLong
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SELECT CA.CustomerAddressId
 		,CA.City

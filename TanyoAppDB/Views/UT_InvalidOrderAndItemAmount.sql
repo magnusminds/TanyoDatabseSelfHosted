@@ -9,7 +9,8 @@
 -- ==========================================================================
 --select  * from [UT_InvalidOrderAndItemAmount] order by CreatedDate DESC
 CREATE VIEW [dbo].[UT_InvalidOrderAndItemAmount]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 SELECT t.TenantName
 	,o.OrderId
 	,o.OrderNo

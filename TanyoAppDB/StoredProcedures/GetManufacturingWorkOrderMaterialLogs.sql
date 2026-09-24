@@ -12,7 +12,8 @@ CREATE PROCEDURE [dbo].[GetManufacturingWorkOrderMaterialLogs]
     @ManufacturingWorkOrderDetailId BIGINT,
     @RawMaterialId BIGINT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

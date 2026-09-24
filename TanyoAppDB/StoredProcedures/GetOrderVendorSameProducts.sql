@@ -10,7 +10,8 @@ CREATE   PROCEDURE [dbo].[GetOrderVendorSameProducts]
 	@VendorId BIGINT,
 	@OrderSetItemId BIGINT,
 	@IsAll BIT = 0
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -1,6 +1,7 @@
 --SELECT * FROM vw_ProductWithoutCalculatedPrice
 CREATE VIEW vw_ProductWithoutCalculatedPrice
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 	SELECT DISTINCT p.TenantId, p.CategoryId
 		,'EXEC [dbo].[UpdateProductPriceByCategory] @TenantID = '+CAST(p.TenantId AS VARCHAR)+', @CategoryID = '+CAST(p.CategoryId AS VARCHAR)+'' AS Query
 	FROM Products p WITH (NOLOCK)

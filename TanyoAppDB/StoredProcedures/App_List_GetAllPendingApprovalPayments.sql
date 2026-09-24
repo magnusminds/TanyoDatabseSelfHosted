@@ -15,7 +15,8 @@ CREATE PROCEDURE [dbo].[App_List_GetAllPendingApprovalPayments] (
 	,@PageNumber INT = 1
 	,@PageSize INT = 10
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

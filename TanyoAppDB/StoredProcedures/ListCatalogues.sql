@@ -16,7 +16,8 @@ CREATE PROCEDURE [dbo].[ListCatalogues] (
 	,@SortBy VARCHAR(50) = 'CreatedDate'
 	,@SortOrder VARCHAR(50) = 'DESC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

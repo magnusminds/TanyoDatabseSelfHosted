@@ -22,7 +22,8 @@ CREATE PROCEDURE [dbo].[ReportLeaveApplication] (
 	,@SortBy VARCHAR(50) = 'LeaveDate'
 	,@SortOrder VARCHAR(50) = 'ASC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

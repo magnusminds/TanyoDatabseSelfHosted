@@ -2,7 +2,8 @@
 	EXEC [dbo].[GetDeliveredCountForMfgDashboard] @TenantId = 2
 */
 CREATE PROCEDURE [dbo].[GetDeliveredCountForMfgDashboard] @TenantId BIGINT
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

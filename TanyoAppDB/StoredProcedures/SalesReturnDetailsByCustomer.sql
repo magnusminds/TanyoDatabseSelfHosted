@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[SalesReturnDetailsByCustomer] (
 	,@SortBy VARCHAR(50) = 'CreatedDate'
 	,@SortOrder VARCHAR(4) = 'DESC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

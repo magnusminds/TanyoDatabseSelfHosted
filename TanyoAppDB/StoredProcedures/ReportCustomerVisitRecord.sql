@@ -30,7 +30,8 @@ CREATE PROCEDURE [dbo].[ReportCustomerVisitRecord] (
     @SortBy VARCHAR(50) = 'VisitDate',
     @SortOrder VARCHAR(4) = 'DESC'
     )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

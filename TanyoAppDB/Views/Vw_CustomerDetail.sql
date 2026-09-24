@@ -5,7 +5,8 @@
 	EXEC STMT	: SELECT * FROM Vw_CustomerDetail
 */
 CREATE VIEW Vw_CustomerDetail
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 	With Cte as
 	(
 	SELECT ISNULL(c.FirstName,'')+ISNULL(LastName,'') AS CustomerName

@@ -28,7 +28,8 @@ CREATE   PROCEDURE [dbo].[ListProducts] (
 	,@CategoryTypeId BIGINT = 1
 	,@ParentCategoryId BIGINT = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -10,7 +10,8 @@ EXEC Dashboard_GetStockOnHoldCount
 CREATE PROCEDURE [dbo].[Dashboard_GetStockOnHoldCount]
     @TenantId INT
     ,@UserId INT = NULL
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

@@ -3,7 +3,8 @@ CREATE   PROCEDURE [dbo].[ReportCustomerLedger]
     ,@CustomerId BIGINT = NULL
     ,@FromDate DATE = NULL
     ,@ToDate DATE = NULL
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

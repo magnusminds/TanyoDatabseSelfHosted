@@ -6,7 +6,8 @@ CREATE   PROCEDURE [dbo].[GetProductParentCategoryLookup]
 (
     @TenantId BIGINT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

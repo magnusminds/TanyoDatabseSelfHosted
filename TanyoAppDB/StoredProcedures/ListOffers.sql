@@ -23,7 +23,8 @@ CREATE PROCEDURE [dbo].[ListOffers] (
 	,@PageNumber INT = 1
 	,@PageSize INT = 100
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

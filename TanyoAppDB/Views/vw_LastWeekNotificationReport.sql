@@ -1,5 +1,6 @@
 CREATE VIEW [dbo].[vw_LastWeekNotificationReport]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 SELECT NotificationType
 	,CAST(CreatedDate AS DATE) NotificationDate
 	,COUNT(NotificationManagementID) NotificationCount

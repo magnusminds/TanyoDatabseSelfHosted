@@ -16,7 +16,8 @@ CREATE   PROC [dbo].[ListIncomingInquiries]
 	,@PageIndex INT = 1
 	,@PageSize INT = 50
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	
 	SET NOCOUNT ON;

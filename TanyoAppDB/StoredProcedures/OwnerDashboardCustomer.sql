@@ -29,7 +29,8 @@ CREATE   PROCEDURE [dbo].[OwnerDashboardCustomer]
     @TenantId INT,
     @Month    INT,
     @Year     INT
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

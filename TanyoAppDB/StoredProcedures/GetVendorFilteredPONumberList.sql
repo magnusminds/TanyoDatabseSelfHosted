@@ -17,7 +17,8 @@ CREATE   PROCEDURE [dbo].[GetVendorFilteredPONumberList]
     @PageSize INT = 50,
     @SortBy VARCHAR(100) = 'PONumber',
     @SortOrder VARCHAR(50) = 'DESC'
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

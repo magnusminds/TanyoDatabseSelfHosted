@@ -35,7 +35,8 @@ CREATE
 	,@SortBy VARCHAR(50) = 'ManufacturingOrderNumber'
 	,@SortOrder VARCHAR(4) = 'ASC'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

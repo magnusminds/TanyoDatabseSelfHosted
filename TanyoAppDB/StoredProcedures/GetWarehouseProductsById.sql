@@ -23,7 +23,8 @@ CREATE   PROCEDURE [dbo].[GetWarehouseProductsById]
     ,@SortBy VARCHAR(100) = 'ProductTitle'
     ,@SortOrder VARCHAR(50) = 'DESC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

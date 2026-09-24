@@ -1,6 +1,7 @@
 
 CREATE VIEW [dbo].[UT_Incorrect_OrderUsers]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 SELECT o.OrderID, 
 		o.OrderNo,
 		o.TenantId,

@@ -3,7 +3,8 @@
 
 --SELECT * FROM UT_VW_OrderUnitPriceIncorrect where tenantid=156
 CREATE VIEW [dbo].[UT_VW_OrderUnitPriceIncorrect]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 SELECT t.TenantId
 	,t.TenantName
 	,'EXEC dbo.UpdateOrderRefreshInquiry @OrderId = '+CAST(o.OrderId AS VARCHAR)+',@TenantId = '+CAST(o.TenantId AS VARCHAR)+',@UserId = '+CAST(o.CreatedBy AS VARCHAR)+'' AS ToFix

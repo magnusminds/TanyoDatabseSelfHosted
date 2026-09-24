@@ -7,7 +7,8 @@
 CREATE  PROCEDURE [dbo].[GetReadyToDeliverWarehouseDetails]
      @TenantId INT  
      ,@ProductId BIGINT
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

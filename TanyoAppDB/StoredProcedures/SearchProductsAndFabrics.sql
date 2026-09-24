@@ -13,7 +13,8 @@ CREATE PROCEDURE [dbo].[SearchProductsAndFabrics] (
 	,@IsFabric BIT = NULL
 	,@RoleId NVARCHAR(100)
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		-- Wholesaler visibility permission check

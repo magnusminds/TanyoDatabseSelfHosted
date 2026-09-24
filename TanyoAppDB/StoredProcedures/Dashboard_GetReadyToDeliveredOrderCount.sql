@@ -20,7 +20,8 @@ CREATE   PROCEDURE [dbo].[Dashboard_GetReadyToDeliveredOrderCount]
     @TenantId INT,
     @CurrentUserId INT,
     @RoleId VARCHAR(100)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

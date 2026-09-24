@@ -8,7 +8,8 @@ CREATE PROCEDURE [dbo].[App_List_GetStockOnHoldOrders] (
 	@SortOrder NVARCHAR(4) = 'DESC' -- ASC | DESC
 	,@UserId INT = NULL
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

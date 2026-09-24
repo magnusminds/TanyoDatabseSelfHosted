@@ -6,7 +6,8 @@
 	EXEC STMT	: SELECT * FROM Vw_ListProductsWithOffer
 */
 CREATE VIEW [dbo].[Vw_ListProductsWithOffer]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 	SELECT t.CategoryName
 	,p.ProductId
 	,p.ProductTitle

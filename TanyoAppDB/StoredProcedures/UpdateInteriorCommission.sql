@@ -5,7 +5,8 @@ CREATE PROCEDURE [dbo].[UpdateInteriorCommission] (
 	,@TenantID INT
 	,@UserID INT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN TRY
 	BEGIN
 		SET NOCOUNT ON;

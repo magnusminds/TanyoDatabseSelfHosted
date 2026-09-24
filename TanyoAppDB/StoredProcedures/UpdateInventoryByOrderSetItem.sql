@@ -11,7 +11,8 @@ CREATE PROCEDURE [dbo].[UpdateInventoryByOrderSetItem] (
 	,@TenantId INT
 	,@UserId INT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

@@ -7,7 +7,8 @@ CREATE PROCEDURE [dbo].[GetOrderSetItemDetailByOrderId] (
 	@TenantId INT
 	,@OrderId BIGINT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		DECLARE @ReceivedAmount NUMERIC(18, 2)

@@ -7,7 +7,8 @@ CREATE PROCEDURE [dbo].[GetInventoryDetailsByProduct] (
 	@TenantId BIGINT
 	,@ProductId BIGINT
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	BEGIN TRY
 		SET NOCOUNT ON;

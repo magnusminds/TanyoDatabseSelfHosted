@@ -1,7 +1,8 @@
 
 
 CREATE VIEW [dbo].[UT_VW_InvalidOrdersWithoutCustomer]
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 SELECT *
 from Orders o
 where not exists(

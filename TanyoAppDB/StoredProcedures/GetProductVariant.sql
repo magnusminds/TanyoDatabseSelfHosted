@@ -17,7 +17,8 @@ CREATE PROCEDURE [dbo].[GetProductVariant]
 	,@SortBy VARCHAR(50) = 'CreatedDate'
 	,@SortOrder VARCHAR(50) = 'DESC'
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 		DECLARE @Tmp_ProductVariant AS TABLE

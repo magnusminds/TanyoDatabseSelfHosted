@@ -8,7 +8,8 @@ CREATE   PROCEDURE [dbo].[ProductSetDetailsById]
     @ProductSetId BIGINT
     ,@TenantId INT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

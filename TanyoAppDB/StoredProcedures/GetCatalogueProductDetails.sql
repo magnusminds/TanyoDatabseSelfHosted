@@ -5,7 +5,8 @@ CREATE PROCEDURE [dbo].[GetCatalogueProductDetails] (
 	 @ProductId BIGINT
 	,@hosturl VARCHAR(255) = 'https://localhost:7253'
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 

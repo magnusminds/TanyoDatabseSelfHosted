@@ -40,7 +40,8 @@ CREATE PROCEDURE [dbo].[GetOrdersByStatusForApp]
     @TentativeDeliveryFromDate DATE = NULL,
     @TentativeDeliveryToDate DATE = NULL
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

@@ -8,7 +8,8 @@ CREATE   PROCEDURE [dbo].[GetPOProductItemsById]
 	@TenantId INT
     ,@POProductId BIGINT
 )
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
     SET NOCOUNT ON;
 

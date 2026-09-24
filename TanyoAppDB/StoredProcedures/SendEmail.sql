@@ -20,6 +20,7 @@ CREATE PROCEDURE [dbo].[SendEmail] (
 	,@Attachements VARCHAR(200) = NULL
 	,@ProfileName VARCHAR(200) = NULL
 	)
+
 WITH ENCRYPTION
 AS
 BEGIN

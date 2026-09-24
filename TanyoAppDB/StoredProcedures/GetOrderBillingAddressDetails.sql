@@ -1,5 +1,6 @@
 CREATE   PROCEDURE GetOrderBillingAddressDetails (@OrderId BIGINT)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SELECT OA.OrderAddressId
 	    ,OA.OrderId

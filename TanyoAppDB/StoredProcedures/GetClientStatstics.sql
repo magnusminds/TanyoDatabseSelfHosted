@@ -4,7 +4,8 @@ EXEC [dbo].[GetClientStatstics]
 */
 CREATE PROCEDURE [dbo].[GetClientStatstics]
     @last_X_days INT = 1
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 
 BEGIN TRY

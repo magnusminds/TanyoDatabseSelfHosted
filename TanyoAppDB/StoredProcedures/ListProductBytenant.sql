@@ -13,7 +13,8 @@ CREATE   PROCEDURE [dbo].[ListProductBytenant] (
 	@TenantId INT
 	,@RoleId nvarchar(MAX)
 	)
-WITH ENCRYPTIONAS
+WITH ENCRYPTION
+AS
 BEGIN
 	SET NOCOUNT ON;
 
