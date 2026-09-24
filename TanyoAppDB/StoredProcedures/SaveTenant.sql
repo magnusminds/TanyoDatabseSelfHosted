@@ -20,8 +20,7 @@ CREATE   PROCEDURE [dbo].[SaveTenant] (
 	,@GSTType BIT = 1
 	,@IsAutoManufacture BIT = 0
 	,@WebsiteURL VARCHAR (250) = NULL
-	)
-WITH ENCRYPTION
+	)	
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -4825,7 +4824,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 
 			DECLARE @LookupId BIGINT
 
-			SELECT @LookupId = LookupId
+			SELECT TOP (1) @LookupId = LookupId
 			FROM Lookups
 			WHERE TenantId = @TenantId
 				AND LookupName = 'Unit'
@@ -4878,7 +4877,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 
 			SELECT @LookupId = 0
 
-			SELECT @LookupId = LookupId
+			SELECT TOP (1) @LookupId = LookupId
 			FROM Lookups
 			WHERE TenantId = @TenantId
 				AND LookupName = 'InquiryClosingReasons'
@@ -4924,7 +4923,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 			
 			SELECT @LookupId = 0
 
-			SELECT @LookupId = LookupId
+			SELECT TOP (1) @LookupId = LookupId
 			FROM Lookups
 			WHERE TenantId = @TenantId
 				AND LookupName = 'BackInquiryClosingReasons'
@@ -4976,7 +4975,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 
 			SELECT @LookupId = 0
 
-			SELECT @LookupId = LookupId
+			SELECT TOP (1) @LookupId = LookupId
 			FROM Lookups
 			WHERE TenantId = @TenantId
 				AND LookupName = 'Profession'
@@ -5120,7 +5119,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 
 			SELECT @LookupId = 0
 
-			SELECT @LookupId = LookupId
+			SELECT TOP (1) @LookupId = LookupId
 			FROM Lookups
 			WHERE TenantId = @TenantId
 				AND LookupName = 'PurchaseUrgency'
@@ -5154,7 +5153,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 
 			SELECT @LookupId = 0
 
-			SELECT @LookupId = LookupId
+			SELECT TOP (1) @LookupId = LookupId
 			FROM Lookups
 			WHERE TenantId = @TenantId
 				AND LookupName = 'CustomerBehavior'
@@ -5206,7 +5205,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 			
 			SELECT @LookupId = 0
 
-			SELECT @LookupId = LookupId
+			SELECT TOP (1) @LookupId = LookupId
 			FROM Lookups
 			WHERE TenantId = @TenantId
 				AND LookupName = 'BuyingRange'
@@ -5300,17 +5299,17 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 			SELECT 'PROCUST'
 				,'PROCUST'
 				,(
-					SELECT CompanyId
+					SELECT TOP (1) CompanyId
 					FROM Companies
 					WHERE CompanyName = 'PROCUST'
 						AND TenantId = @TenantId
 					)
 				,(
-					SELECT LookupValueId
+					SELECT TOP (1) LookupValueId
 					FROM LookupValues
 					WHERE LookupValueName = 'meter'
 						AND LookupId = (
-							SELECT LookupId
+							SELECT TOP (1) LookupId
 							FROM Lookups
 							WHERE TenantId = @TenantId
 								AND LookupName = 'Unit'
@@ -5337,13 +5336,13 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 			SELECT 'PU Matt with Mixing'
 				,'PUMMAX'
 				,(
-					SELECT CompanyId
+					SELECT TOP (1) CompanyId
 					FROM Companies
 					WHERE TenantId = @TenantId
 						AND CompanyName = 'Asian Paint'
 					)
 				,(
-					SELECT LookupValueId
+					SELECT TOP (1) LookupValueId
 					FROM LookupValues lv
 					INNER JOIN Lookups l ON l.LookupId = lv.LookupId
 					WHERE l.TenantId = @TenantId
@@ -5358,13 +5357,13 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 			SELECT 'PU Sealer Mixing'
 				,'PUSMIX'
 				,(
-					SELECT CompanyId
+					SELECT TOP (1) CompanyId
 					FROM Companies
 					WHERE TenantId = @TenantId
 						AND CompanyName = 'Asian Paint'
 					)
 				,(
-					SELECT LookupValueId
+					SELECT TOP (1) LookupValueId
 					FROM LookupValues lv
 					INNER JOIN Lookups l ON l.LookupId = lv.LookupId
 					WHERE l.TenantId = @TenantId
@@ -5385,7 +5384,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 				)
 			SELECT 'ASH WOOD'
 				,(
-					SELECT LookupValueId
+					SELECT TOP (1) LookupValueId
 					FROM LookupValues lv
 					INNER JOIN Lookups l ON l.LookupId = lv.LookupId
 					WHERE l.TenantId = @TenantId
@@ -5399,7 +5398,7 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 			
 			SELECT 'TEAK WOOD'
 				,(
-					SELECT LookupValueId
+					SELECT TOP (1) LookupValueId
 					FROM LookupValues lv
 					INNER JOIN Lookups l ON l.LookupId = lv.LookupId
 					WHERE l.TenantId = @TenantId
@@ -6022,6 +6021,3 @@ tions or need assistance, don''t hesitate to reach out to us at <b>support@tanyo
 		
 	END CATCH
 END
-
-GO
-

@@ -29,6 +29,11 @@
       <DefaultValue>
       </DefaultValue>
     </SqlCmdVariable>
+    <SqlCmdVariable Include="DatabaseMailPassword">
+      <Value>$(SqlCmdVar__2)</Value>
+      <DefaultValue>__REQUIRED_DATABASE_MAIL_PASSWORD__</DefaultValue>
+    </SqlCmdVariable>
+    <PostDeploy Include="PostDeployment\SQLAgentJobs.sql" />
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
